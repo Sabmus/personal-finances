@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: 221 24% 13%;
+  --color-foreground: 0 0% 100%;
+  --color-accent: 163 99% 38%;
+  --color-accent-hover: 163 99% 28%;
+  --color-surface: 221 7% 44%;
+  --color-surface-hover: 221 7% 24%;
+  --color-surface-foreground: 209 57% 17%;
+  --color-error: 1.72 83.65% 59.22%;
+  --color-success: 216.9 100% 41.76%;
+}
+
+.dark {
+  --color-background: 221.25 24.24% 12.94%;
+  --color-foreground: 0 0% 100%;
+  --color-accent: 163.3 98.98% 38.43%;
+  --color-accent-hover: 163.3 98.98% 28.43%;
+  --color-surface: 221.25 7.08% 44.31%;
+  --color-surface-hover: 221.25 7.08% 34.31%;
+  --color-surface-foreground: 209.41 57.3% 17.45%;
+  --color-error: 1.72 83.65% 59.22%;
+  --color-success: 224.89 88.95% 53.53%;
+}
+
+.pastel {
+  --color-background: 219 49% 17%;
+  --color-foreground: 0 0% 100%;
+  --color-accent: 349 100% 69%;
+  --color-accent-hover: 349 100% 89%;
+  --color-surface: 38 100% 78%;
+  --color-surface-hover: 38 100% 58%;
+  --color-surface-foreground: 38 61% 60%;
+  --color-error: 1.72 83.65% 59.22%;
+  --color-success: 163.3 98.98% 38.43%;
+}
+
+.pastel-2 {
+  --color-background: 231.43 28% 24.51%;
+  --color-foreground: 0 0% 100%;
+  --color-accent: 25.98 91.37% 72.75%;
+  --color-accent-hover: 25.98 91.37% 62.75%;
+  --color-surface: 231.11 21.6% 50.98%;
+  --color-surface-hover: 231.11 21.6% 40.98%;
+  --color-surface-foreground: 232.31 22.81% 33.53%;
+  --color-error: 1.72 83.65% 59.22%;
+  --color-success: 163.3 98.98% 38.43%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    @apply text-foreground;
+  }
+
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+  p {
+    @apply leading-none;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply bg-accent text-background font-semibold px-4 py-2 rounded-md leading-none hover:bg-accent-hover transition-colors duration-100 ease-in;
+  }
+  .btn-sm {
+    @apply text-sm px-2 py-1;
+  }
+  .btn-lg {
+    @apply text-lg px-6 py-3;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-accent font-semibold px-4 py-2 rounded-md leading-none border border-accent hover:bg-accent-hover hover:text-foreground transition-colors duration-100 ease-in;
+  }
+  .btn-outline-sm {
+    @apply text-sm px-2 py-1;
+  }
+  .btn-outline-lg {
+    @apply text-lg px-6 py-3;
+  }
+
+  .with-border {
+    @apply border border-accent rounded-sm;
+  }
+
+  .text-secondary {
+    @apply text-surface;
+  }
+
+  .link {
+    @apply text-accent hover:text-accent-hover transition-colors duration-100 ease-in;
+  }
+
+  .card {
+    @apply bg-surface;
+  }
+
+  .inner-card {
+    @apply bg-surface-foreground;
+  }
+}
