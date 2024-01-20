@@ -82,6 +82,12 @@
   p {
     @apply leading-none;
   }
+  a {
+    @apply no-underline text-accent hover:text-accent-hover;
+  }
+  a {
+    text-decoration-skip-ink: auto;
+  }
 }
 
 @layer components {

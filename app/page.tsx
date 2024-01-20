@@ -1,5 +1,31 @@
+import Link from 'next/link';
+
+const links = [
+  {
+    name: 'Home',
+    url: '/',
+  },
+  {
+    name: 'About',
+    url: '/about',
+  },
+];
+
 const Home = () => {
-  return <div className="flex flex-col items-center gap-1"></div>;
+  return (
+    <div>
+      <header>
+        <ul>
+          {links &&
+            links.map((link, idx) => (
+              <li key={idx}>
+                <Link href={link.url}>{link.name}</Link>
+              </li>
+            ))}
+        </ul>
+      </header>
+    </div>
+  );
 };
 
 export default Home;
