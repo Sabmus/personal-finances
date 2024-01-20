@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <div className="h-full w-5/6 mx-auto">{children}</div>
+          <div className="h-svh w-5/6 mx-auto">{children}</div>
         </ThemeProvider>
       </body>
     </html>

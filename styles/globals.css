@@ -52,12 +52,21 @@
 
 @layer base {
   html {
-    @apply scroll-smooth w-screen;
+    @apply scroll-smooth w-full;
   }
 
   body {
-    @apply bg-background text-foreground w-screen h-svh min-h-svh;
+    @apply bg-background text-foreground w-full min-h-svh;
   }
+
+  section {
+    @apply p-4 min-h-svh;
+  }
+
+  footer {
+    @apply px-4;
+  }
+
   h1,
   h2,
   h3,
@@ -93,7 +102,7 @@
 
 @layer components {
   .btn {
-    @apply bg-accent text-background font-semibold px-4 py-2 rounded-md leading-none hover:bg-accent-hover transition-colors duration-100 ease-in;
+    @apply bg-accent text-background font-semibold px-4 py-2 rounded-md leading-none hover:bg-accent-hover hover:text-background transition-colors duration-100 ease-in;
   }
   .btn-sm {
     @apply text-sm px-2 py-1;
@@ -103,7 +112,7 @@
   }
 
   .btn-outline {
-    @apply bg-transparent text-accent font-semibold px-4 py-2 rounded-md leading-none border border-accent hover:bg-accent-hover hover:text-foreground transition-colors duration-100 ease-in;
+    @apply bg-transparent text-accent font-semibold px-4 py-2 rounded-md leading-none border border-accent hover:bg-accent-hover hover:text-background transition-colors duration-100 ease-in;
   }
   .btn-outline-sm {
     @apply text-sm px-2 py-1;
@@ -130,5 +139,11 @@
 
   .inner-card {
     @apply bg-surface-foreground;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex justify-center items-center;
   }
 }
