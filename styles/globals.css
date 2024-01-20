@@ -18,7 +18,7 @@
   --color-background: 221.25 24.24% 12.94%;
   --color-foreground: 0 0% 100%;
   --color-accent: 163.3 98.98% 38.43%;
-  --color-accent-hover: 163.3 98.98% 28.43%;
+  --color-accent-hover: 163.3 98.98% 58.43%;
   --color-surface: 221.25 7.08% 44.31%;
   --color-surface-hover: 221.25 7.08% 34.31%;
   --color-surface-foreground: 209.41 57.3% 17.45%;
@@ -51,8 +51,12 @@
 }
 
 @layer base {
+  html {
+    @apply scroll-smooth w-screen;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground w-screen h-svh min-h-svh;
   }
   h1,
   h2,
@@ -83,10 +87,7 @@
     @apply leading-none;
   }
   a {
-    @apply no-underline text-accent hover:text-accent-hover;
-  }
-  a {
-    text-decoration-skip-ink: auto;
+    @apply no-underline text-accent hover:text-accent-hover [text-decoration-skip-ink:auto];
   }
 }
 
