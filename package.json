@@ -6,20 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:push": "npx dizzle-kit push:sqlite",
+    "db:generate": "npx drizzle-kit generate:sqlite",
+    "db:migrate": "npx tsx db/migrate.ts",
+    "db:migrate:drop": "npx drizzle-kit drop"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^0.3.16",
+    "@libsql/client": "^0.4.0-pre.7",
+    "better-sqlite3": "^9.3.0",
+    "drizzle-orm": "^0.29.3",
     "next": "14.1.0",
+    "next-auth": "^5.0.0-beta.5",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/tailwindcss": "^3.1.0",
     "autoprefixer": "^10.0.1",
+    "dotenv": "^16.3.2",
+    "drizzle-kit": "^0.20.13",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
