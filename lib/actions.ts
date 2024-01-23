@@ -23,9 +23,3 @@ export const login = async (prevState: any, formData: FormData) => {
     throw error;
   }
 };
-
-export const register = async (prevState: any, formData: FormData) => {
-  const { name, lastName, email, password } = Object.fromEntries(formData);
-
-  console.log({ name, lastName, email, password });
-};

@@ -12,7 +12,7 @@ if (!process.env.DB_TOKEN) {
 }
 
 export default {
-  schema: './db/models/*',
+  schema: './db/models/index.ts',
   out: './db/drizzle/migrations',
   driver: 'turso', // 'pg' | 'mysql2' | 'better-sqlite' | 'libsql' | 'turso'
   verbose: true,
