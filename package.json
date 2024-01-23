@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push": "npx dizzle-kit push:sqlite",
+    "db:push": "npx drizzle-kit push:sqlite",
     "db:generate": "npx drizzle-kit generate:sqlite",
     "db:migrate": "npx tsx db/migrate.ts",
     "db:migrate:drop": "npx drizzle-kit drop"

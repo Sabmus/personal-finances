@@ -1,3 +1,5 @@
+'use server';
+
 import { AuthError } from 'next-auth';
 import { signIn } from '@/lib/auth';
 
@@ -20,4 +22,10 @@ export const login = async (prevState: any, formData: FormData) => {
     // https://nextjs.org/docs/app/api-reference/functions/redirect#server-component
     throw error;
   }
+};
+
+export const register = async (prevState: any, formData: FormData) => {
+  const { name, lastName, email, password } = Object.fromEntries(formData);
+
+  console.log({ name, lastName, email, password });
 };

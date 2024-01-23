@@ -1,11 +1,11 @@
 import NextAuth from 'next-auth';
-// import { MongoDBAdapter } from '@auth/mongodb-adapter';
-// import clientPromise from '@/lib/clientPromise';
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
+// import { db } from '@/lib/dbConnect';
+import { db } from '@/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
-// import dbConnect from '@/lib/dbConn';
+import { authConfig } from '@/app/api/auth/[...nextauth]/auth.config';
 // import { User } from '@/db/models';
 // import bcrypt from 'bcrypt';
-import { authConfig } from '@/app/api/auth/[...nextauth]/auth.config';
 // import { z } from 'zod';
 // import GitHub from 'next-auth/providers/github';
 
@@ -19,6 +19,7 @@ import { authConfig } from '@/app/api/auth/[...nextauth]/auth.config';
   }
 };
  */
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -26,10 +27,10 @@ export const {
   signOut,
 } = NextAuth({
   ...authConfig,
-  //   adapter: MongoDBAdapter(clientPromise),
-  //   session: {
-  //     strategy: 'jwt',
-  //   },
+  adapter: DrizzleAdapter(db),
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
