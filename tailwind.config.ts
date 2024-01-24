@@ -14,9 +14,9 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        background: 'hsl(var(--color-background))',
-        foreground: 'hsl(var(--color-foreground))',
-        accent: 'hsl(var(--color-accent))',
+        background: 'hsl(var(--color-background) / <alpha-value>)',
+        foreground: 'hsl(var(--color-foreground) / <alpha-value>)',
+        accent: 'hsl(var(--color-accent) / <alpha-value>)',
         'accent-hover': 'hsl(var(--color-accent-hover))',
         surface: 'hsl(var(--color-surface))',
         'surface-hover': 'hsl(var(--color-surface-hover))',

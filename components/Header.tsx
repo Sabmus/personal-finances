@@ -6,6 +6,10 @@ const links = [
     name: 'About',
     url: '#about',
   },
+  {
+    name: 'Dashboard',
+    url: '/dashboard',
+  },
 ];
 
 const Header = () => {
