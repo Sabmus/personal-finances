@@ -1,10 +1,10 @@
-import HeroPhoto from '@/components/HeroPhoto';
+import { HeroPhoto } from '@/components';
 import { Breadcrumb, DashboardTitle } from '@/components/ui';
 
 const Paymentlayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col h-full border-test">
-      <div className="dashboard-header border-test">
+    <div className="flex flex-col h-full">
+      <div className="dashboard-header">
         <div>
           <Breadcrumb />
           <DashboardTitle />

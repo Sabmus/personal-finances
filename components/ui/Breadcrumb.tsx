@@ -19,8 +19,6 @@ const Breadcrumb = () => {
       return acc;
     }, []);
 
-  console.log('🚀 ~ Breadcrumb ~ pathArray:', pathArray);
-
   return (
     <ul>
       {pathArray.map((path, idx) => (

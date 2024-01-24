@@ -1,4 +1,4 @@
-import HeroPhoto from '@/components/HeroPhoto';
+import { HeroPhoto } from '@/components';
 
 const Dashboard = () => {
   return (
