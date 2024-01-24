@@ -1,4 +1,12 @@
+import Link from 'next/link';
 import { Logo } from '@/components';
+
+const href = [
+  {
+    name: 'Payment',
+    url: '/dashboard/payment',
+  },
+];
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -7,7 +15,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20 border-test">
           <ul>
-            <li className="py-2">item de la lista</li>
+            <li className="py-2">
+              <Link href={href[0].url}>{href[0].name}</Link>
+            </li>
             <li className="py-2">item de la lista</li>
             <li className="py-2">item de la lista</li>
             <li className="py-2">item de la lista</li>
