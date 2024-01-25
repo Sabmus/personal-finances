@@ -4,7 +4,14 @@ import { AuthError } from 'next-auth';
 import { signIn } from '@/lib/auth';
 import { z } from 'zod';
 import { db } from '@/db';
-import { transactions } from '@/db/models';
+import { transactions, User } from '@/db/models';
+import { createId } from '@paralleldrive/cuid2';
+import { auth } from '@/lib/auth';
+
+const getUser = async () => {
+  const session = await auth();
+  return session?.user;
+};
 
 export type PaymentState = {
   errors?: {
@@ -86,6 +93,9 @@ export const login = async (prevState: any, formData: FormData) => {
 };
 
 export const createPayment = async (prevState: PaymentState, formData: FormData) => {
+  // @ts-ignore
+  const user: User = await getUser();
+
   const validatedFields = PaymentSchema.safeParse({
     categoryId: formData.get('categoryId'),
     paymentMethodId: formData.get('paymentMethodId'),
@@ -107,15 +117,19 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
     validatedFields.data;
 
   try {
-    db.insert(transactions).values({
-      userId: '',
+    console.log('inserting...');
+    await db.insert(transactions).values({
+      id: createId(),
+      userId: user.id,
       categoryId,
       paymentMethodId,
       amount,
-      hasInstalment: hasInstalment === 'on' ? 1 : 0,
+      hasInstalment: hasInstalment === 'on' ? true : false,
       instalmentQuantity,
       instalmentAmount,
       notes,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
   } catch (error) {
     console.log(error);

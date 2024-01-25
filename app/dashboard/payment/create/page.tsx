@@ -1,18 +1,9 @@
 import { CreatePaymentForm } from '@/components';
+import { getCategories, getPaymentMethods } from '@/lib/data';
 
-const CreatePayment = () => {
-  const categories = [
-    {
-      id: 'fwnsc6tbvbnghxvu2t4bkzhb',
-      name: 'Food',
-    },
-  ];
-  const paymentMethods = [
-    {
-      id: 'fwnsc6tbvbnghxvu2t4bkzhb',
-      name: 'Cash',
-    },
-  ];
+const CreatePayment = async () => {
+  const categories = await getCategories();
+  const paymentMethods = await getPaymentMethods();
 
   return (
     <div className="h-full border-test">

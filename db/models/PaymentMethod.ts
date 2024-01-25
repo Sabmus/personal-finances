@@ -1,7 +1,7 @@
 import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import timestampMs from '../utils/timestamp';
 
-const options: readonly [string, ...string[]] = ['Debit', 'Credit', 'Cash', 'Other'];
+const options: readonly [string, ...string[]] = ['Cash', 'Credit Card', 'Debit Card', 'Others'];
 
 export const paymentMethods = sqliteTable('paymentMethod', {
   id: text('id').notNull().primaryKey(),

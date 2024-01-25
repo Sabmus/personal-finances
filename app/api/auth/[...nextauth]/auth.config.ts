@@ -4,15 +4,13 @@ export const authConfig = {
   },*/
   providers: [],
   callbacks: {
-    /*     async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }: { session: any; token: any }) {
       if (token) {
-        session.user = {
-          ...session.user,
-          id: token.sub,
-        };
+        session.user.id = token.sub;
       }
       return session;
-    }, 
+    },
+    /*
     authorized({ auth, request }: { auth: any; request: any }) {
       const user = auth?.user;
 
