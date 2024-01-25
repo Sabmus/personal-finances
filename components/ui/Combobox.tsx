@@ -2,9 +2,9 @@
 
 import { ChangeEvent, useState, useRef, useEffect, MouseEvent, forwardRef, HTMLProps } from 'react';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
+import { IInputObject } from '@/lib/definitions';
 
-type TDataArray = string[];
-type InputProps = HTMLProps<HTMLInputElement> & { dataArray: TDataArray };
+type InputProps = HTMLProps<HTMLInputElement> & { dataArray: IInputObject[] };
 
 const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props }, ref) => {
   const { id, name, className, placeholder } = props;
@@ -29,7 +29,7 @@ const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props
   };
 
   const filteredData =
-    query === '' ? dataArray : dataArray.filter(item => item.toLowerCase().includes(query.toLowerCase()));
+    query === '' ? dataArray : dataArray.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
 
   const KEY_CODES = {
     ESCAPE: 'Escape',
@@ -69,7 +69,7 @@ const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props
       case KEY_CODES.ENTER: {
         if (open && active > -1) {
           e.preventDefault();
-          setQuery(filteredData[active]);
+          setQuery(filteredData[active].name);
           setOpen(false);
         }
         break;
@@ -108,12 +108,12 @@ const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props
           <ul>
             {filteredData.map((item, idx) => (
               <li
-                key={item}
+                key={item.id}
                 className={`hover:bg-green-400 ${active === idx ? 'bg-green-400' : null}`}
                 onClick={e => handleItemClick(e)}
                 onMouseEnter={() => setactive(-1)}
               >
-                {item}
+                {item.name}
               </li>
             ))}
           </ul>

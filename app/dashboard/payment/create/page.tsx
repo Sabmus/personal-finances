@@ -1,8 +1,18 @@
 import { CreatePaymentForm } from '@/components';
 
 const CreatePayment = () => {
-  const categories = ['category 1', 'category 2', 'category 3'];
-  const paymentMethods = ['payment 1', 'payment 2', 'payment 3'];
+  const categories = [
+    {
+      id: 'fwnsc6tbvbnghxvu2t4bkzhb',
+      name: 'Food',
+    },
+  ];
+  const paymentMethods = [
+    {
+      id: 'fwnsc6tbvbnghxvu2t4bkzhb',
+      name: 'Cash',
+    },
+  ];
 
   return (
     <div className="h-full border-test">

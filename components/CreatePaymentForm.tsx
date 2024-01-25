@@ -1,20 +1,34 @@
 'use client';
+
 import { useFormState } from 'react-dom';
+import { ChangeEvent, useState } from 'react';
 import { Combobox } from '@/components/ui';
+import { createPayment, PaymentState } from '@/lib/actions';
+import { IInputObject } from '@/lib/definitions';
 
 type CreatePaymentFormProps = {
-  categories: string[];
-  paymentMethods: string[];
+  categories: IInputObject[];
+  paymentMethods: IInputObject[];
 };
 
 const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProps) => {
+  const initialFormState: PaymentState = { errors: {}, message: '' };
+
+  const [checked, setChecked] = useState(false);
+  const [state, formAction] = useFormState(createPayment, initialFormState);
+  console.log('🚀 ~ CreatePaymentForm ~ state:', state);
+
+  const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+  };
+
   return (
-    <form action="" className="flex flex-col gap-2 w-1/2 mx-auto mt-10">
-      <Combobox dataArray={categories} id="category" name="category" className="w-full" placeholder="Category" />
+    <form action={formAction} className="flex flex-col gap-2 w-1/2 mx-auto mt-10">
+      <Combobox dataArray={categories} id="categoryId" name="categoryId" className="w-full" placeholder="Category" />
       <Combobox
         dataArray={paymentMethods}
-        id="paymentMethod"
-        name="paymentMethod"
+        id="paymentMethodId"
+        name="paymentMethodId"
         className="w-full"
         placeholder="Payment Method"
       />
@@ -24,10 +38,15 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
         <label htmlFor="hasInstalment" className="mr-3">
           Instalment
         </label>
-        <input type="checkbox" name="hasInstalment" id="hasInstalment" />
+        <input type="checkbox" name="hasInstalment" id="hasInstalment" onChange={e => handleChecked(e)} />
       </div>
-      <input type="number" name="instalmentQuantity" id="instalmentQuantity" placeholder="Instalment Quantity" />
-      <input type="number" name="instalmentAmount" id="instalmentAmount" placeholder="Instalment Amount" />
+      {checked && (
+        <>
+          <input type="number" name="instalmentQuantity" id="instalmentQuantity" placeholder="Instalment Quantity" />
+          <input type="number" name="instalmentAmount" id="instalmentAmount" placeholder="Instalment Amount" />
+        </>
+      )}
+
       <textarea name="notes" id="notes" rows={4} placeholder="Notes" className="max-h-40"></textarea>
       <button className="btn">Add</button>
     </form>
