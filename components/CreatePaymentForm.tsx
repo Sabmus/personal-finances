@@ -10,8 +10,15 @@ type CreatePaymentFormProps = {
 const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProps) => {
   return (
     <form action="" className="flex flex-col gap-2 w-1/2 mx-auto mt-10">
-      <Combobox dataArray={categories} />
-      <input type="text" name="paymentMethod" id="paymentMethod" placeholder="Payment Method" />
+      <Combobox dataArray={categories} id="category" name="category" className="w-full" placeholder="Category" />
+      <Combobox
+        dataArray={paymentMethods}
+        id="paymentMethod"
+        name="paymentMethod"
+        className="w-full"
+        placeholder="Payment Method"
+      />
+
       <input type="number" name="amount" id="amount" placeholder="Amount" />
       <div>
         <label htmlFor="hasInstalment" className="mr-3">
