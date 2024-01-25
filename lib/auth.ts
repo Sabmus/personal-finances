@@ -1,8 +1,8 @@
 import NextAuth from 'next-auth';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
-// import { db } from '@/lib/dbConnect';
 import { db } from '@/db';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GithubProvider from 'next-auth/providers/github';
 import { authConfig } from '@/app/api/auth/[...nextauth]/auth.config';
 // import { User } from '@/db/models';
 // import bcrypt from 'bcrypt';
@@ -32,11 +32,16 @@ export const {
     strategy: 'jwt',
   },
   providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+    /*
     CredentialsProvider({
       name: 'Credentials',
       id: 'credentials',
       async authorize(credentials) {
-        /* const parsedCredentials = z
+        const parsedCredentials = z
           .object({
             email: z.string().email(),
             password: z.string().min(4),
@@ -56,9 +61,9 @@ export const {
         if (!isPasswordCorrect) return null;
 
         delete user.password;
-        return user; */
-        return null;
+        return user;
       },
     }),
+    */
   ],
 });

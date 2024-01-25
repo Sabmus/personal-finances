@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Logo from '@/components/Logo';
+import { auth } from '@/lib/auth';
 
 const links = [
   {
@@ -12,8 +13,8 @@ const links = [
   },
 ];
 
-const Header = () => {
-  const session = false;
+const Header = async () => {
+  const session = await auth();
 
   return (
     <header className="p-4 h-14 flex justify-between items-center fixed w-5/6 bg-background">
@@ -30,18 +31,13 @@ const Header = () => {
             ))}
         </ul>
         {session ? (
-          <Link href="/log-out" className="btn">
+          <Link href="/api/auth/signout?callbackUrl=/" className="btn">
             Log out
           </Link>
         ) : (
-          <>
-            <Link href="/login" className="btn-outline">
-              Log in
-            </Link>
-            <Link href="/register" className="btn-outline">
-              Register
-            </Link>
-          </>
+          <Link href="/api/auth/signin?callbackUrl=/" className="btn-outline">
+            Log in
+          </Link>
         )}
       </div>
     </header>

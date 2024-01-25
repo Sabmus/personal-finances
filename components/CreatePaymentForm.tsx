@@ -2,7 +2,7 @@
 
 import { useFormState } from 'react-dom';
 import { ChangeEvent, useState } from 'react';
-import { Combobox } from '@/components/ui';
+//import { Combobox } from '@/components/ui';
 import { createPayment, PaymentState } from '@/lib/actions';
 import { IInputObject } from '@/lib/definitions';
 
@@ -24,6 +24,27 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
 
   return (
     <form action={formAction} className="flex flex-col gap-2 w-1/2 mx-auto mt-10">
+      <select name="categoryId" id="categoryId" defaultValue="" className="placeholder:text-green-500">
+        <option value="" disabled={true}>
+          Select a category...
+        </option>
+        {categories.map((category, idx) => (
+          <option key={idx} value={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+      <select name="paymentMethodId" id="paymentMethodId" defaultValue="" className="placeholder:text-green-500">
+        <option value="" disabled={true}>
+          Select a payment method...
+        </option>
+        {paymentMethods.map((paymentMethod, idx) => (
+          <option key={idx} value={paymentMethod.id}>
+            {paymentMethod.name}
+          </option>
+        ))}
+      </select>
+      {/**
       <Combobox dataArray={categories} id="categoryId" name="categoryId" className="w-full" placeholder="Category" />
       <Combobox
         dataArray={paymentMethods}
@@ -32,6 +53,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
         className="w-full"
         placeholder="Payment Method"
       />
+       */}
 
       <input type="number" name="amount" id="amount" placeholder="Amount" />
       <div>

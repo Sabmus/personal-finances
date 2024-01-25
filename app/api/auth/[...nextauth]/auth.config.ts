@@ -1,7 +1,7 @@
 export const authConfig = {
-  pages: {
+  /*pages: {
     signIn: '/login',
-  },
+  },*/
   providers: [],
   callbacks: {
     /*     async session({ session, token }: { session: any; token: any }) {
@@ -12,7 +12,7 @@ export const authConfig = {
         };
       }
       return session;
-    }, */
+    }, 
     authorized({ auth, request }: { auth: any; request: any }) {
       const user = auth?.user;
 
@@ -28,6 +28,6 @@ export const authConfig = {
       }
 
       return true;
-    },
+    },*/
   },
 };

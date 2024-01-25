@@ -93,6 +93,9 @@ const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props
       <input
         ref={ref}
         id={id}
+        role="combobox"
+        aria-controls="list-box"
+        aria-expanded={false}
         name={name}
         className={className}
         placeholder={placeholder}
@@ -105,13 +108,16 @@ const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props
       />
       <div className="absolute bg-blue-400 w-full top-7 z-10">
         {open && (
-          <ul>
+          <ul id="list-box" role="listbox" aria-label="Options">
             {filteredData.map((item, idx) => (
               <li
                 key={item.id}
+                role="option"
+                aria-selected={active === idx}
                 className={`hover:bg-green-400 ${active === idx ? 'bg-green-400' : null}`}
                 onClick={e => handleItemClick(e)}
                 onMouseEnter={() => setactive(-1)}
+                value={item.id}
               >
                 {item.name}
               </li>

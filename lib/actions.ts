@@ -3,6 +3,8 @@
 import { AuthError } from 'next-auth';
 import { signIn } from '@/lib/auth';
 import { z } from 'zod';
+import { db } from '@/db';
+import { transactions } from '@/db/models';
 
 export type PaymentState = {
   errors?: {
@@ -19,8 +21,18 @@ export type PaymentState = {
 
 const PaymentSchema = z
   .object({
-    categoryId: z.string().min(1, { message: 'Category is required.' }).cuid2(),
-    paymentMethodId: z.string().min(1, { message: 'Payment method is required.' }).cuid2(),
+    categoryId: z
+      .string({
+        invalid_type_error: 'Category is required.',
+      })
+      .min(1, { message: 'Category is required.' })
+      .cuid2(),
+    paymentMethodId: z
+      .string({
+        invalid_type_error: 'Payment method is required.',
+      })
+      .min(1, { message: 'Payment method is required.' })
+      .cuid2(),
     amount: z.coerce.number().positive({
       message: 'Amount is required.',
     }),
@@ -94,6 +106,21 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
   const { categoryId, paymentMethodId, amount, hasInstalment, instalmentQuantity, instalmentAmount, notes } =
     validatedFields.data;
 
-  console.log({ categoryId, paymentMethodId, amount, hasInstalment, instalmentQuantity, instalmentAmount, notes });
+  try {
+    db.insert(transactions).values({
+      userId: '',
+      categoryId,
+      paymentMethodId,
+      amount,
+      hasInstalment: hasInstalment === 'on' ? 1 : 0,
+      instalmentQuantity,
+      instalmentAmount,
+      notes,
+    });
+  } catch (error) {
+    console.log(error);
+    return { message: 'Something went wrong.', errors: undefined };
+  }
+
   return { message: 'Payment created successfully.', errors: undefined };
 };
