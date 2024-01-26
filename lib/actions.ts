@@ -7,6 +7,8 @@ import { db } from '@/db';
 import { transactions, User } from '@/db/models';
 import { createId } from '@paralleldrive/cuid2';
 import { auth } from '@/lib/auth';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const getUser = async () => {
   const session = await auth();
@@ -117,7 +119,6 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
     validatedFields.data;
 
   try {
-    console.log('inserting...');
     await db.insert(transactions).values({
       id: createId(),
       userId: user.id,
@@ -136,5 +137,6 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
     return { message: 'Something went wrong.', errors: undefined };
   }
 
-  return { message: 'Payment created successfully.', errors: undefined };
+  revalidatePath('/dashboard/payment');
+  redirect('/dashboard/payment');
 };
