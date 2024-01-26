@@ -18,6 +18,7 @@ const config: Config = {
         foreground: 'hsl(var(--color-foreground) / <alpha-value>)',
         accent: 'hsl(var(--color-accent) / <alpha-value>)',
         'accent-hover': 'hsl(var(--color-accent-hover))',
+        'accent-darker': 'hsl(var(--color-accent-darker))',
         surface: 'hsl(var(--color-surface))',
         'surface-hover': 'hsl(var(--color-surface-hover))',
         'surface-foreground': 'hsl(var(--color-surface-foreground))',

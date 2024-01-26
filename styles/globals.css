@@ -19,6 +19,7 @@
   --color-foreground: 0 0% 100%;
   --color-accent: 163.3 98.98% 43.43%;
   --color-accent-hover: 163.3 98.98% 58.43%;
+  --color-accent-darker: 163.3 98.98% 33.43%;
   --color-surface: 221.25 7.08% 44.31%;
   --color-surface-hover: 221.25 7.08% 34.31%;
   --color-surface-foreground: 209.41 57.3% 17.45%;
@@ -143,6 +144,14 @@
 
   .dashboard-header {
     @apply flex justify-between items-center h-14 flex-shrink-0;
+  }
+
+  .table-th {
+    @apply px-6 py-3;
+  }
+
+  .table-td {
+    @apply px-6 py-4;
   }
 }
 
