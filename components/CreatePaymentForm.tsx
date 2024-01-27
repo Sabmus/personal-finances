@@ -2,7 +2,7 @@
 
 import { useFormState } from 'react-dom';
 import { ChangeEvent, useState } from 'react';
-//import { Combobox } from '@/components/ui';
+// import { Combobox } from '@/components/ui';
 import { createPayment, PaymentState } from '@/lib/actions';
 import { IInputObject } from '@/lib/definitions';
 
@@ -69,7 +69,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
           </div>
         )}
       </div>
-      {/**
+      {/* 
       <Combobox dataArray={categories} id="categoryId" name="categoryId" className="w-full" placeholder="Category" />
       <Combobox
         dataArray={paymentMethods}
@@ -78,7 +78,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
         className="w-full"
         placeholder="Payment Method"
       />
-       */}
+ */}
       <div>
         <input
           type="number"
