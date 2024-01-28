@@ -37,12 +37,13 @@ export const getPaymentMethods = async () => {
 
 export const getAllTransactions = async () => {
   try {
-    const result: TAllTransactions = await db
+    const result: TAllTransactions[] = await db
       .select({
         id: transactions.id,
         category: categories.name,
         paymentMethod: paymentMethods.name,
         amount: transactions.amount,
+        hasInstalment: transactions.hasInstalment,
         instalmentQuantity: transactions.instalmentQuantity,
         instalmentAmount: transactions.instalmentAmount,
         notes: transactions.notes,

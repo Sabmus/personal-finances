@@ -1,15 +1,17 @@
 import Link from 'next/link';
 // import { getAllTransactions } from '@/lib/data';
 import PaymentTable from '@/components/payment/PaymentTable';
+import { TAllTransactions } from '@/lib/definitions';
 
 const Payment = async () => {
   // const transactions = await getAllTransactions();
-  const transactions = [
+  const transactions: TAllTransactions[] = [
     {
       id: 'fhv98qb1pmjjyc2arpaedk1p',
       category: 'Transport',
       paymentMethod: 'Debit Card',
       amount: 10000,
+      hasInstalment: false,
       instalmentQuantity: null,
       instalmentAmount: null,
       notes: 'nota de test',
@@ -20,6 +22,7 @@ const Payment = async () => {
       category: 'Entertainment',
       paymentMethod: 'Debit Card',
       amount: 1312321,
+      hasInstalment: true,
       instalmentQuantity: 123123,
       instalmentAmount: 123,
       notes: 'test',
@@ -30,6 +33,7 @@ const Payment = async () => {
       category: 'Food',
       paymentMethod: 'Credit Card',
       amount: 1500,
+      hasInstalment: false,
       instalmentQuantity: null,
       instalmentAmount: null,
       notes: null,
@@ -40,6 +44,7 @@ const Payment = async () => {
       category: 'Shopping',
       paymentMethod: 'Debit Card',
       amount: 10000,
+      hasInstalment: true,
       instalmentQuantity: 2,
       instalmentAmount: 5000,
       notes:

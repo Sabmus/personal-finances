@@ -11,6 +11,7 @@
   --color-surface-hover: 221 7% 24%;
   --color-surface-foreground: 209 57% 17%;
   --color-error: 1.72 83.65% 59.22%;
+  --color-error-hover: 1.72 83.65% 59.22%;
   --color-success: 216.9 100% 41.76%;
 }
 
@@ -24,31 +25,8 @@
   --color-surface-hover: 221.25 7.08% 34.31%;
   --color-surface-foreground: 209.41 57.3% 17.45%;
   --color-error: 1.72 83.65% 59.22%;
+  --color-error-hover: 1.72 63.65% 49.22%;
   --color-success: 224.89 88.95% 53.53%;
-}
-
-.pastel {
-  --color-background: 219 49% 17%;
-  --color-foreground: 0 0% 100%;
-  --color-accent: 349 100% 69%;
-  --color-accent-hover: 349 100% 89%;
-  --color-surface: 38 100% 78%;
-  --color-surface-hover: 38 100% 58%;
-  --color-surface-foreground: 38 61% 60%;
-  --color-error: 1.72 83.65% 59.22%;
-  --color-success: 163.3 98.98% 38.43%;
-}
-
-.pastel-2 {
-  --color-background: 231.43 28% 24.51%;
-  --color-foreground: 0 0% 100%;
-  --color-accent: 25.98 91.37% 72.75%;
-  --color-accent-hover: 25.98 91.37% 62.75%;
-  --color-surface: 231.11 21.6% 50.98%;
-  --color-surface-hover: 231.11 21.6% 40.98%;
-  --color-surface-foreground: 232.31 22.81% 33.53%;
-  --color-error: 1.72 83.65% 59.22%;
-  --color-success: 163.3 98.98% 38.43%;
 }
 
 @layer base {
