@@ -9,23 +9,12 @@ import { createId } from '@paralleldrive/cuid2';
 import { auth } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { PaymentState } from '@/lib/definitions';
+import { eq } from 'drizzle-orm';
 
 const getUser = async () => {
   const session = await auth();
   return session?.user;
-};
-
-export type PaymentState = {
-  errors?: {
-    categoryId?: string[];
-    paymentMethodId?: string[];
-    amount?: string[];
-    hasInstalment?: string[];
-    instalmentQuantity?: string[];
-    instalmentAmount?: string[];
-    notes?: string[];
-  };
-  message?: string;
 };
 
 const PaymentSchema = z
@@ -132,6 +121,53 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+  } catch (error) {
+    console.log(error);
+    return { message: 'Something went wrong.', errors: undefined };
+  }
+
+  revalidatePath('/dashboard/payment');
+  redirect('/dashboard/payment');
+};
+
+export const editPayment = async (prevState: PaymentState, formData: FormData) => {
+  // @ts-ignore
+  const user: User = await getUser();
+
+  const validatedFields = PaymentSchema.safeParse({
+    categoryId: formData.get('categoryId'),
+    paymentMethodId: formData.get('paymentMethodId'),
+    amount: formData.get('amount'),
+    hasInstalment: formData.get('hasInstalment'),
+    instalmentQuantity: formData.get('instalmentQuantity'),
+    instalmentAmount: formData.get('instalmentAmount'),
+    notes: formData.get('notes'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Failed to create payment.',
+    };
+  }
+
+  const { categoryId, paymentMethodId, amount, hasInstalment, instalmentQuantity, instalmentAmount, notes } =
+    validatedFields.data;
+
+  try {
+    await db
+      .update(transactions)
+      .set({
+        categoryId,
+        paymentMethodId,
+        amount,
+        hasInstalment: hasInstalment === 'on' ? true : false,
+        instalmentQuantity,
+        instalmentAmount,
+        notes,
+        updatedAt: new Date(),
+      })
+      .where(eq(transactions.id, ''));
   } catch (error) {
     console.log(error);
     return { message: 'Something went wrong.', errors: undefined };

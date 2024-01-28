@@ -1,4 +1,4 @@
-import { CreatePaymentForm } from '@/components';
+import { PaymentForm } from '@/components';
 import { getCategories, getPaymentMethods } from '@/lib/data';
 
 const CreatePayment = async () => {
@@ -7,7 +7,7 @@ const CreatePayment = async () => {
 
   return (
     <div className="h-full border-test">
-      <CreatePaymentForm categories={categories} paymentMethods={paymentMethods} />
+      <PaymentForm type="create" categories={categories} paymentMethods={paymentMethods} transaction={undefined} />
     </div>
   );
 };

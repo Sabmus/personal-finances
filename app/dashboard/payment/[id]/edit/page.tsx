@@ -1,8 +1,14 @@
-const EditPayment = ({ params }: { params: { id: string } }) => {
+import { PaymentForm } from '@/components';
+import { getCategories, getPaymentMethods, getTransaction } from '@/lib/data';
+
+const EditPayment = async ({ params }: { params: { id: string } }) => {
+  const categories = await getCategories();
+  const paymentMethods = await getPaymentMethods();
+  const transaction = await getTransaction(params.id);
+
   return (
-    <div>
-      <h3>id</h3>
-      <span>{params.id}</span>
+    <div className="h-full border-test">
+      <PaymentForm type="edit" categories={categories} paymentMethods={paymentMethods} transaction={transaction} />
     </div>
   );
 };

@@ -1,25 +1,26 @@
 'use client';
 
-import { useFormState } from 'react-dom';
-import { ChangeEvent, useState } from 'react';
-// import { Combobox } from '@/components/ui';
-import { createPayment, PaymentState } from '@/lib/actions';
-import { IInputObject } from '@/lib/definitions';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { ActionPaymentFormProps } from '@/lib/definitions';
 
-type CreatePaymentFormProps = {
-  categories: IInputObject[];
-  paymentMethods: IInputObject[];
-};
-
-const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProps) => {
-  const initialFormState: PaymentState = { errors: {}, message: '' };
-
+const ActionPaymentForm = ({
+  formAction,
+  state,
+  categories,
+  paymentMethods,
+  transaction = undefined,
+}: ActionPaymentFormProps) => {
   const [checked, setChecked] = useState(false);
-  const [state, formAction] = useFormState(createPayment, initialFormState);
 
   const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
   };
+
+  useEffect(() => {
+    if (transaction?.hasInstalment) {
+      setChecked(true);
+    }
+  }, [transaction]);
 
   return (
     <form action={formAction} className="flex flex-col gap-2 w-1/2 mx-auto mt-10">
@@ -27,9 +28,9 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
         <select
           name="categoryId"
           id="categoryId"
-          defaultValue=""
           aria-describedby="categoryId-error"
           className="w-full"
+          defaultValue={transaction?.categoryId ?? ''}
         >
           <option value="" disabled={true}>
             Select a category...
@@ -50,9 +51,9 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
         <select
           name="paymentMethodId"
           id="paymentMethodId"
-          defaultValue=""
           aria-describedby="paymentMethodId-error"
           className="w-full"
+          defaultValue={transaction?.paymentMethodId ?? ''}
         >
           <option value="" disabled={true}>
             Select a payment method...
@@ -69,16 +70,6 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
           </div>
         )}
       </div>
-      {/* 
-      <Combobox dataArray={categories} id="categoryId" name="categoryId" className="w-full" placeholder="Category" />
-      <Combobox
-        dataArray={paymentMethods}
-        id="paymentMethodId"
-        name="paymentMethodId"
-        className="w-full"
-        placeholder="Payment Method"
-      />
- */}
       <div>
         <input
           type="number"
@@ -87,6 +78,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
           placeholder="Amount"
           aria-describedby="amount-error"
           className="w-full"
+          defaultValue={transaction?.amount ?? ''}
         />
         {state.errors && state.errors.amount && (
           <div id="amount-error" className="text-red-500">
@@ -98,7 +90,13 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
         <label htmlFor="hasInstalment" className="mr-3">
           Instalment
         </label>
-        <input type="checkbox" name="hasInstalment" id="hasInstalment" onChange={e => handleChecked(e)} />
+        <input
+          type="checkbox"
+          name="hasInstalment"
+          id="hasInstalment"
+          onChange={e => handleChecked(e)}
+          checked={checked}
+        />
       </div>
       {checked && (
         <>
@@ -110,6 +108,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
               placeholder="Instalment Quantity"
               className="w-full"
               aria-describedby="instalmentQuantity-error"
+              defaultValue={transaction?.instalmentQuantity ?? ''}
             />
             {state.errors && state.errors.instalmentQuantity && (
               <div id="instalmentQuantity-error" className="text-red-500">
@@ -125,6 +124,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
               placeholder="Instalment Amount"
               className="w-full"
               aria-describedby="instalmentAmount-error"
+              defaultValue={transaction?.instalmentAmount ?? ''}
             />
             {state.errors && state.errors.instalmentAmount && (
               <div id="instalmentAmount-error" className="text-red-500">
@@ -142,6 +142,7 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
           placeholder="Notes"
           className="max-h-40 w-full"
           aria-describedby="notes-error"
+          defaultValue={transaction?.notes ?? ''}
         ></textarea>
         {state.errors && state.errors.notes && (
           <div id="notes-error" className="text-red-500">
@@ -149,10 +150,10 @@ const CreatePaymentForm = ({ categories, paymentMethods }: CreatePaymentFormProp
           </div>
         )}
       </div>
-      <button className="btn">Add</button>
+      <button className="btn">Save</button>
       {state.message && <div className="text-green-500">{state.message}</div>}
     </form>
   );
 };
 
-export default CreatePaymentForm;
+export default ActionPaymentForm;
