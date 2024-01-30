@@ -1,5 +1,5 @@
 import { TAllTransactions } from '@/lib/definitions';
-import { toCLP } from '@/lib/currencyFormat';
+import { toCLP } from '@/utils';
 import { X } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 

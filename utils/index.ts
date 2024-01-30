@@ -1,3 +1,14 @@
+export const KEY_CODES = {
+  ESCAPE: 'Escape',
+  ESCAPE_IE11: 'Esc',
+  TAB: 'Tab',
+  ARROW_UP: 'ArrowUp',
+  ARROW_UP_IE11: 'Up',
+  ARROW_DOWN: 'ArrowDown',
+  ARROW_DOWN_IE11: 'Down',
+  ENTER: 'Enter',
+};
+
 export function toCLP(value: number) {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',

@@ -39,3 +39,10 @@ export type PaymentState = {
   };
   message?: string;
 };
+
+export interface IPaymentTableListProps {
+  transaction: TAllTransactions;
+  handleButtonClick: () => void;
+  setIsOpen: () => void;
+  idx: string;
+}
