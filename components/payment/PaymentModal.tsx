@@ -4,10 +4,12 @@ import { X } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 
 const PaymentModal = ({
+  divRef,
   isOpen,
   setIsOpen,
   selectedTransaction,
 }: {
+  divRef: React.RefObject<HTMLDivElement>;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   selectedTransaction: TAllTransactions;
@@ -21,6 +23,7 @@ const PaymentModal = ({
 
   return (
     <div
+      ref={divRef}
       id="paymentDetails"
       tabIndex={-1}
       aria-hidden={isOpen}
@@ -29,8 +32,8 @@ const PaymentModal = ({
       <span className="absolute text-error top-1.5 right-2 hover:cursor-pointer" onClick={handleCloseClick}>
         <X size={24} strokeWidth={5} />
       </span>
-      <div className="w-full text-center bg-accent-darker border border-b-accent">
-        <h3>{toCLP(amount)}</h3>
+      <div className="flex-center w-full h-20 text-center bg-accent-darker border border-b-accent">
+        <h1>{toCLP(amount)}</h1>
       </div>
       <div>
         <p className="text-foreground/60">
@@ -40,7 +43,7 @@ const PaymentModal = ({
       </div>
 
       {hasInstalment && (
-        <div className="grid grid-cols-2 w-full text-center">
+        <div className="grid grid-cols-2 w-full text-center py-2">
           <div>
             <h6>Instalment</h6>
             <span>{instalmentQuantity}</span>
@@ -52,13 +55,13 @@ const PaymentModal = ({
         </div>
       )}
       {notes && (
-        <div className="px-4">
+        <div className="px-24 py-2 w-full">
           <h6>Notes</h6>
           <p className="text-foreground/70">{notes}</p>
         </div>
       )}
 
-      <div>
+      <div className="py-1 border-t border-accent mt-4">
         <span>{createdAt.toDateString()}</span>
       </div>
     </div>

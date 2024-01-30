@@ -1,10 +1,18 @@
 import Link from 'next/link';
 import { Logo } from '@/components';
 
-const href = [
+const links = [
   {
     name: 'Payment',
-    url: '/dashboard/payment',
+    href: '/dashboard/payment',
+  },
+  {
+    name: 'Categories',
+    href: '/dashboard/categories',
+  },
+  {
+    name: 'Payment Methods',
+    href: '/dashboard/paymentMethods',
   },
 ];
 
@@ -15,12 +23,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20 border-test">
           <ul>
-            <li className="py-2">
-              <Link href={href[0].url}>{href[0].name}</Link>
-            </li>
-            <li className="py-2">item de la lista</li>
-            <li className="py-2">item de la lista</li>
-            <li className="py-2">item de la lista</li>
+            {links &&
+              links.map((link, idx) => (
+                <li key={idx} className="py-2">
+                  <Link href={link.href}>{link.name}</Link>
+                </li>
+              ))}
           </ul>
         </div>
         <div className="flex-shrink-0">footer</div>

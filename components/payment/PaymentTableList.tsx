@@ -30,7 +30,7 @@ const PaymentTableList = ({ transaction, handleButtonClick, setIsOpen, idx }: IP
   }, []);
 
   return (
-    <tr className="border-b bg-surface-foreground border-surface hover:bg-accent-darker hover:border-accent-darker">
+    <tr className="table-body-tr">
       <td className="table-td">
         <button id={idx} onClick={handleButtonClick}>
           <Eye size={20} className="text-accent hover:text-accent-hover" />

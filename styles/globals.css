@@ -124,10 +124,21 @@
     @apply flex justify-between items-center h-14 flex-shrink-0;
   }
 
+  .table-main {
+    @apply w-full text-sm table-auto text-left;
+  }
+  .table-main-blur {
+    @apply blur-sm transition-all duration-200;
+  }
+  .table-head {
+    @apply text-xs uppercase bg-surface text-foreground;
+  }
   .table-th {
     @apply px-6 py-3;
   }
-
+  .table-body-tr {
+    @apply border-b bg-surface-foreground border-surface hover:bg-accent-darker hover:border-accent-darker;
+  }
   .table-td {
     @apply px-6 py-4;
   }

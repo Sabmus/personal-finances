@@ -5,6 +5,11 @@ export interface IPath {
   url: string;
 }
 
+export interface IDimension {
+  id: string;
+  name: string;
+}
+
 export interface IInputObject {
   id: string;
   name: string;
@@ -46,3 +51,10 @@ export interface IPaymentTableListProps {
   setIsOpen: () => void;
   idx: string;
 }
+
+export type TTableData<T> = {
+  colName: string;
+  data: T[];
+};
+
+export type TTableDataProps = TTableData<IDimension>;

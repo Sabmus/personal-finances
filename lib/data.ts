@@ -1,13 +1,16 @@
 import { db } from '@/db';
 import { categories, paymentMethods, transactions } from '@/db/models';
 import { isNull, eq, and } from 'drizzle-orm';
-import { TAllTransactions } from '@/lib/definitions';
+import { TAllTransactions, IDimension } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
-// TODO: type the result of this function
 export const getCategories = async () => {
+  // Add noStore() here prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
   try {
-    const result = await db
+    const result: IDimension[] = await db
       .select({
         id: categories.id,
         name: categories.name,
@@ -20,10 +23,13 @@ export const getCategories = async () => {
   }
 };
 
-// TODO: type the result of this function
 export const getPaymentMethods = async () => {
+  // Add noStore() here prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
   try {
-    const result = await db
+    const result: IDimension[] = await db
       .select({
         id: paymentMethods.id,
         name: paymentMethods.name,

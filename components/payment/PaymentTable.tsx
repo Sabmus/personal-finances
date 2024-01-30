@@ -1,24 +1,30 @@
 'use client';
 
 import { TAllTransactions } from '@/lib/definitions';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PaymentModal from '@/components/payment/PaymentModal';
-import { KEY_CODES } from '@/utils';
 import PaymentTableList from '@/components/payment/PaymentTableList';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
+import { useRef } from 'react';
 
 const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<TAllTransactions | null>(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
   const handleButtonClick = (idx: number) => {
     setIsOpen(prev => !prev);
     setSelectedTransaction(transactions[idx]);
   };
 
+  useOnClickOutside(divRef, () => {
+    setIsOpen(false);
+  });
+
   return (
     <div className="relative h-full">
-      <table className={`w-full text-sm table-auto text-left ${isOpen ? 'blur-sm transition-all duration-200' : null}`}>
-        <thead className="text-xs uppercase bg-surface text-foreground">
+      <table className={`table-main ${isOpen ? 'table-main-blur' : null}`}>
+        <thead className="table-head">
           <tr>
             <th scope="col" className="table-th">
               view
@@ -61,7 +67,12 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
       </table>
       {selectedTransaction && (
         <div className={`absolute w-1/2 top-20 right-0 left-0 mx-auto ${isOpen ? 'block' : 'hidden'}`}>
-          <PaymentModal isOpen={isOpen} setIsOpen={setIsOpen} selectedTransaction={selectedTransaction} />
+          <PaymentModal
+            divRef={divRef}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            selectedTransaction={selectedTransaction}
+          />
         </div>
       )}
     </div>
