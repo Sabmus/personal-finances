@@ -6,6 +6,7 @@ import { TAllTransactions } from '@/lib/definitions';
 import { useState } from 'react';
 import PaymentModal from '@/components/payment/PaymentModal';
 import Link from 'next/link';
+import DeletePayment from '@/components/payment/DeletePayment';
 
 const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,9 +76,7 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
                       </Link>
                     </span>
                     <span>
-                      <Link href={`/dashboard/payment/${transaction.id}/delete`}>
-                        <Trash2 size={22} className="text-error hover:text-error-hover" />
-                      </Link>
+                      <DeletePayment id={transaction.id} />
                     </span>
                   </div>
                 </td>

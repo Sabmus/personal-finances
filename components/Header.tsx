@@ -7,10 +7,6 @@ const links = [
     name: 'About',
     url: '#about',
   },
-  {
-    name: 'Dashboard',
-    url: '/dashboard',
-  },
 ];
 
 const Header = async () => {
@@ -29,6 +25,13 @@ const Header = async () => {
                 </Link>
               </li>
             ))}
+          {session && (
+            <li>
+              <Link href="/dashboard" className="link">
+                Dashboard
+              </Link>
+            </li>
+          )}
         </ul>
         {session ? (
           <Link href="/api/auth/signout?callbackUrl=/" className="btn">

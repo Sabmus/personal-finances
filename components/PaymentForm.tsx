@@ -7,7 +7,9 @@ import ActionPaymentForm from '@/components/payment/ActionPaymentForm';
 
 const PaymentForm = ({ type, categories, paymentMethods, transaction = undefined }: PaymentFormProps) => {
   const initialFormState: PaymentState = { errors: {}, message: '' };
-  const useFormStateFunc = type === 'create' ? createPayment : editPayment;
+
+  const editPaymentWithId = editPayment.bind(null, transaction?.id || '');
+  const useFormStateFunc = type === 'create' ? createPayment : editPaymentWithId;
 
   const [state, formAction] = useFormState(useFormStateFunc, initialFormState);
 

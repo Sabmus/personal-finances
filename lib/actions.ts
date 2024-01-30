@@ -10,7 +10,7 @@ import { auth } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { PaymentState } from '@/lib/definitions';
-import { eq } from 'drizzle-orm';
+import { eq, and, isNull } from 'drizzle-orm';
 
 const getUser = async () => {
   const session = await auth();
@@ -60,7 +60,23 @@ const PaymentSchema = z
     }
 
     return true;
-  });
+  })
+  .refine(
+    input => {
+      if (input.instalmentQuantity && input.instalmentAmount) {
+        const totalInstalment = input.instalmentAmount * input.instalmentQuantity;
+        if (totalInstalment !== input.amount) {
+          return false;
+        }
+      }
+
+      return true;
+    },
+    {
+      message: 'Instalment amount and quantity must be equal to the total amount.',
+      path: ['instalmentAmount'],
+    }
+  );
 
 export const login = async (prevState: any, formData: FormData) => {
   const { email, password } = Object.fromEntries(formData);
@@ -130,10 +146,7 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
   redirect('/dashboard/payment');
 };
 
-export const editPayment = async (prevState: PaymentState, formData: FormData) => {
-  // @ts-ignore
-  const user: User = await getUser();
-
+export const editPayment = async (id: string, prevState: PaymentState, formData: FormData) => {
   const validatedFields = PaymentSchema.safeParse({
     categoryId: formData.get('categoryId'),
     paymentMethodId: formData.get('paymentMethodId'),
@@ -167,7 +180,7 @@ export const editPayment = async (prevState: PaymentState, formData: FormData) =
         notes,
         updatedAt: new Date(),
       })
-      .where(eq(transactions.id, ''));
+      .where(and(eq(transactions.id, id), isNull(transactions.deletedAt)));
   } catch (error) {
     console.log(error);
     return { message: 'Something went wrong.', errors: undefined };
@@ -175,4 +188,15 @@ export const editPayment = async (prevState: PaymentState, formData: FormData) =
 
   revalidatePath('/dashboard/payment');
   redirect('/dashboard/payment');
+};
+
+export const deletePayment = async (id: string) => {
+  try {
+    await db.update(transactions).set({ deletedAt: new Date() }).where(eq(transactions.id, id));
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error deleting payment.');
+  }
+
+  revalidatePath('/dashboard/payment');
 };

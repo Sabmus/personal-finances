@@ -2,6 +2,7 @@ import { db } from '@/db';
 import { categories, paymentMethods, transactions } from '@/db/models';
 import { isNull, eq, and } from 'drizzle-orm';
 import { TAllTransactions } from '@/lib/definitions';
+import { unstable_noStore as noStore } from 'next/cache';
 
 // TODO: type the result of this function
 export const getCategories = async () => {
@@ -36,6 +37,10 @@ export const getPaymentMethods = async () => {
 };
 
 export const getAllTransactions = async () => {
+  // Add noStore() here prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
   try {
     const result: TAllTransactions[] = await db
       .select({

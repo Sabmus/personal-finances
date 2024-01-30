@@ -1,11 +1,11 @@
 import Link from 'next/link';
-// import { getAllTransactions } from '@/lib/data';
+import { getAllTransactions } from '@/lib/data';
 import PaymentTable from '@/components/payment/PaymentTable';
 import { TAllTransactions } from '@/lib/definitions';
 
 const Payment = async () => {
-  // const transactions = await getAllTransactions();
-  const transactions: TAllTransactions[] = [
+  const transactions = await getAllTransactions();
+  /*   const transactions: TAllTransactions[] = [
     {
       id: 'fhv98qb1pmjjyc2arpaedk1p',
       category: 'Transport',
@@ -52,7 +52,7 @@ const Payment = async () => {
       createdAt: new Date('2024-01-25T23:43:56.849Z'),
     },
   ];
-
+ */
   return (
     <div className="flex flex-col gap-3 h-full">
       <div className="text-right">
