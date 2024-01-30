@@ -1,11 +1,11 @@
-import { HeroPhoto } from '@/components';
+import { Hero } from '@/components';
 
 const Dashboard = () => {
   return (
     <div className="flex flex-col h-full">
       <div className="dashboard-header">
         <h2>Dashboard</h2>
-        <HeroPhoto />
+        <Hero />
       </div>
       {/* 3.5rem of the h-14 of the abode div */}
       <div className="grid grid-rows-[20%_40%_40%] h-full">

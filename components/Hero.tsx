@@ -1,13 +1,14 @@
-const Hero = () => {
+import { auth } from '@/lib/auth';
+import { HeroPhoto } from '@/components';
+import { LogOutForm } from '@/components';
+
+const Hero = async () => {
+  const session = await auth();
+
   return (
-    <>
-      <section className="flex-center">
-        <h1>Personal Finances App</h1>
-      </section>
-      <section id="about" className="bg-orange-400 flex-center">
-        <h1>About</h1>
-      </section>
-    </>
+    <HeroPhoto img={session?.user?.image ?? ''}>
+      <LogOutForm redirectTo="/" />
+    </HeroPhoto>
   );
 };
 

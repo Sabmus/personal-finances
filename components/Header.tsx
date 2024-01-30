@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import { auth } from '@/lib/auth';
+import { LogOutForm } from '@/components';
 
 const links = [
   {
@@ -34,9 +35,7 @@ const Header = async () => {
           )}
         </ul>
         {session ? (
-          <Link href="/api/auth/signout?callbackUrl=/" className="btn">
-            Log out
-          </Link>
+          <LogOutForm redirectTo={undefined} />
         ) : (
           <Link href="/api/auth/signin?callbackUrl=/" className="btn-outline">
             Log in
