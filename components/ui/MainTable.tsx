@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { TTableDataProps, IDimension } from '@/lib/definitions';
 import { Modal } from '@/components/ui';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
@@ -20,6 +20,10 @@ const MainTable = ({ colName, data, action }: TTableDataProps) => {
   };
 
   useCloseOnEscKey(() => setIsModalOpen(false));
+
+  useEffect(() => {
+    setIsModalOpen(false);
+  }, [data]);
 
   return (
     <div className="relative h-full">

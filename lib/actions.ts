@@ -204,6 +204,7 @@ export const editCategory = async (id: string, prevState: CategoryState, formDat
   }
 
   revalidatePath('/dashboard/categories');
+  redirect('/dashboard/categories');
 };
 
 export const deleteCategory = async (id: string) => {
@@ -280,6 +281,7 @@ export const editPaymentMethod = async (id: string, prevState: PaymentMethodStat
   }
 
   revalidatePath('/dashboard/paymentMethods');
+  redirect('/dashboard/paymentMethods');
 };
 
 export const deletePaymentMethod = async (id: string) => {
