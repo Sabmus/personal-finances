@@ -3,6 +3,7 @@ import { categories, paymentMethods, transactions } from '@/db/models';
 import { isNull, eq, and } from 'drizzle-orm';
 import { TAllTransactions, IDimension } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
+import { createId } from '@paralleldrive/cuid2';
 
 export const getCategories = async () => {
   // Add noStore() here prevent the response from being cached.
@@ -100,4 +101,36 @@ export const getTransaction = async (id: string) => {
     console.log(error);
     throw new Error('Error getting transaction.');
   }
+};
+
+export const createInitialCategory = async (userId: string) => {
+  try {
+    await db.insert(categories).values({
+      id: createId(),
+      userId,
+      name: 'Food',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error creating initial category.');
+  }
+  return;
+};
+
+export const createInitialPaymentMethod = async (userId: string) => {
+  try {
+    await db.insert(paymentMethods).values({
+      id: createId(),
+      userId,
+      name: 'Debit Card',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error creating initial payment method.');
+  }
+  return;
 };

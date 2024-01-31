@@ -1,11 +1,13 @@
 import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import timestampMs from '../utils/timestamp';
-
-const options: readonly [string, ...string[]] = ['Cash', 'Credit Card', 'Debit Card', 'Others'];
+import { users } from '@/db/models';
 
 export const paymentMethods = sqliteTable('paymentMethod', {
   id: text('id').notNull().primaryKey(),
-  name: text('name', { enum: options }).notNull(),
+  userId: text('userId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
   ...timestampMs,
 });
 

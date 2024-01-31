@@ -1,26 +1,15 @@
 import { X } from 'lucide-react';
-import { IDimension } from '@/lib/definitions';
+import { IModalProps } from '@/lib/definitions';
+import { UpdateForm } from '@/components/ui';
 
-interface IModalProps {
-  divRef: React.RefObject<HTMLDivElement>;
-  modalClose: () => void;
-  selectedItem: IDimension;
-}
-
-const Modal = ({ divRef, modalClose, selectedItem }: IModalProps) => {
+const Modal = ({ divRef, modalClose, selectedItem, action }: IModalProps) => {
   return (
     <div ref={divRef} className="relative h-full border-test">
-      <div className="py-2">
+      <div className="py-2 mt-2">
         <h4>Edit Category</h4>
       </div>
-      <div>
-        <input
-          type="text"
-          name="category"
-          id="category"
-          className="w-full p-2 border border-test"
-          defaultValue={selectedItem.name}
-        />
+      <div className="px-8">
+        <UpdateForm selectedItem={selectedItem} action={action} />
       </div>
       <div className="absolute text-error top-1 right-1">
         <X size={24} strokeWidth={4} className="hover:cursor-pointer hover:scale-110" onClick={modalClose} />

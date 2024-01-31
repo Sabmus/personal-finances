@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1706021834350,
-      "tag": "0000_hot_human_cannonball",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1706047800548,
-      "tag": "0001_wandering_banshee",
+      "when": 1706712667626,
+      "tag": "0000_easy_matthew_murdock",
       "breakpoints": true
     }
   ]

@@ -2,81 +2,20 @@
 
 import { AuthError } from 'next-auth';
 import { signIn } from '@/lib/auth';
-import { z } from 'zod';
 import { db } from '@/db';
-import { transactions, User } from '@/db/models';
+import { transactions, User, categories, paymentMethods } from '@/db/models';
 import { createId } from '@paralleldrive/cuid2';
 import { auth } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { PaymentState } from '@/lib/definitions';
+import { PaymentState, CategoryState, PaymentMethodState } from '@/lib/definitions';
 import { eq, and, isNull } from 'drizzle-orm';
+import { PaymentSchema, CategorySchema, PaymentMethodSchema } from '@/lib/schemasDefinition';
 
 const getUser = async () => {
   const session = await auth();
   return session?.user;
 };
-
-const PaymentSchema = z
-  .object({
-    categoryId: z
-      .string({
-        invalid_type_error: 'Category is required.',
-      })
-      .min(1, { message: 'Category is required.' })
-      .cuid2(),
-    paymentMethodId: z
-      .string({
-        invalid_type_error: 'Payment method is required.',
-      })
-      .min(1, { message: 'Payment method is required.' })
-      .cuid2(),
-    amount: z.coerce.number().positive({
-      message: 'Amount is required.',
-    }),
-    hasInstalment: z.union([z.literal('on'), z.null()]),
-    instalmentQuantity: z.union([
-      z.null(),
-      z.coerce.number().int().positive({
-        message: 'Instalment quantity is required.',
-      }),
-    ]),
-    instalmentAmount: z.union([
-      z.null(),
-      z.coerce.number().positive({
-        message: 'Instalment amount is required.',
-      }),
-    ]),
-    notes: z
-      .string()
-      .max(255, {
-        message: 'Notes must be less than 255 characters.',
-      })
-      .transform(value => (value === '' ? null : value)),
-  })
-  .refine(input => {
-    if (input.hasInstalment === 'on' && (!input.instalmentAmount || !input.instalmentQuantity)) {
-      return false;
-    }
-
-    return true;
-  })
-  .refine(
-    input => {
-      if (input.instalmentQuantity && input.instalmentAmount) {
-        const totalInstalment = input.instalmentAmount * input.instalmentQuantity;
-        if (totalInstalment !== input.amount) {
-          return false;
-        }
-      }
-
-      return true;
-    },
-    {
-      message: 'Instalment amount and quantity must be equal to the total amount.',
-      path: ['instalmentAmount'],
-    }
-  );
 
 export const login = async (prevState: any, formData: FormData) => {
   const { email, password } = Object.fromEntries(formData);
@@ -99,6 +38,7 @@ export const login = async (prevState: any, formData: FormData) => {
   }
 };
 
+/* PAYMENTS */
 export const createPayment = async (prevState: PaymentState, formData: FormData) => {
   // @ts-ignore
   const user: User = await getUser();
@@ -199,4 +139,156 @@ export const deletePayment = async (id: string) => {
   }
 
   revalidatePath('/dashboard/payment');
+};
+
+/* CATEGORIES */
+export const createCategory = async (prevState: CategoryState, formData: FormData) => {
+  // @ts-ignore
+  const user: User = await getUser();
+
+  const validatedFields = CategorySchema.safeParse({
+    name: formData.get('name'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Failed to create category.',
+    };
+  }
+
+  const { name } = validatedFields.data;
+
+  try {
+    await db.insert(categories).values({
+      id: createId(),
+      userId: user.id,
+      name,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.log(error);
+    return { message: 'Something went wrong.', errors: undefined };
+  }
+
+  revalidatePath('/dashboard/categories');
+  redirect('/dashboard/categories');
+};
+
+export const editCategory = async (id: string, prevState: CategoryState, formData: FormData) => {
+  const validatedFields = CategorySchema.safeParse({
+    name: formData.get('name'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Failed to edit category.',
+    };
+  }
+
+  const { name } = validatedFields.data;
+
+  try {
+    await db
+      .update(categories)
+      .set({
+        name,
+        updatedAt: new Date(),
+      })
+      .where(and(eq(categories.id, id), isNull(categories.deletedAt)));
+  } catch (error) {
+    console.log(error);
+    return { message: 'Something went wrong.', errors: undefined };
+  }
+
+  revalidatePath('/dashboard/categories');
+};
+
+export const deleteCategory = async (id: string) => {
+  try {
+    await db.update(categories).set({ deletedAt: new Date() }).where(eq(categories.id, id));
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error deleting category.');
+  }
+
+  revalidatePath('/dashboard/categories');
+};
+
+/* PAYMENT METHODS */
+export const createPaymentMethod = async (prevState: PaymentMethodState, formData: FormData) => {
+  // @ts-ignore
+  const user: User = await getUser();
+
+  const validatedFields = PaymentMethodSchema.safeParse({
+    name: formData.get('name'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Failed to create payment method.',
+    };
+  }
+
+  const { name } = validatedFields.data;
+
+  try {
+    await db.insert(paymentMethods).values({
+      id: createId(),
+      userId: user.id,
+      name,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.log(error);
+    return { message: 'Something went wrong.', errors: undefined };
+  }
+
+  revalidatePath('/dashboard/paymentMethods');
+  redirect('/dashboard/paymentMethods');
+};
+
+export const editPaymentMethod = async (id: string, prevState: PaymentMethodState, formData: FormData) => {
+  const validatedFields = CategorySchema.safeParse({
+    name: formData.get('name'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Failed to edit payment method.',
+    };
+  }
+
+  const { name } = validatedFields.data;
+
+  try {
+    await db
+      .update(paymentMethods)
+      .set({
+        name,
+        updatedAt: new Date(),
+      })
+      .where(and(eq(paymentMethods.id, id), isNull(paymentMethods.deletedAt)));
+  } catch (error) {
+    console.log(error);
+    return { message: 'Something went wrong.', errors: undefined };
+  }
+
+  revalidatePath('/dashboard/paymentMethods');
+};
+
+export const deletePaymentMethod = async (id: string) => {
+  try {
+    await db.update(paymentMethods).set({ deletedAt: new Date() }).where(eq(paymentMethods.id, id));
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error deleting category.');
+  }
+
+  revalidatePath('/dashboard/paymentMethods');
 };

@@ -7,7 +7,7 @@ import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { SquarePen, Trash2 } from 'lucide-react';
 import useCloseOnEscKey from '@/hooks/useCloseOnEscKey';
 
-const MainTable = ({ colName, data }: TTableDataProps) => {
+const MainTable = ({ colName, data, action }: TTableDataProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<IDimension>();
 
@@ -23,7 +23,7 @@ const MainTable = ({ colName, data }: TTableDataProps) => {
 
   return (
     <div className="relative h-full">
-      <table className="table-main w-1/2 mx-auto">
+      <table className={`table-main w-1/2 mx-auto ${isModalOpen ? 'blur-sm' : null}`}>
         <thead className="table-head">
           <tr>
             <th scope="col" className="table-th">
@@ -52,8 +52,8 @@ const MainTable = ({ colName, data }: TTableDataProps) => {
         </tbody>
       </table>
       {isModalOpen && selectedItem && (
-        <div className="absolute w-1/3 h-1/3 top-8 left-0 right-0 mx-auto z-10 text-center bg-background">
-          <Modal divRef={divRef} modalClose={() => setIsModalOpen(false)} selectedItem={selectedItem} />
+        <div className="absolute w-1/3 h-1/4 top-8 left-0 right-0 mx-auto z-10 text-center bg-background">
+          <Modal divRef={divRef} modalClose={() => setIsModalOpen(false)} selectedItem={selectedItem} action={action} />
         </div>
       )}
     </div>

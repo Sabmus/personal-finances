@@ -45,6 +45,20 @@ export type PaymentState = {
   message?: string;
 };
 
+export type CategoryState = {
+  errors?: {
+    name?: string[];
+  };
+  message?: string;
+};
+
+export type PaymentMethodState = {
+  errors?: {
+    name?: string[];
+  };
+  message?: string;
+};
+
 export interface IPaymentTableListProps {
   transaction: TAllTransactions;
   handleButtonClick: () => void;
@@ -52,9 +66,28 @@ export interface IPaymentTableListProps {
   idx: string;
 }
 
+export type TEditFormAction = (
+  id: string,
+  prevState: CategoryState,
+  formData: FormData
+) => Promise<{ errors: { name?: string[] | undefined }; message: string } | { message: string; errors: undefined }>;
+
 export type TTableData<T> = {
   colName: string;
   data: T[];
+  action: TEditFormAction;
 };
 
 export type TTableDataProps = TTableData<IDimension>;
+
+export interface IModalProps {
+  divRef: React.RefObject<HTMLDivElement>;
+  modalClose: () => void;
+  selectedItem: IDimension;
+  action: TEditFormAction;
+}
+
+export type TUpdateFormProps = {
+  selectedItem: IDimension;
+  action: TEditFormAction;
+};
