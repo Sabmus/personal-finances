@@ -6,8 +6,9 @@ import { Modal } from '@/components/ui';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { SquarePen, Trash2 } from 'lucide-react';
 import useCloseOnEscKey from '@/hooks/useCloseOnEscKey';
+import { DeleteForm } from '@/components/ui';
 
-const MainTable = ({ colName, data, action }: TTableDataProps) => {
+const MainTable = ({ colName, data, action, deleteAction }: TTableDataProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<IDimension>();
 
@@ -49,7 +50,7 @@ const MainTable = ({ colName, data, action }: TTableDataProps) => {
                     onClick={() => handleOnClick(idx)}
                     className="text-accent hover:cursor-pointer"
                   />
-                  <Trash2 size={24} className="text-error hover:cursor-pointer" />
+                  <DeleteForm id={item.id} deleteAction={deleteAction} />
                 </td>
               </tr>
             ))}

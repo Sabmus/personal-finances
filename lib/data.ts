@@ -16,7 +16,8 @@ export const getCategories = async () => {
         id: categories.id,
         name: categories.name,
       })
-      .from(categories);
+      .from(categories)
+      .where(isNull(categories.deletedAt));
     return result;
   } catch (error) {
     console.log(error);
@@ -35,7 +36,8 @@ export const getPaymentMethods = async () => {
         id: paymentMethods.id,
         name: paymentMethods.name,
       })
-      .from(paymentMethods);
+      .from(paymentMethods)
+      .where(isNull(paymentMethods.deletedAt));
     return result;
   } catch (error) {
     console.log(error);

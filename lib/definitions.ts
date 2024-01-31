@@ -66,6 +66,15 @@ export interface IPaymentTableListProps {
   idx: string;
 }
 
+export type TCreateFormAction = (
+  prevState: CategoryState,
+  formData: FormData
+) => Promise<{ errors: { name?: string[] | undefined }; message: string } | { message: string; errors: undefined }>;
+
+export type TCreateFormProps = {
+  action: TCreateFormAction;
+};
+
 export type TEditFormAction = (
   id: string,
   prevState: CategoryState,
@@ -76,6 +85,7 @@ export type TTableData<T> = {
   colName: string;
   data: T[];
   action: TEditFormAction;
+  deleteAction: (id: string) => Promise<void>;
 };
 
 export type TTableDataProps = TTableData<IDimension>;

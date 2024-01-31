@@ -1,7 +1,7 @@
 import { MainTable } from '@/components/ui';
 import Link from 'next/link';
 import { getPaymentMethods } from '@/lib/data';
-import { editPaymentMethod } from '@/lib/actions';
+import { editPaymentMethod, deletePaymentMethod } from '@/lib/actions';
 
 const PaymentMethods = async () => {
   const paymentMethods = await getPaymentMethods();
@@ -15,7 +15,12 @@ const PaymentMethods = async () => {
       </div>
 
       <div className="h-full">
-        <MainTable colName={'Payment Methods'} data={paymentMethods} action={editPaymentMethod} />
+        <MainTable
+          colName={'Payment Methods'}
+          data={paymentMethods}
+          action={editPaymentMethod}
+          deleteAction={deletePaymentMethod}
+        />
       </div>
     </div>
   );
