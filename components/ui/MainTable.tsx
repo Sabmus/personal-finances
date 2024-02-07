@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { TTableDataProps, IDimension } from '@/lib/definitions';
 import { Modal } from '@/components/ui';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
-import { SquarePen, Trash2 } from 'lucide-react';
+import { SquarePen } from 'lucide-react';
 import useCloseOnEscKey from '@/hooks/useCloseOnEscKey';
 import { DeleteForm } from '@/components/ui';
 
