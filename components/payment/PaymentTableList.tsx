@@ -3,38 +3,14 @@ import { Eye, SquarePen } from 'lucide-react';
 import Link from 'next/link';
 import DeletePayment from '@/components/payment/DeletePayment';
 import { IPaymentTableListProps } from '@/lib/definitions';
-import { useEffect } from 'react';
-import { KEY_CODES } from '@/utils';
 
-const PaymentTableList = ({ transaction, handleButtonClick, setIsOpen, idx }: IPaymentTableListProps) => {
-  const keyDownHandler = (e: any) => {
-    switch (e.key) {
-      case KEY_CODES.ESCAPE:
-      case KEY_CODES.ESCAPE_IE11: {
-        setIsOpen();
-        document.getElementById(`${idx}`)?.blur();
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', keyDownHandler);
-    return () => {
-      document.removeEventListener('keydown', keyDownHandler);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+const PaymentTableList = ({ transaction, handleButtonClick }: IPaymentTableListProps) => {
   return (
     <tr className="table-body-tr">
       <td className="table-td">
-        <button id={idx} onClick={handleButtonClick}>
+        <span onClick={handleButtonClick} className="hover:cursor-pointer">
           <Eye size={20} className="text-accent hover:text-accent-hover" />
-        </button>
+        </span>
       </td>
       <th scope="row" className="table-td font-medium whitespace-nowrap">
         {transaction.category}

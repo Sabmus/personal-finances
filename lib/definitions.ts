@@ -62,8 +62,6 @@ export type PaymentMethodState = {
 export interface IPaymentTableListProps {
   transaction: TAllTransactions;
   handleButtonClick: () => void;
-  setIsOpen: () => void;
-  idx: string;
 }
 
 export type TCreateFormAction = (

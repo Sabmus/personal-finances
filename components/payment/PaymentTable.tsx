@@ -6,6 +6,7 @@ import PaymentModal from '@/components/payment/PaymentModal';
 import PaymentTableList from '@/components/payment/PaymentTableList';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { useRef } from 'react';
+import useCloseOnEscKey from '@/hooks/useCloseOnEscKey';
 
 const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,11 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
     setIsOpen(prev => !prev);
     setSelectedTransaction(transactions[idx]);
   };
+
+  useCloseOnEscKey(() => {
+    setIsOpen(false);
+    //document.getElementById(`${idx}`)?.blur();
+  });
 
   useOnClickOutside(divRef, () => {
     setIsOpen(false);
@@ -59,8 +65,6 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
                 key={transaction.id}
                 transaction={transaction}
                 handleButtonClick={() => handleButtonClick(idx)}
-                setIsOpen={() => setIsOpen(false)}
-                idx={idx.toString()}
               />
             ))}
         </tbody>
