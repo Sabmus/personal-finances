@@ -14,6 +14,10 @@ const links = [
     name: 'Payment Methods',
     href: '/dashboard/paymentMethods',
   },
+  {
+    name: 'Configuration',
+    href: '/dashboard/configuration',
+  },
 ];
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {

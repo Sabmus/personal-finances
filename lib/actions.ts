@@ -292,5 +292,6 @@ export const deletePaymentMethod = async (id: string) => {
     throw new Error('Error deleting category.');
   }
 
-  revalidatePath('/dashboard/paymentMethods');
+  revalidatePath('/dashboard/configuration');
+  redirect('/dashboard/configuration');
 };

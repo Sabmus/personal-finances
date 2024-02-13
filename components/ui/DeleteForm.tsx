@@ -1,14 +1,37 @@
-import { Trash2 } from 'lucide-react';
+import { X } from 'lucide-react';
+import Link from 'next/link';
 
-const DeleteForm = ({ id, deleteAction }: { id: string; deleteAction: (id: string) => Promise<void> }) => {
+const DeleteForm = ({
+  id,
+  deleteAction,
+  searchParams,
+}: {
+  id: string;
+  deleteAction: (id: string) => Promise<void>;
+  searchParams: Record<string, string> | null | undefined;
+}) => {
+  const showModal = searchParams?.show;
+  const modalId = searchParams?.id;
   const deleteWithId = deleteAction.bind(null, id);
 
   return (
-    <form action={deleteWithId}>
-      <button>
-        <Trash2 size={24} className="text-error hover:cursor-pointer" />
-      </button>
-    </form>
+    <>
+      <Link href={`/dashboard/configuration?show=true&id=${id}`}>Delete</Link>
+      {showModal && modalId === id && (
+        <div className="absolute w-96 text-center p-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-surface z-10 rounded-sm">
+          <Link
+            href="/dashboard/configuration"
+            className="absolute top-2 right-2 hover:scale-110 hover:cursor-pointer border border-red-600"
+          >
+            <X size={24} className="text-red-600" />
+          </Link>
+          <p>Do you really want to delete this?</p>
+          <form action={deleteWithId} className="text-center leading-none mt-4">
+            <button className="btn">Delete</button>
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 
