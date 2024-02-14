@@ -21,7 +21,12 @@ const PaymentMethods = async ({ searchParams }: { searchParams: Record<string, s
                   <a href="" className="px-2">
                     Edit
                   </a>
-                  <DeleteForm id={paymentMethod.id} deleteAction={deletePaymentMethod} searchParams={searchParams} />
+                  <DeleteForm
+                    id={paymentMethod.id}
+                    deleteAction={deletePaymentMethod}
+                    searchParams={searchParams}
+                    href="/dashboard/configuration"
+                  />
                 </div>
               </li>
             ))}

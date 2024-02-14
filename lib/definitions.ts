@@ -84,6 +84,7 @@ export type TTableData<T> = {
   data: T[];
   action: TEditFormAction;
   deleteAction: (id: string) => Promise<void>;
+  searchParams: Record<string, string> | null | undefined;
 };
 
 export type TTableDataProps = TTableData<IDimension>;
