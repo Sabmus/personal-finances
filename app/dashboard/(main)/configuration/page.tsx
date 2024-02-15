@@ -5,7 +5,7 @@ const Configuration = async () => {
   const groups = await getGroups();
 
   return (
-    <div className="border-test h-full">
+    <div className="h-full">
       <SubConfiguration title="Categories" btnTitle="Add Category" data={groups} createAction={() => {}} />
     </div>
   );
