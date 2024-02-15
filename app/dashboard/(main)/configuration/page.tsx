@@ -1,32 +1,12 @@
-import { PaymentMethods } from '@/components/configuration';
-import { MainTable } from '@/components/ui';
-import { getCategories, getPaymentMethods } from '@/lib/data';
-import { editCategory, deleteCategory, editPaymentMethod, deletePaymentMethod } from '@/lib/actions';
+import { getGroups } from '@/lib/data';
+import { SubConfiguration } from '@/components/configuration';
 
-const Configuration = async ({ searchParams }: { searchParams: Record<string, string> | null | undefined }) => {
-  const categories = await getCategories();
-  const paymentMethods = await getPaymentMethods();
+const Configuration = async () => {
+  const groups = await getGroups();
 
   return (
-    <div>
-      {/**
-       * <PaymentMethods searchParams={searchParams} />
-       */}
-      <MainTable
-        colName={'Category'}
-        data={categories}
-        action={editCategory}
-        deleteAction={deleteCategory}
-        searchParams={searchParams}
-      />
-
-      <MainTable
-        colName={'Payment Methods'}
-        data={paymentMethods}
-        action={editPaymentMethod}
-        deleteAction={deletePaymentMethod}
-        searchParams={searchParams}
-      />
+    <div className="border-test h-full">
+      <SubConfiguration title="Categories" btnTitle="Add Category" data={groups} createAction={() => {}} />
     </div>
   );
 };

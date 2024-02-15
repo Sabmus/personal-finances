@@ -100,3 +100,21 @@ export type TUpdateFormProps = {
   selectedItem: IDimension;
   action: TEditFormAction;
 };
+
+type TGroupsData = {
+  id: string;
+  name: string;
+  description: string;
+  owner: boolean;
+};
+
+export interface ISubConfigurationProps {
+  title: string;
+  btnTitle: string;
+  data: TGroupsData[];
+  createAction: () => void;
+}
+
+export interface IConfigurationItemsProps {
+  item: TGroupsData;
+}

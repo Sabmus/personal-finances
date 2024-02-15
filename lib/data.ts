@@ -5,6 +5,31 @@ import { TAllTransactions, IDimension } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createId } from '@paralleldrive/cuid2';
 
+export const getGroups = async () => {
+  const groups = [
+    {
+      id: '1',
+      name: 'Friends Pizza',
+      description: 'Pizza with friends',
+      owner: true,
+    },
+    {
+      id: '2',
+      name: 'Gamer day',
+      description: 'Gaming with friends',
+      owner: true,
+    },
+    {
+      id: '3',
+      name: 'Beach day',
+      description: 'Beach with friends',
+      owner: false,
+    },
+  ];
+
+  return groups;
+};
+
 export const getCategories = async () => {
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
