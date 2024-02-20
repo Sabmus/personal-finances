@@ -112,7 +112,9 @@ export interface ISubConfigurationProps {
   title: string;
   btnTitle: string;
   data: TGroupsData[];
-  createAction: () => void;
+  createAction: TCreateFormAction;
+  editAction: (id: string, prevState: CategoryState, formData: FormData) => void;
+  deleteAction: (id: string) => void;
 }
 
 export interface IConfigurationItemsProps {
