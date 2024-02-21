@@ -116,7 +116,8 @@ type TGroupsData = {
 export interface ISubConfigurationProps {
   title: string;
   btnTitle: string;
-  data: TGroupsData[] | IInputObject[];
+  //data: TGroupsData[] | IInputObject[];
+  dataFunction: () => Promise<TGroupsData[] | IInputObject[]>;
   createAction: TCreateFormAction;
   editAction: TEditFormAction;
   deleteAction: TDeleteFormAction;

@@ -40,8 +40,9 @@ export const createPaymentMethod = async (prevState: PaymentMethodState, formDat
     return { message: 'Something went wrong.', errors: undefined };
   }
 
-  revalidatePath('/dashboard/paymentMethods');
-  redirect('/dashboard/paymentMethods');
+  revalidatePath('/dashboard/configuration');
+  //redirect('/dashboard/paymentMethods');
+  return { message: 'Payment Method created successfully', errors: undefined };
 };
 
 export const editPaymentMethod = async (id: string, prevState: PaymentMethodState, formData: FormData) => {
@@ -71,8 +72,9 @@ export const editPaymentMethod = async (id: string, prevState: PaymentMethodStat
     return { message: 'Something went wrong.', errors: undefined };
   }
 
-  revalidatePath('/dashboard/paymentMethods');
-  redirect('/dashboard/paymentMethods');
+  revalidatePath('/dashboard/configuration');
+  //redirect('/dashboard/paymentMethods');
+  return { message: 'Payment Method updated successfully', errors: undefined };
 };
 
 export const deletePaymentMethod = async (id: string) => {
@@ -80,9 +82,11 @@ export const deletePaymentMethod = async (id: string) => {
     await db.update(paymentMethods).set({ deletedAt: new Date() }).where(eq(paymentMethods.id, id));
   } catch (error) {
     console.log(error);
-    throw new Error('Error deleting category.');
+    //throw new Error('Error deleting category.');
+    return { status: 'error', message: 'Error deleting Payment Method.' };
   }
 
   revalidatePath('/dashboard/configuration');
-  redirect('/dashboard/configuration');
+  //redirect('/dashboard/configuration');
+  return { status: 'success', message: 'Deleted successfully.' };
 };

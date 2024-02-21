@@ -1,6 +1,9 @@
+import { CategorySkeleton } from '@/components/skeleton';
+
 const Palette = () => {
   return (
     <div className="flex flex-col items-center gap-1">
+      <CategorySkeleton title="asd" />
       <h1>H1 heading</h1>
       <h2>H2 heading</h2>
       <h3>H3 heading</h3>
