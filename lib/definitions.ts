@@ -73,6 +73,11 @@ export type TCreateFormProps = {
   action: TCreateFormAction;
 };
 
+export type TDeleteFormAction = (id: string) => Promise<{
+  status: string;
+  message: string;
+}>;
+
 export type TEditFormAction = (
   id: string,
   prevState: CategoryState,
@@ -111,12 +116,31 @@ type TGroupsData = {
 export interface ISubConfigurationProps {
   title: string;
   btnTitle: string;
-  data: TGroupsData[];
+  data: TGroupsData[] | IInputObject[];
   createAction: TCreateFormAction;
-  editAction: (id: string, prevState: CategoryState, formData: FormData) => void;
-  deleteAction: (id: string) => void;
+  editAction: TEditFormAction;
+  deleteAction: TDeleteFormAction;
 }
 
 export interface IConfigurationItemsProps {
-  item: TGroupsData;
+  item: IInputObject;
+  editAction: TEditFormAction;
+  deleteAction: TDeleteFormAction;
+}
+
+export interface ICreateConfigurationItemProps {
+  action: TCreateFormAction;
+  btnTitle: string;
+}
+
+export interface IUpdateConfigurationItem {
+  id: string;
+  inputValue: string;
+  action: TEditFormAction;
+  handleShowOptions: () => void;
+}
+
+export interface IDeleteConfigurationItemProps {
+  id: string;
+  action: TDeleteFormAction;
 }

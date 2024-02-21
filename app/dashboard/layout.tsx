@@ -7,14 +7,6 @@ const links = [
     href: '/dashboard/payment',
   },
   {
-    name: 'Categories',
-    href: '/dashboard/categories',
-  },
-  {
-    name: 'Payment Methods',
-    href: '/dashboard/paymentMethods',
-  },
-  {
     name: 'Configuration',
     href: '/dashboard/configuration',
   },

@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-import { createPayment, editPayment } from '@/lib/actions';
+import { createPayment, editPayment } from '@/lib/actions/paymentActions';
 import { PaymentFormProps, PaymentState } from '@/lib/definitions';
 import ActionPaymentForm from '@/components/payment/ActionPaymentForm';
 

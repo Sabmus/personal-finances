@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { IConfigurationItemsProps } from '@/lib/definitions';
 import { Settings, X } from 'lucide-react';
-import { UpdateConfigurationItem } from '@/components/configuration';
+import { UpdateConfigurationItem, DeleteConfigurationItem } from '@/components/configuration';
 
-const ConfigurationItem = ({ item }: IConfigurationItemsProps) => {
+const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationItemsProps) => {
   const { id, name } = item;
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -20,34 +20,36 @@ const ConfigurationItem = ({ item }: IConfigurationItemsProps) => {
   };
 
   return (
-    <>
-      <div className="flex justify-between items-center px-2 py-1 rounded-sm border-test select-none">
-        {showEdit ? <UpdateConfigurationItem action={() => {}} inputValue={name} /> : <h6>{name}</h6>}
-        <div className="flex items-center gap-1">
-          {showOptions && !showEdit && (
-            <div className="flex gap-2">
-              <a href="#" onClick={handleEdit}>
-                Edit
-              </a>
-              <a href="#">Delete</a>
-            </div>
-          )}
-          {showEdit ? (
-            <button onClick={handleEdit}>
-              <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer" />
+    <div className="configurationItem">
+      {showEdit ? (
+        <UpdateConfigurationItem id={id} inputValue={name} action={editAction} handleShowOptions={handleShowOptions} />
+      ) : (
+        <h6>{name}</h6>
+      )}
+      <div className="flex items-center gap-1">
+        {showOptions && !showEdit && (
+          <div className="flex items-center gap-2">
+            <button className="text-accent hover:text-accent-hover leading-none" onClick={handleEdit}>
+              Edit
             </button>
-          ) : (
-            <Settings
-              size={20}
-              className={`hover:cursor-pointer duration-200 ease-in ${
-                showOptions ? 'rotate-90 scale-110' : 'rotate-0 scale-100'
-              }`}
-              onClick={handleShowOptions}
-            />
-          )}
-        </div>
+            <DeleteConfigurationItem id={id} action={deleteAction} />
+          </div>
+        )}
+        {showEdit ? (
+          <button onClick={handleEdit}>
+            <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer" />
+          </button>
+        ) : (
+          <Settings
+            size={20}
+            className={`hover:cursor-pointer duration-200 ease-in ${
+              showOptions ? 'rotate-90 scale-110' : 'rotate-0 scale-100'
+            }`}
+            onClick={handleShowOptions}
+          />
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
