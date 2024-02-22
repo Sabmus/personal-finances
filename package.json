@@ -11,7 +11,8 @@
     "db:generate": "npx drizzle-kit generate:sqlite",
     "db:migrate": "npx tsx db/migrate.ts",
     "db:migrate:drop": "npx drizzle-kit drop",
-    "db:seed": "npx tsx db/seed.ts"
+    "db:seed": "npx tsx db/seed.ts",
+    "db:droptables": "npx tsx db/dropTables.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.3.16",

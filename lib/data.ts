@@ -1,33 +1,28 @@
 import { db } from '@/db';
-import { categories, paymentMethods, transactions } from '@/db/models';
+import { categories, paymentMethods, transactions, groups } from '@/db/models';
 import { isNull, eq, and } from 'drizzle-orm';
 import { TAllTransactions, IDimension } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createId } from '@paralleldrive/cuid2';
 
 export const getGroups = async () => {
-  const groups = [
-    {
-      id: '1',
-      name: 'Friends Pizza',
-      description: 'Pizza with friends',
-      owner: true,
-    },
-    {
-      id: '2',
-      name: 'Gamer day',
-      description: 'Gaming with friends',
-      owner: true,
-    },
-    {
-      id: '3',
-      name: 'Beach day',
-      description: 'Beach with friends',
-      owner: false,
-    },
-  ];
+  // Add noStore() here prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
 
-  return groups;
+  try {
+    const result: IDimension[] = await db
+      .select({
+        id: groups.id,
+        name: groups.name,
+      })
+      .from(groups)
+      .where(isNull(groups.deletedAt));
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error getting groups.');
+  }
 };
 
 export const getCategories = async () => {

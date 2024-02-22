@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1706712667626,
-      "tag": "0000_easy_matthew_murdock",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1708015704203,
-      "tag": "0001_complex_old_lace",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1708015761361,
-      "tag": "0002_grey_spitfire",
+      "when": 1708617875817,
+      "tag": "0000_fluffy_supreme_intelligence",
       "breakpoints": true
     }
   ]

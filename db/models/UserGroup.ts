@@ -1,12 +1,12 @@
 import { sqliteTable, text, real } from 'drizzle-orm/sqlite-core';
 import timestampMs from '../utils/timestamp';
-import { users, group } from '@/db/models';
+import { users, groups } from '@/db/models';
 
-export const userGroup = sqliteTable('userGroup', {
+export const userGroups = sqliteTable('userGroup', {
   id: text('id').notNull().primaryKey(),
   groupId: text('groupId')
     .notNull()
-    .references(() => group.id, { onDelete: 'cascade' }),
+    .references(() => groups.id, { onDelete: 'cascade' }),
   userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),

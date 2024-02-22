@@ -59,6 +59,14 @@ export type PaymentMethodState = {
   message?: string;
 };
 
+export type GroupState = {
+  errors?: {
+    name?: string[];
+    description?: string[];
+  };
+  message?: string;
+};
+
 export interface IPaymentTableListProps {
   transaction: TAllTransactions;
   handleButtonClick: () => void;

@@ -2,14 +2,18 @@
 
 import { CategoryState, PaymentMethodState, ICreateConfigurationItemProps } from '@/lib/definitions';
 import { useFormState } from 'react-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { SubmitButton } from '@/components/ui';
 import toast from 'react-hot-toast';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemProps) => {
   const initialState: CategoryState | PaymentMethodState = { errors: {}, message: '' };
   const [state, formAction] = useFormState(action, initialState);
+  const divRef = useRef(null);
+
+  useOnClickOutside(divRef, () => setCreate(false));
 
   const [create, setCreate] = useState(false);
 
@@ -32,7 +36,7 @@ const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemP
   return (
     <>
       {create ? (
-        <div className="configurationItem">
+        <div ref={divRef} className="configurationItem">
           <form action={formAction} className="flex w-full items-center">
             <input type="text" name="name" id="name" className="px-2 mr-2 w-full" autoFocus />
             <SubmitButton name="Save" />

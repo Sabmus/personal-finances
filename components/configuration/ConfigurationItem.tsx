@@ -1,14 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { IConfigurationItemsProps } from '@/lib/definitions';
 import { Settings, X } from 'lucide-react';
 import { UpdateConfigurationItem, DeleteConfigurationItem } from '@/components/configuration';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationItemsProps) => {
   const { id, name } = item;
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const divRef = useRef(null);
+
+  useOnClickOutside(divRef, () => setShowOptions(false));
 
   const handleEdit = () => {
     setShowEdit(prev => !prev);
@@ -20,7 +24,7 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
   };
 
   return (
-    <div className="configurationItem">
+    <div ref={divRef} className="configurationItem">
       {showEdit ? (
         <UpdateConfigurationItem id={id} inputValue={name} action={editAction} handleShowOptions={handleShowOptions} />
       ) : (

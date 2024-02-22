@@ -32,8 +32,8 @@ export const PaymentSchema = z
     ]),
     notes: z
       .string()
-      .max(255, {
-        message: 'Notes must be less than 255 characters.',
+      .max(120, {
+        message: 'Notes must be less than 120 characters.',
       })
       .transform(value => (value === '' ? null : value)),
   })
@@ -77,4 +77,20 @@ export const PaymentMethodSchema = z.object({
     })
     .min(1, { message: 'Payment Method name is required.' })
     .max(20, { message: 'Payment Method name must be less than 20 characters.' }),
+});
+
+export const GroupSchema = z.object({
+  name: z
+    .string({
+      invalid_type_error: 'Group name is required.',
+    })
+    .min(1, { message: 'Group name is required.' })
+    .max(30, { message: 'Group name must be less than 30 characters.' }),
+  description: z
+    .string()
+    .max(120, {
+      message: 'Description must be less than 120 characters.',
+    })
+    .transform(value => (value === '' ? null : value))
+    .nullable(),
 });
