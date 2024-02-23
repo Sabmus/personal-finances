@@ -6,9 +6,8 @@ import { PaymentMethodState } from '@/lib/definitions';
 import { createId } from '@paralleldrive/cuid2';
 import { User, paymentMethods } from '@/db/models';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 import { eq, and, isNull } from 'drizzle-orm';
-import { getUser } from '@/lib/actions/utils';
+import { getUser, checkPaymentMethodExists } from '@/lib/actions/utils';
 
 export const createPaymentMethod = async (prevState: PaymentMethodState, formData: FormData) => {
   // @ts-ignore
@@ -26,6 +25,14 @@ export const createPaymentMethod = async (prevState: PaymentMethodState, formDat
   }
 
   const { name } = validatedFields.data;
+  const paymentMethodExists = await checkPaymentMethodExists(user, name);
+
+  if (paymentMethodExists) {
+    return {
+      errors: { name: ['Payment Method already exists.'] },
+      message: 'Failed to create payment method.',
+    };
+  }
 
   try {
     await db.insert(paymentMethods).values({

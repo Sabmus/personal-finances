@@ -7,7 +7,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { User, groups, userGroups } from '@/db/models';
 import { revalidatePath } from 'next/cache';
 import { eq, and, isNull } from 'drizzle-orm';
-import { getUser } from '@/lib/actions/utils';
+import { getUser, checkGroupExists } from '@/lib/actions/utils';
 
 export const createGroup = async (prevState: GroupState, formData: FormData) => {
   // @ts-ignore
@@ -19,7 +19,6 @@ export const createGroup = async (prevState: GroupState, formData: FormData) => 
   });
 
   if (!validatedFields.success) {
-    console.log('🚀 ~ createGroup ~ validatedFields:', validatedFields.error.flatten().fieldErrors);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Failed to create group.',
@@ -27,6 +26,14 @@ export const createGroup = async (prevState: GroupState, formData: FormData) => 
   }
 
   const { name, description } = validatedFields.data;
+  const groupExists = await checkGroupExists(user, name);
+
+  if (groupExists) {
+    return {
+      errors: { name: ['Group already exists.'] },
+      message: 'Failed to create group.',
+    };
+  }
 
   try {
     const newGroup = await db
@@ -58,7 +65,7 @@ export const createGroup = async (prevState: GroupState, formData: FormData) => 
   return { message: 'Group created successfully.', errors: undefined };
 };
 
-export const editCategory = async (id: string, prevState: GroupState, formData: FormData) => {
+export const editGroup = async (id: string, prevState: GroupState, formData: FormData) => {
   const validatedFields = GroupSchema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
@@ -92,7 +99,7 @@ export const editCategory = async (id: string, prevState: GroupState, formData: 
   return { message: 'Updated Successfully.', errors: undefined };
 };
 
-export const deleteCategory = async (id: string) => {
+export const deleteGroup = async (id: string) => {
   try {
     await db.update(groups).set({ deletedAt: new Date() }).where(eq(groups.id, id));
   } catch (error) {

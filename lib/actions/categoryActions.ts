@@ -7,7 +7,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { User, categories } from '@/db/models';
 import { revalidatePath } from 'next/cache';
 import { eq, and, isNull } from 'drizzle-orm';
-import { getUser } from '@/lib/actions/utils';
+import { getUser, checkCategoryExists } from '@/lib/actions/utils';
 
 export const createCategory = async (prevState: CategoryState, formData: FormData) => {
   // @ts-ignore
@@ -25,6 +25,14 @@ export const createCategory = async (prevState: CategoryState, formData: FormDat
   }
 
   const { name } = validatedFields.data;
+  const categoryExists = await checkCategoryExists(user, name);
+
+  if (categoryExists) {
+    return {
+      errors: { name: ['Category already exists.'] },
+      message: 'Failed to create category.',
+    };
+  }
 
   try {
     await db.insert(categories).values({
