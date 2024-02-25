@@ -1,4 +1,5 @@
 import { createInitialCategory, createInitialPaymentMethod } from '@/lib/data';
+import { NewUser } from '@/db/models/User';
 
 interface INewUser {
   id: string;
@@ -40,22 +41,9 @@ export const authConfig = {
 
       return true;
     },
-    async signIn({ user, account, profile, email, credentials }: any) {
-      // console.log('signIn', { user, account, profile, email, credentials });
-
-      return true;
-    },
-    /*   async jwt({ token, user, account, profile, isNewUser }: any) {
-      console.log('jwt', { token, user, isNewUser });
-      return token;
-    }, */
   },
-  events: {
-    /*     async signIn({ user, isNewUser }: any) {
-      console.log('signIn', { user, isNewUser });
-      return;
-    }, */
-    async createUser({ user }: { user: INewUser }) {
+  /*events: {
+    async createUser({ user }: { user: NewUser }) {
       console.log('\n\n⚠⚠ creating initial category ⚠⚠\n\n');
       await createInitialCategory(user.id);
       console.log('\n✨✨ initial category created succesfully ✨✨\n');
@@ -64,5 +52,5 @@ export const authConfig = {
       console.log('\n\n✨✨ initial payment method created succesfully ✨✨\n\n');
       return;
     },
-  },
+  },*/
 };

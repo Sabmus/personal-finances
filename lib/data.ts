@@ -1,9 +1,10 @@
 import { db } from '@/db';
 import { categories, paymentMethods, transactions, groups } from '@/db/models';
-import { isNull, eq, and } from 'drizzle-orm';
+import { isNull, eq, and, sum, desc } from 'drizzle-orm';
 import { TAllTransactions, IDimension } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createId } from '@paralleldrive/cuid2';
+import { getUser } from '@/lib/actions/utils';
 
 export const getGroups = async () => {
   // Add noStore() here prevent the response from being cached.
@@ -11,13 +12,14 @@ export const getGroups = async () => {
   noStore();
 
   try {
+    const user = await getUser();
     const result: IDimension[] = await db
       .select({
         id: groups.id,
         name: groups.name,
       })
       .from(groups)
-      .where(isNull(groups.deletedAt));
+      .where(and(isNull(groups.deletedAt), eq(groups.owner, user?.id || '')));
     return result;
   } catch (error) {
     console.log(error);
@@ -31,13 +33,14 @@ export const getCategories = async () => {
   noStore();
 
   try {
+    const user = await getUser();
     const result: IDimension[] = await db
       .select({
         id: categories.id,
         name: categories.name,
       })
       .from(categories)
-      .where(isNull(categories.deletedAt));
+      .where(and(isNull(categories.deletedAt), eq(categories.userId, user?.id || '')));
     return result;
   } catch (error) {
     console.log(error);
@@ -51,13 +54,14 @@ export const getPaymentMethods = async () => {
   noStore();
 
   try {
+    const user = await getUser();
     const result: IDimension[] = await db
       .select({
         id: paymentMethods.id,
         name: paymentMethods.name,
       })
       .from(paymentMethods)
-      .where(isNull(paymentMethods.deletedAt));
+      .where(and(isNull(paymentMethods.deletedAt), eq(paymentMethods.userId, user?.id || '')));
     return result;
   } catch (error) {
     console.log(error);
@@ -71,6 +75,7 @@ export const getAllTransactions = async () => {
   noStore();
 
   try {
+    const user = await getUser();
     const result: TAllTransactions[] = await db
       .select({
         id: transactions.id,
@@ -88,7 +93,7 @@ export const getAllTransactions = async () => {
       .from(transactions)
       .leftJoin(categories, eq(categories.id, transactions.categoryId))
       .leftJoin(paymentMethods, eq(paymentMethods.id, transactions.paymentMethodId))
-      .where(isNull(transactions.deletedAt));
+      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')));
 
     return result;
   } catch (error) {
@@ -155,4 +160,47 @@ export const createInitialPaymentMethod = async (userId: string) => {
     throw new Error('Error creating initial payment method.');
   }
   return;
+};
+
+export const getTotalAmount = async () => {
+  try {
+    const user = await getUser();
+    const result = await db
+      .select({
+        totalAmount: sum(transactions.amount),
+      })
+      .from(transactions)
+      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')));
+    return result[0].totalAmount || 0;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error getting total amount.');
+  }
+};
+
+export const getTop3Categories = async () => {
+  try {
+    const user = await getUser();
+    const amountByCategory = db.$with('amountByCategory').as(
+      db
+        .select({
+          category: categories.name,
+          amount: sum(transactions.amount).as('amount'),
+        })
+        .from(transactions)
+        .leftJoin(categories, eq(categories.id, transactions.categoryId))
+        .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
+        .groupBy(transactions.categoryId)
+    );
+    const result = await db
+      .with(amountByCategory)
+      .select()
+      .from(amountByCategory)
+      .orderBy(desc(amountByCategory.amount))
+      .limit(3);
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error getting top 3 categories.');
+  }
 };

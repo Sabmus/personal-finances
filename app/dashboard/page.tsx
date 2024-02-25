@@ -1,4 +1,6 @@
 import { Hero } from '@/components';
+import { Suspense } from 'react';
+import { TotalAmount } from '@/components/dashboard';
 
 const Dashboard = () => {
   return (
@@ -11,7 +13,11 @@ const Dashboard = () => {
       <div className="grid grid-rows-[20%_40%_40%] h-full">
         <div className="flex">
           <div className="p-4 w-1/3 flex-center flex-col">
-            <h1 className="text-accent">$100.000</h1>
+            <h1 className="text-accent">
+              <Suspense fallback={<span>Loading...</span>}>
+                <TotalAmount />
+              </Suspense>
+            </h1>
             <span>Total</span>
           </div>
           <div className="flex-grow p-2">
