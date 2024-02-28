@@ -1,6 +1,5 @@
 import { auth } from '@/lib/auth';
-import { HeroPhoto } from '@/components';
-import { LogOutForm } from '@/components';
+import { HeroPhoto, LogOutForm } from '@/components';
 
 const Hero = async () => {
   const session = await auth();

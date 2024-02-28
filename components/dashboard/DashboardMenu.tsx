@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 const links = [
   {
@@ -21,33 +22,38 @@ const links = [
 
 const DashboardMenu = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const divRef = useRef(null);
 
   const handleMenuClick = () => {
     setIsOpenMenu(prev => !prev);
   };
 
+  useOnClickOutside(divRef, () => setIsOpenMenu(false));
+
   return (
-    <div className="flex flex-col px-4 py-2 bg-slate-500">
-      <div>
-        <span>
-          <Menu onClick={handleMenuClick} />
-        </span>
+    <div ref={divRef} className="relative flex items-center">
+      <div className={`absolute z-20 transition-all duration-200 ${isOpenMenu ? 'left-16 delay-75' : 'left-0'}`}>
+        <Menu onClick={handleMenuClick} />
       </div>
-      {isOpenMenu && (
-        <>
-          <div className="flex-grow flex-shrink-0 basis-auto w-full text-center border-test">
-            <ul>
-              {links &&
-                links.map((link, idx) => (
-                  <li key={idx} className="py-2">
-                    <Link href={link.href}>{link.name}</Link>
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <div className="flex-shrink-0 text-center">footer</div>
-        </>
-      )}
+      <div
+        className={`absolute w-[200px] z-10 flex flex-col top-0 h-svh transition-all duration-200 ease-in ${
+          isOpenMenu ? '-left-7' : '-left-64'
+        } bg-blue-700`}
+      >
+        <div className="flex-grow flex-shrink-0 basis-auto w-full text-center">
+          <ul className="border-test h-full flex flex-col justify-center">
+            {links &&
+              links.map((link, idx) => (
+                <li key={idx} className="py-2">
+                  <Link href={link.href} onClick={handleMenuClick}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="flex-shrink-0 text-center">footer</div>
+      </div>
     </div>
   );
 };

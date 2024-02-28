@@ -1,4 +1,3 @@
-import { Hero } from '@/components';
 import { Breadcrumb, DashboardTitle } from '@/components/ui';
 
 const Paymentlayout = ({ children }: { children: React.ReactNode }) => {
@@ -9,7 +8,6 @@ const Paymentlayout = ({ children }: { children: React.ReactNode }) => {
           <Breadcrumb />
           <DashboardTitle />
         </div>
-        <Hero />
       </div>
       {children}
     </div>

@@ -1,7 +1,7 @@
 'use server';
 
 import { AuthError } from 'next-auth';
-import { signIn } from '@/lib/auth';
+import { signIn, signOut } from '@/lib/auth';
 
 export const login = async (prevState: any, formData: FormData) => {
   const { email, password } = Object.fromEntries(formData);
@@ -22,4 +22,8 @@ export const login = async (prevState: any, formData: FormData) => {
     // https://nextjs.org/docs/app/api-reference/functions/redirect#server-component
     throw error;
   }
+};
+
+export const logOut = async ({ path = '/' }: { path: string }) => {
+  await signOut({ redirectTo: path });
 };

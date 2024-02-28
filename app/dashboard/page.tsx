@@ -1,4 +1,3 @@
-import { Hero } from '@/components';
 import { Suspense } from 'react';
 import { TotalAmount, Top3Categories } from '@/components/dashboard';
 
@@ -7,7 +6,6 @@ const Dashboard = () => {
     <div className="flex flex-col h-full">
       <div className="dashboard-header">
         <h2>Dashboard</h2>
-        <Hero />
       </div>
       {/* 3.5rem of the h-14 of the abode div */}
       <div className="grid grid-rows-[20%_40%_40%] h-full">

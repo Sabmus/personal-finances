@@ -10,7 +10,7 @@ const DashboardTitle = () => {
     .filter(path => path !== '' && path !== 'dashboard' && path !== id)
     .join(' - ');
 
-  return <h3 className="leading-none capitalize">{pathTitle}</h3>;
+  return <h5 className="leading-none capitalize">{pathTitle}</h5>;
 };
 
 export default DashboardTitle;

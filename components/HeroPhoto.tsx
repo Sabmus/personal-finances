@@ -11,7 +11,7 @@ const HeroPhoto = ({ img, children }: { img: string; children: React.ReactNode }
   };
 
   return (
-    <div className="relative">
+    <div className="relative py-2">
       <div className="w-10 h-10 rounded-full text-center">
         {img ? (
           <img src={img} className="rounded-full hover:cursor-pointer" onClick={handleOnClick} />

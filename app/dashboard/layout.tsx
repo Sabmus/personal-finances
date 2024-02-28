@@ -1,10 +1,10 @@
-import { DashboardMenu } from '@/components/dashboard';
+import { DashboardNav } from '@/components/dashboard';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-svh">
-      <DashboardMenu />
-      <div className="p-4">{children}</div>
+    <div className="flex flex-col h-svh">
+      <DashboardNav />
+      <div className="h-full">{children}</div>
     </div>
   );
 };
