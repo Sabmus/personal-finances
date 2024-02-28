@@ -184,7 +184,7 @@ export const getTop3Categories = async () => {
     const amountByCategory = db.$with('amountByCategory').as(
       db
         .select({
-          category: categories.name,
+          name: categories.name,
           amount: sum(transactions.amount).as('amount'),
         })
         .from(transactions)

@@ -1,20 +1,18 @@
-import Link from 'next/link';
-import { Logo } from '@/components';
-
-const links = [
-  {
-    name: 'Payment',
-    href: '/dashboard/payment',
-  },
-  {
-    name: 'Configuration',
-    href: '/dashboard/configuration',
-  },
-];
+import { DashboardMenu } from '@/components/dashboard';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="grid grid-cols-[20%_80%] h-svh">
+    <div className="h-svh">
+      <DashboardMenu />
+      <div className="p-4">{children}</div>
+    </div>
+  );
+};
+
+export default DashboardLayout;
+
+{
+  /* <div className="grid grid-cols-[20%_80%] h-svh">
       <div className="flex flex-col items-center p-4 bg-slate-500">
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20 border-test">
@@ -30,8 +28,5 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex-shrink-0">footer</div>
       </div>
       <div className="p-4">{children}</div>
-    </div>
-  );
-};
-
-export default DashboardLayout;
+    </div> */
+}

@@ -1,6 +1,6 @@
 import { Hero } from '@/components';
 import { Suspense } from 'react';
-import { TotalAmount } from '@/components/dashboard';
+import { TotalAmount, Top3Categories } from '@/components/dashboard';
 
 const Dashboard = () => {
   return (
@@ -21,21 +21,10 @@ const Dashboard = () => {
             <span>Total</span>
           </div>
           <div className="flex-grow p-2">
-            <h6 className="text-center mb-4 text-foreground/70">Top 3</h6>
-            <ul className="flex justify-around text-foreground/70 items-center">
-              <li className="text-center">
-                <h5 className="text-foreground/70">$50.000</h5>
-                <span>Super</span>
-              </li>
-              <li className="text-center">
-                <h5 className="text-foreground/70">$25.000</h5>
-                <span>Cuentas</span>
-              </li>
-              <li className="text-center">
-                <h5 className="text-foreground/70">$25.000</h5>
-                <span>Juegos</span>
-              </li>
-            </ul>
+            <h6 className="text-center mb-4 text-foreground/70">Top 3 Categories</h6>
+            <Suspense fallback={<span>Loading...</span>}>
+              <Top3Categories />
+            </Suspense>
           </div>
         </div>
         <div className="p-4 grid grid-cols-2">

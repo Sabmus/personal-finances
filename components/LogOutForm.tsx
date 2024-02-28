@@ -1,4 +1,5 @@
 import { signOut } from '@/lib/auth';
+import { LogOut } from 'lucide-react';
 
 const LogOutForm = ({ redirectTo }: { redirectTo: string | undefined }) => {
   return (
@@ -10,7 +11,9 @@ const LogOutForm = ({ redirectTo }: { redirectTo: string | undefined }) => {
         });
       }}
     >
-      <button className="btn">Log Out</button>
+      <button className="btn py-1">
+        <LogOut size={18} />
+      </button>
     </form>
   );
 };

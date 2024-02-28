@@ -14,7 +14,7 @@ const Header = async () => {
   const session = await auth();
 
   return (
-    <header className="p-4 h-14 flex justify-between items-center fixed w-5/6 bg-background">
+    <header className="h-14 flex justify-between items-center fixed w-5/6 bg-background">
       <Logo />
       <div className="flex gap-4 items-center">
         <ul className="flex gap-8 px-4 border-r-2">
