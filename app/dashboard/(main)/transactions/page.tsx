@@ -8,12 +8,12 @@ const Payment = async () => {
   return (
     <div className="flex flex-col gap-3 h-full">
       <div className="text-right">
-        <Link href="/dashboard/payment/create" className="btn-outline right-0">
-          Add Payment
+        <Link href="/dashboard/transactions/create" className="btn-outline right-0">
+          Add Transaction
         </Link>
       </div>
 
-      <PaymentTable transactions={transactions} />
+      {/* <PaymentTable transactions={transactions} /> */}
     </div>
   );
 };

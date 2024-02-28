@@ -12,7 +12,7 @@ const links = [
   },
   {
     name: 'Transactions',
-    href: '/dashboard/payment',
+    href: '/dashboard/transactions',
   },
   {
     name: 'Configuration',
@@ -38,10 +38,10 @@ const DashboardMenu = () => {
       <div
         className={`absolute w-[200px] z-10 flex flex-col top-0 h-svh transition-all duration-200 ease-in ${
           isOpenMenu ? '-left-7' : '-left-64'
-        } bg-blue-700`}
+        } bg-background/95`}
       >
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center">
-          <ul className="border-test h-full flex flex-col justify-center">
+          <ul className="h-full flex flex-col justify-center">
             {links &&
               links.map((link, idx) => (
                 <li key={idx} className="py-2">
