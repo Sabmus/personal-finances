@@ -21,7 +21,7 @@ const HeroPhoto = ({ img, children }: { img: string; children: React.ReactNode }
           </div>
         )}
       </div>
-      {isOpen && <div className="absolute h-fit w-24 top-1 right-12 flex-center">{children}</div>}
+      {isOpen && <div className="absolute h-fit w-24 top-1/2 -translate-y-1/2 right-8 flex-center">{children}</div>}
     </div>
   );
 };

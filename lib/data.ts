@@ -93,7 +93,8 @@ export const getAllTransactions = async () => {
       .from(transactions)
       .leftJoin(categories, eq(categories.id, transactions.categoryId))
       .leftJoin(paymentMethods, eq(paymentMethods.id, transactions.paymentMethodId))
-      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')));
+      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
+      .orderBy(desc(transactions.createdAt));
 
     return result;
   } catch (error) {

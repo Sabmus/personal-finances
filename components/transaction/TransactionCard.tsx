@@ -12,7 +12,7 @@ const TransactionCard = ({ transaction }: { transaction: TAllTransactions }) => 
   };
 
   return (
-    <div className="border border-accent-darker rounded-sm shadow-md shadow-accent-hover">
+    <div className="border border-accent-darker rounded-sm">
       <TransactionCardHeader
         amount={transaction.amount}
         category={transaction.category}

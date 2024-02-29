@@ -27,7 +27,7 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Failed to create payment.',
+      message: 'Failed to create transactions.',
     };
   }
 
@@ -50,11 +50,11 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
     });
   } catch (error) {
     console.log(error);
-    return { message: 'Something went wrong.', errors: undefined };
+    return { message: 'Failed to create transactions.', errors: undefined };
   }
 
-  revalidatePath('/dashboard/payment');
-  redirect('/dashboard/payment');
+  revalidatePath('/dashboard/transactions');
+  redirect('/dashboard/transactions');
 };
 
 export const editPayment = async (id: string, prevState: PaymentState, formData: FormData) => {
@@ -71,7 +71,7 @@ export const editPayment = async (id: string, prevState: PaymentState, formData:
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Failed to create payment.',
+      message: 'Failed updating transaction.',
     };
   }
 
@@ -94,11 +94,11 @@ export const editPayment = async (id: string, prevState: PaymentState, formData:
       .where(and(eq(transactions.id, id), isNull(transactions.deletedAt)));
   } catch (error) {
     console.log(error);
-    return { message: 'Something went wrong.', errors: undefined };
+    return { message: 'Failed updating transaction.', errors: undefined };
   }
 
-  revalidatePath('/dashboard/payment');
-  redirect('/dashboard/payment');
+  revalidatePath('/dashboard/transactions');
+  return { message: 'Transaction updated!.', errors: undefined };
 };
 
 export const deletePayment = async (id: string) => {
@@ -106,8 +106,10 @@ export const deletePayment = async (id: string) => {
     await db.update(transactions).set({ deletedAt: new Date() }).where(eq(transactions.id, id));
   } catch (error) {
     console.log(error);
-    throw new Error('Error deleting payment.');
+
+    return { message: 'Error deleting transaction.', errors: undefined };
   }
 
-  revalidatePath('/dashboard/payment');
+  revalidatePath('/dashboard/transactions');
+  return { message: 'Transaction deleted!.', errors: undefined };
 };
