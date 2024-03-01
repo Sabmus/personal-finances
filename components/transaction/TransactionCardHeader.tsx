@@ -52,7 +52,7 @@ const TransactionCardHeader = ({
             showSettings ? 'opacity-100 right-7' : 'opacity-0 -right-40'
           }`}
         >
-          <Link href={`/dashboard/transaction/${id}/edit`}>Edit</Link>
+          <Link href={`/dashboard/transactions/${id}/edit`}>Edit</Link>
           <DeleteTransaction id={id} action={deleteAction} />
         </div>
         <span>

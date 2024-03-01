@@ -7,7 +7,7 @@ const EditPayment = async ({ params }: { params: { id: string } }) => {
   const transaction = await getTransaction(params.id);
 
   return (
-    <div className="h-full border-test">
+    <div className="h-full">
       <PaymentForm type="edit" categories={categories} paymentMethods={paymentMethods} transaction={transaction} />
     </div>
   );

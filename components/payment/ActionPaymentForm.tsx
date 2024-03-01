@@ -23,7 +23,7 @@ const ActionPaymentForm = ({
   }, [transaction]);
 
   return (
-    <form action={formAction} className="flex flex-col gap-2 w-1/2 mx-auto mt-10">
+    <form action={formAction} className="flex flex-col px-2 py-1 gap-2 mt-10 border border-accent-darker rounded-sm">
       <div>
         <select
           name="categoryId"
@@ -32,9 +32,6 @@ const ActionPaymentForm = ({
           className="w-full"
           defaultValue={transaction?.categoryId ?? ''}
         >
-          <option value="" disabled={true}>
-            Select a category...
-          </option>
           {categories.map((category, idx) => (
             <option key={idx} value={category.id}>
               {category.name}
@@ -55,9 +52,6 @@ const ActionPaymentForm = ({
           className="w-full"
           defaultValue={transaction?.paymentMethodId ?? ''}
         >
-          <option value="" disabled={true}>
-            Select a payment method...
-          </option>
           {paymentMethods.map((paymentMethod, idx) => (
             <option key={idx} value={paymentMethod.id}>
               {paymentMethod.name}

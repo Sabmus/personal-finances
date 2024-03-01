@@ -5,15 +5,17 @@ const Top3Categories = async () => {
   const top3Categories = await getTop3Categories();
 
   return (
-    <ul className="flex justify-around text-foreground/70 items-center">
-      {top3Categories &&
-        top3Categories.map(category => (
-          <li key={category.name} className="text-center">
-            <h5 className="text-foreground/70">{toCLP(Number(category.amount))}</h5>
-            <span>{category.name}</span>
-          </li>
-        ))}
-    </ul>
+    <div className="">
+      <ul className="flex flex-col text-foreground/70">
+        {top3Categories &&
+          top3Categories.map(category => (
+            <li key={category.name} className="flex justify-between items-baseline text-center">
+              <h5 className="text-accent">{category.name}</h5>
+              <h5 className="text-foreground/70">{toCLP(Number(category.amount))}</h5>
+            </li>
+          ))}
+      </ul>
+    </div>
   );
 };
 
