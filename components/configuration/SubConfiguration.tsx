@@ -16,7 +16,7 @@ const SubConfiguration = async ({
       <h5 className="text-center text-accent-darker">{title}</h5>
       <div className="overflow-y-scroll">
         <div className="flex flex-col gap-2">
-          <div>
+          <div className="overflow-x-hidden">
             {' '}
             {/* grid grid-cols-1 gap-x-4 gap-y-1 */}
             {data &&

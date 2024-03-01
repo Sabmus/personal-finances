@@ -12,7 +12,10 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
   const [showEdit, setShowEdit] = useState(false);
   const divRef = useRef(null);
 
-  useOnClickOutside(divRef, () => setShowOptions(false));
+  useOnClickOutside(divRef, () => {
+    setShowOptions(false);
+    setShowEdit(false);
+  });
 
   const handleEdit = () => {
     setShowEdit(prev => !prev);
@@ -30,15 +33,17 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
       ) : (
         <h6>{name}</h6>
       )}
-      <div className="flex items-center gap-1">
-        {showOptions && !showEdit && (
-          <div className="flex items-center gap-2">
-            <button className="text-accent hover:text-accent-hover leading-none" onClick={handleEdit}>
-              Edit
-            </button>
-            <DeleteConfigurationItem id={id} action={deleteAction} />
-          </div>
-        )}
+      <div className="relative flex items-center gap-1">
+        <div
+          className={`absolute flex items-center gap-2 transition-all duration-200 ${
+            showOptions && !showEdit ? '-left-24 opacity-100' : 'left-10 opacity-0'
+          }`}
+        >
+          <button className="text-accent hover:text-accent-hover leading-none" onClick={handleEdit}>
+            Edit
+          </button>
+          <DeleteConfigurationItem id={id} action={deleteAction} />
+        </div>
         {showEdit ? (
           <button onClick={handleEdit}>
             <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer" />
@@ -46,7 +51,7 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
         ) : (
           <Settings
             size={20}
-            className={`hover:cursor-pointer duration-200 ease-in ${
+            className={`bg-background hover:cursor-pointer duration-200 ease-in ${
               showOptions ? 'rotate-90 scale-110' : 'rotate-0 scale-100'
             }`}
             onClick={handleShowOptions}
