@@ -154,11 +154,23 @@ export interface IDeleteConfigurationItemProps {
   action: TDeleteFormAction;
 }
 
+export interface IDeleteTransactionProps {
+  id: string;
+  action: TDeleteFormAction;
+}
+
+export interface ITransactionCardProps {
+  transaction: TAllTransactions;
+  deleteAction: TDeleteFormAction;
+}
+
 export interface ITransactionCardHeaderProps {
+  id: string;
   amount: number;
   category: string | null;
   showDetails: boolean;
   handleShowDetails: () => void;
+  deleteAction: TDeleteFormAction;
 }
 
 export interface ITransactionCardDetailsProps {

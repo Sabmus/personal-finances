@@ -1,39 +1,64 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { toCLP } from '@/utils';
 import { ITransactionCardHeaderProps } from '@/lib/definitions';
 import { Settings } from 'lucide-react';
+import Link from 'next/link';
+import { DeleteTransaction } from '@/components/transaction';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
-const TransactionCardHeader = ({ amount, category, showDetails, handleShowDetails }: ITransactionCardHeaderProps) => {
+const TransactionCardHeader = ({
+  id,
+  amount,
+  category,
+  showDetails,
+  handleShowDetails,
+  deleteAction,
+}: ITransactionCardHeaderProps) => {
   const [showSettings, setShowSettings] = useState(false);
+  const spanRef = useRef(null);
 
   const handleShowSettings = () => {
     setShowSettings(prev => !prev);
   };
 
+  useOnClickOutside(spanRef, () => setShowSettings(false));
+
   return (
-    <div className="flex justify-between items-center">
+    <div ref={spanRef} className="flex justify-between items-center bg-purple-900">
       <div
-        className="flex justify-between items-center flex-grow px-2 py-1 overflow-x-hidden bg-purple-900"
+        className="flex justify-between items-center flex-grow px-2 py-1 overflow-x-hidden"
         onClick={handleShowDetails}
       >
         <span
           className={`relative text-accent text-xl transition-all duration-200 ease-in ${
-            showDetails ? 'left-1/2 -translate-x-1/2' : 'left-0'
+            showDetails && !showSettings ? 'left-1/2 -translate-x-1/2' : 'left-0'
           }`}
         >
           {toCLP(amount)}
         </span>
         <span
           className={`relative text-surface transition-all duration-200 ease-in ${
-            showDetails ? 'opacity-0 -right-40' : 'opacity-100 right-0'
+            showSettings || showDetails ? 'opacity-0 -right-40' : 'opacity-100 right-0'
           }`}
         >
           {category}
         </span>
       </div>
-      <Settings size={20} className="mx-2" onClick={handleShowSettings} />
+      <div className="relative flex items-center">
+        <div
+          className={`absolute flex gap-2 px-2 transition-all duration-200 ${
+            showSettings ? 'opacity-100 right-7' : 'opacity-0 -right-40'
+          }`}
+        >
+          <Link href={`/dashboard/transaction/${id}/edit`}>Edit</Link>
+          <DeleteTransaction id={id} action={deleteAction} />
+        </div>
+        <span>
+          <Settings size={20} className="mx-2" onClick={handleShowSettings} />
+        </span>
+      </div>
     </div>
   );
 };

@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { TransactionCardHeader, TransactionCardDetails } from '@/components/transaction';
-import { TAllTransactions } from '@/lib/definitions';
+import { ITransactionCardProps } from '@/lib/definitions';
 
-const TransactionCard = ({ transaction }: { transaction: TAllTransactions }) => {
+const TransactionCard = ({ transaction, deleteAction }: ITransactionCardProps) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const handleShowDetails = () => {
@@ -12,12 +12,14 @@ const TransactionCard = ({ transaction }: { transaction: TAllTransactions }) => 
   };
 
   return (
-    <div className="border border-accent-darker rounded-sm">
+    <div className="border border-accent-darker rounded-sm overflow-x-hidden">
       <TransactionCardHeader
+        id={transaction.id}
         amount={transaction.amount}
         category={transaction.category}
         showDetails={showDetails}
         handleShowDetails={handleShowDetails}
+        deleteAction={deleteAction}
       />
       <TransactionCardDetails showDetails={showDetails} transaction={transaction} />
     </div>

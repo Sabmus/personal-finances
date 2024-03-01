@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation';
 import { eq, and, isNull } from 'drizzle-orm';
 import { getUser } from '@/lib/actions/utils';
 
-export const createPayment = async (prevState: PaymentState, formData: FormData) => {
+export const createTransaction = async (prevState: PaymentState, formData: FormData) => {
   // @ts-ignore
   const user: User = await getUser();
 
@@ -57,7 +57,7 @@ export const createPayment = async (prevState: PaymentState, formData: FormData)
   redirect('/dashboard/transactions');
 };
 
-export const editPayment = async (id: string, prevState: PaymentState, formData: FormData) => {
+export const editTransaction = async (id: string, prevState: PaymentState, formData: FormData) => {
   const validatedFields = PaymentSchema.safeParse({
     categoryId: formData.get('categoryId'),
     paymentMethodId: formData.get('paymentMethodId'),
@@ -98,18 +98,17 @@ export const editPayment = async (id: string, prevState: PaymentState, formData:
   }
 
   revalidatePath('/dashboard/transactions');
-  return { message: 'Transaction updated!.', errors: undefined };
+  redirect('/dashboard/transactions');
 };
 
-export const deletePayment = async (id: string) => {
+export const deleteTransaction = async (id: string) => {
   try {
     await db.update(transactions).set({ deletedAt: new Date() }).where(eq(transactions.id, id));
   } catch (error) {
     console.log(error);
-
-    return { message: 'Error deleting transaction.', errors: undefined };
+    return { status: 'error', message: 'Error deleting transaction.' };
   }
 
   revalidatePath('/dashboard/transactions');
-  return { message: 'Transaction deleted!.', errors: undefined };
+  return { status: 'success', message: 'Transaction deleted successfully.' };
 };

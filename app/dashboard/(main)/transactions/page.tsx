@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { DashboardTitle } from '@/components/ui';
 import { getAllTransactions } from '@/lib/data';
 import { TransactionCard } from '@/components/transaction';
-
+import { deleteTransaction } from '@/lib/actions/transactionActions';
 import PaymentTable from '@/components/payment/PaymentTable';
 
 const Transaction = async () => {
-  // const transactions = await getAllTransactions();
-  const transactions = [
+  const transactions = await getAllTransactions();
+  /*   const transactions = [
     {
       id: 'idi669kld1oadtrcjzxrkbbb',
       category: 'Supermercado',
@@ -21,19 +21,21 @@ const Transaction = async () => {
       notes: 'hola que hace',
       createdAt: new Date('2024-02-23T14:27:20.810Z'),
     },
-  ];
+  ]; */
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-between items-center mb-4">
+      <div className="pt-2 pb-4 sticky top-0 bg-background z-10 flex justify-between items-center">
         <DashboardTitle />
         <Link href="/dashboard/transactions/create" className="btn-outline right-0">
           Add Transaction
         </Link>
       </div>
-      <div className="flex flex-col gap-1 overflow-y-scroll">
+      <div className="flex flex-col gap-1">
         {transactions &&
-          transactions.map(transaction => <TransactionCard key={transaction.id} transaction={transaction} />)}
+          transactions.map(transaction => (
+            <TransactionCard key={transaction.id} transaction={transaction} deleteAction={deleteTransaction} />
+          ))}
       </div>
 
       {/* <PaymentTable transactions={transactions} /> */}
