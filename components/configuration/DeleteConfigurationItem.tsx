@@ -23,7 +23,7 @@ const DeleteConfigurationItem = ({ id, action }: IDeleteConfigurationItemProps) 
 
   return (
     <form onSubmit={e => handleFormSubmit(e)}>
-      <button className="text-accent hover:text-accent-hover">Delete</button>
+      <button className="link">Delete</button>
     </form>
   );
 };

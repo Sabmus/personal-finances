@@ -30,9 +30,9 @@ const UpdateConfigurationItem = ({ id, inputValue, action, handleShowOptions }: 
   };
 
   return (
-    <form action={formAction} className="flex w-full items-center">
-      <input type="text" id="name" name="name" value={item} onChange={e => handleChange(e)} className="w-fit" />
-      <SubmitButton name="Save" />
+    <form action={formAction} className="w-full flex justify-between">
+      <input type="text" id="name" name="name" value={item} onChange={e => handleChange(e)} className="w-2/3" />
+      <SubmitButton btnName="Save" className="mr-4" />
     </form>
   );
 };

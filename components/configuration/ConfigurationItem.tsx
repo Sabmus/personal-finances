@@ -39,14 +39,14 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
             showOptions && !showEdit ? '-left-24 opacity-100' : 'left-10 opacity-0'
           }`}
         >
-          <button className="text-accent hover:text-accent-hover leading-none" onClick={handleEdit}>
+          <button className="link leading-none" onClick={handleEdit}>
             Edit
           </button>
           <DeleteConfigurationItem id={id} action={deleteAction} />
         </div>
         {showEdit ? (
           <button onClick={handleEdit}>
-            <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer" />
+            <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer bg-background" />
           </button>
         ) : (
           <Settings

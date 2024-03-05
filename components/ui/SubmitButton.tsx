@@ -3,16 +3,21 @@
 import { Loader2 } from 'lucide-react';
 import { useFormStatus } from 'react-dom';
 
-const SubmitButton = ({ name }: { name: string }) => {
+interface ISubmitButtonProps {
+  btnName: string;
+  className?: string;
+}
+
+const SubmitButton = ({ btnName, className }: ISubmitButtonProps) => {
   const status = useFormStatus();
 
   return (
     <>
       {status.pending ? (
-        <Loader2 size={20} className="mx-auto animate-spin" />
+        <Loader2 size={20} className={`animate-spin ${className}`} />
       ) : (
-        <button disabled={status.pending} className="mx-auto text-accent hover:text-accent-hover">
-          {name}
+        <button disabled={status.pending} className={`link ${className}`}>
+          {btnName}
         </button>
       )}
     </>
