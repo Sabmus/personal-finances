@@ -1,4 +1,4 @@
-import { Logo } from '@/components';
+import { Logo, LogOutForm } from '@/components';
 import { DashboardNav } from '@/components/dashboard';
 import Link from 'next/link';
 
@@ -35,12 +35,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </ul>
         </div>
         <div className="flex-shrink-0">
-          <span>
-            built with{' '}
-            <a href="https://nextjs.org/" target="_blank" rel="noopener">
-              NextJs
-            </a>
-          </span>
+          <LogOutForm redirectTo="/" label="Log out" />
         </div>
       </div>
 

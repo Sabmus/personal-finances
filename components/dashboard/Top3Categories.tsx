@@ -5,7 +5,7 @@ const Top3Categories = async () => {
   const top3Categories = await getTop3Categories();
 
   return (
-    <ul className="border-test flex flex-col h-full text-foreground/70 md:flex-row md:justify-evenly md:items-center">
+    <ul className="flex flex-col h-full text-foreground/70 md:flex-row md:justify-evenly md:items-center">
       {top3Categories.data && !top3Categories.error ? (
         top3Categories.data.map(category => (
           <li key={category.name} className="flex justify-between items-baseline text-center md:flex-col">

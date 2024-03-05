@@ -1,11 +1,11 @@
 import { DashboardMenu } from '@/components/dashboard';
-import { Hero } from '@/components';
+import { LogOutForm } from '@/components';
 
 const DashboardNav = () => {
   return (
-    <div className="flex justify-between w-full md:hidden">
+    <div className="flex justify-between md:hidden">
       <DashboardMenu />
-      <Hero />
+      <LogOutForm />
     </div>
   );
 };
