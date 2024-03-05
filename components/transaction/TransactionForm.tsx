@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect, ChangeEvent } from 'react';
-import { ActionPaymentFormProps } from '@/lib/definitions';
+import { ITransactionFormProps } from '@/lib/definitions';
 
-const ActionPaymentForm = ({
+const TransactionForm = ({
   formAction,
   state,
   categories,
   paymentMethods,
   transaction = undefined,
-}: ActionPaymentFormProps) => {
+}: ITransactionFormProps) => {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
@@ -153,4 +153,4 @@ const ActionPaymentForm = ({
   );
 };
 
-export default ActionPaymentForm;
+export default TransactionForm;

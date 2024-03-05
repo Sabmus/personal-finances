@@ -1,8 +1,8 @@
 'use server';
 
 import { db } from '@/db';
-import { PaymentSchema } from '@/lib/schemasDefinition';
-import { PaymentState } from '@/lib/definitions';
+import { TransactionSchema } from '@/lib/schemasDefinition';
+import { TransactiontState } from '@/lib/definitions';
 import { createId } from '@paralleldrive/cuid2';
 import { User, transactions } from '@/db/models';
 import { revalidatePath } from 'next/cache';
@@ -10,11 +10,11 @@ import { redirect } from 'next/navigation';
 import { eq, and, isNull } from 'drizzle-orm';
 import { getUser } from '@/lib/actions/utils';
 
-export const createTransaction = async (prevState: PaymentState, formData: FormData) => {
+export const createTransaction = async (prevState: TransactiontState, formData: FormData) => {
   // @ts-ignore
   const user: User = await getUser();
 
-  const validatedFields = PaymentSchema.safeParse({
+  const validatedFields = TransactionSchema.safeParse({
     categoryId: formData.get('categoryId'),
     paymentMethodId: formData.get('paymentMethodId'),
     amount: formData.get('amount'),
@@ -57,8 +57,8 @@ export const createTransaction = async (prevState: PaymentState, formData: FormD
   redirect('/dashboard/transactions');
 };
 
-export const editTransaction = async (id: string, prevState: PaymentState, formData: FormData) => {
-  const validatedFields = PaymentSchema.safeParse({
+export const editTransaction = async (id: string, prevState: TransactiontState, formData: FormData) => {
+  const validatedFields = TransactionSchema.safeParse({
     categoryId: formData.get('categoryId'),
     paymentMethodId: formData.get('paymentMethodId'),
     amount: formData.get('amount'),

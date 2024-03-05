@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { DashboardTitle } from '@/components/ui';
 import { getAllTransactions } from '@/lib/data';
-import { TransactionCard } from '@/components/transaction';
+import { TransactionCard, TransactionTable } from '@/components/transaction';
 import { deleteTransaction } from '@/lib/actions/transactionActions';
-import PaymentTable from '@/components/payment/PaymentTable';
 
 const Transaction = async () => {
   const transactions = await getAllTransactions();
@@ -38,7 +37,7 @@ const Transaction = async () => {
           ))}
       </div>
       <div className="hidden lg:block">
-        <PaymentTable transactions={transactions} />
+        <TransactionTable transactions={transactions} />
       </div>
     </div>
   );

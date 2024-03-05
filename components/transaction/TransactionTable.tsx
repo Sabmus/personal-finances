@@ -2,13 +2,12 @@
 
 import { TAllTransactions } from '@/lib/definitions';
 import { useState } from 'react';
-import PaymentModal from '@/components/payment/PaymentModal';
-import PaymentTableList from '@/components/payment/PaymentTableList';
+import { TransactionModal, TransactionTableList } from '@/components/transaction';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { useRef } from 'react';
 import useCloseOnEscKey from '@/hooks/useCloseOnEscKey';
 
-const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) => {
+const TransactionTable = ({ transactions }: { transactions: TAllTransactions[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<TAllTransactions | null>(null);
   const divRef = useRef<HTMLDivElement>(null);
@@ -61,7 +60,7 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
         <tbody>
           {transactions &&
             transactions.map((transaction, idx) => (
-              <PaymentTableList
+              <TransactionTableList
                 key={transaction.id}
                 transaction={transaction}
                 handleButtonClick={() => handleButtonClick(idx)}
@@ -71,7 +70,7 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
       </table>
       {selectedTransaction && (
         <div className={`absolute w-1/2 top-20 right-0 left-0 mx-auto ${isOpen ? 'block' : 'hidden'}`}>
-          <PaymentModal
+          <TransactionModal
             divRef={divRef}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
@@ -83,4 +82,4 @@ const PaymentTable = ({ transactions }: { transactions: TAllTransactions[] }) =>
   );
 };
 
-export default PaymentTable;
+export default TransactionTable;

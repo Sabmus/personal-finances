@@ -24,7 +24,7 @@ const DeleteTransaction = ({ id, action, buttonName }: IDeleteTransactionProps) 
 
   return (
     <form onSubmit={e => handleFormSubmit(e)}>
-      <button className="text-accent hover:text-accent-hover">{buttonName ? buttonName : <Trash2 size={20} />}</button>
+      <button className="text-accent hover:text-accent-hover">{buttonName ? buttonName : <Trash2 size={22} />}</button>
     </form>
   );
 };

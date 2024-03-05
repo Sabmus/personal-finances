@@ -3,7 +3,7 @@ import { toCLP } from '@/utils';
 import { X } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 
-const PaymentModal = ({
+const TransacionModal = ({
   divRef,
   isOpen,
   setIsOpen,
@@ -24,7 +24,7 @@ const PaymentModal = ({
   return (
     <div
       ref={divRef}
-      id="paymentDetails"
+      id="transactionDetails"
       tabIndex={-1}
       aria-hidden={isOpen}
       className="relative bg-background border border-accent mx-auto flex flex-col gap-2 items-center"
@@ -68,4 +68,4 @@ const PaymentModal = ({
   );
 };
 
-export default PaymentModal;
+export default TransacionModal;

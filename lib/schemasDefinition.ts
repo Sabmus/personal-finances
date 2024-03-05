@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const PaymentSchema = z
+export const TransactionSchema = z
   .object({
     categoryId: z
       .string({

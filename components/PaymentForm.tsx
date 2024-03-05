@@ -2,11 +2,11 @@
 
 import { useFormState } from 'react-dom';
 import { createTransaction, editTransaction } from '@/lib/actions/transactionActions';
-import { PaymentFormProps, PaymentState } from '@/lib/definitions';
-import ActionPaymentForm from '@/components/payment/ActionPaymentForm';
+import { TransactionFormProps, TransactiontState } from '@/lib/definitions';
+import { TransactionForm } from '@/components/transaction';
 
-const PaymentForm = ({ type, categories, paymentMethods, transaction = undefined }: PaymentFormProps) => {
-  const initialFormState: PaymentState = { errors: {}, message: '' };
+const PaymentForm = ({ type, categories, paymentMethods, transaction = undefined }: TransactionFormProps) => {
+  const initialFormState: TransactiontState = { errors: {}, message: '' };
 
   const editTransactionWithId = editTransaction.bind(null, transaction?.id || '');
   const useFormStateFunc = type === 'create' ? createTransaction : editTransactionWithId;
@@ -14,7 +14,7 @@ const PaymentForm = ({ type, categories, paymentMethods, transaction = undefined
   const [state, formAction] = useFormState(useFormStateFunc, initialFormState);
 
   return (
-    <ActionPaymentForm
+    <TransactionForm
       formAction={formAction}
       state={state}
       categories={categories}

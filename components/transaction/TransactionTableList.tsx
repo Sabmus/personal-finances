@@ -2,10 +2,10 @@ import { toCLP } from '@/utils';
 import { Eye, SquarePen } from 'lucide-react';
 import Link from 'next/link';
 import { DeleteTransaction } from '@/components/transaction';
-import { IPaymentTableListProps } from '@/lib/definitions';
+import { ITransactionTableListProps } from '@/lib/definitions';
 import { deleteTransaction } from '@/lib/actions/transactionActions';
 
-const PaymentTableList = ({ transaction, handleButtonClick }: IPaymentTableListProps) => {
+const TransactionTableList = ({ transaction, handleButtonClick }: ITransactionTableListProps) => {
   return (
     <tr className="table-body-tr">
       <td className="table-td">
@@ -37,4 +37,4 @@ const PaymentTableList = ({ transaction, handleButtonClick }: IPaymentTableListP
   );
 };
 
-export default PaymentTableList;
+export default TransactionTableList;

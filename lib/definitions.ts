@@ -20,19 +20,7 @@ export type TAllTransactions = Omit<Transaction, 'userId' | 'updatedAt' | 'delet
   paymentMethod: string | null;
 };
 
-export type PaymentFormProps = {
-  type?: string;
-  categories: IInputObject[];
-  paymentMethods: IInputObject[];
-  transaction: TAllTransactions | undefined;
-};
-
-export interface ActionPaymentFormProps extends PaymentFormProps {
-  formAction: (payload: FormData) => void;
-  state: PaymentState;
-}
-
-export type PaymentState = {
+export type TransactiontState = {
   errors?: {
     categoryId?: string[];
     paymentMethodId?: string[];
@@ -44,6 +32,18 @@ export type PaymentState = {
   };
   message?: string;
 };
+
+export type TransactionFormProps = {
+  type?: string;
+  categories: IInputObject[];
+  paymentMethods: IInputObject[];
+  transaction: TAllTransactions | undefined;
+};
+
+export interface ITransactionFormProps extends TransactionFormProps {
+  formAction: (payload: FormData) => void;
+  state: TransactiontState;
+}
 
 export type CategoryState = {
   errors?: {
@@ -67,7 +67,7 @@ export type GroupState = {
   message?: string;
 };
 
-export interface IPaymentTableListProps {
+export interface ITransactionTableListProps {
   transaction: TAllTransactions;
   handleButtonClick: () => void;
 }
