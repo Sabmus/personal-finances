@@ -53,7 +53,7 @@ const TransactionCardHeader = ({
           }`}
         >
           <Link href={`/dashboard/transactions/${id}/edit`}>Edit</Link>
-          <DeleteTransaction id={id} action={deleteAction} />
+          <DeleteTransaction id={id} action={deleteAction} buttonName="Delete" />
         </div>
         <span>
           <Settings size={20} className="mx-2" onClick={handleShowSettings} />

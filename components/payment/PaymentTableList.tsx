@@ -1,8 +1,9 @@
 import { toCLP } from '@/utils';
 import { Eye, SquarePen } from 'lucide-react';
 import Link from 'next/link';
-import DeletePayment from '@/components/payment/DeletePayment';
+import { DeleteTransaction } from '@/components/transaction';
 import { IPaymentTableListProps } from '@/lib/definitions';
+import { deleteTransaction } from '@/lib/actions/transactionActions';
 
 const PaymentTableList = ({ transaction, handleButtonClick }: IPaymentTableListProps) => {
   return (
@@ -23,12 +24,12 @@ const PaymentTableList = ({ transaction, handleButtonClick }: IPaymentTableListP
       <td className="table-td">
         <div className="flex justify-between items-center">
           <span>
-            <Link href={`/dashboard/payment/${transaction.id}/edit`}>
+            <Link href={`/dashboard/transactions/${transaction.id}/edit`}>
               <SquarePen size={22} className="" />
             </Link>
           </span>
           <span>
-            <DeletePayment id={transaction.id} />
+            <DeleteTransaction id={transaction.id} action={deleteTransaction} />
           </span>
         </div>
       </td>

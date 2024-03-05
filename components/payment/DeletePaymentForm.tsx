@@ -1,8 +1,8 @@
 import { Trash2 } from 'lucide-react';
-import { deletePayment } from '@/lib/actions/transactionActions';
+import { deleteTransaction } from '@/lib/actions/transactionActions';
 
 const DeletePaymentForm = ({ id }: { id: string }) => {
-  const deletePaymentWithId = deletePayment.bind(null, id);
+  const deletePaymentWithId = deleteTransaction.bind(null, id);
 
   return (
     <form action={deletePaymentWithId}>

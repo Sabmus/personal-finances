@@ -4,10 +4,8 @@ import { TotalAmount, Top3Categories } from '@/components/dashboard';
 const Dashboard = () => {
   return (
     <div className="h-full">
-      {/* 3.5rem of the h-14 of the abode div */}
-      {/* grid grid-rows-[20%_40%_40%] */}
-      <div className="flex flex-col h-full">
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col h-full md:grid md:grid-rows-[20%_40%_40%]">
+        <div className="flex flex-col gap-2 lg:grid lg:grid-cols-[30%_70%]">
           <div className="flex-center flex-col">
             <h1 className="text-accent">
               <Suspense fallback={<span>Loading...</span>}>
@@ -16,7 +14,7 @@ const Dashboard = () => {
             </h1>
             <span>Total</span>
           </div>
-          <div className="">
+          <div className="flex flex-col">
             <h6 className="text-center text-foreground/70">Top 3 Categories</h6>
             <Suspense fallback={<span>Loading...</span>}>
               <Top3Categories />

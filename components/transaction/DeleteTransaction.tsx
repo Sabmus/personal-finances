@@ -2,8 +2,9 @@
 
 import { IDeleteTransactionProps } from '@/lib/definitions';
 import toast from 'react-hot-toast';
+import { Trash2 } from 'lucide-react';
 
-const DeleteTransaction = ({ id, action }: IDeleteTransactionProps) => {
+const DeleteTransaction = ({ id, action, buttonName }: IDeleteTransactionProps) => {
   const deleteActionWithId = action.bind(null, id);
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +24,7 @@ const DeleteTransaction = ({ id, action }: IDeleteTransactionProps) => {
 
   return (
     <form onSubmit={e => handleFormSubmit(e)}>
-      <button className="text-accent hover:text-accent-hover">Delete</button>
+      <button className="text-accent hover:text-accent-hover">{buttonName ? buttonName : <Trash2 size={20} />}</button>
     </form>
   );
 };

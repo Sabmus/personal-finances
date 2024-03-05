@@ -23,7 +23,10 @@ const ActionPaymentForm = ({
   }, [transaction]);
 
   return (
-    <form action={formAction} className="flex flex-col px-2 py-1 gap-2 mt-10 border border-accent-darker rounded-sm">
+    <form
+      action={formAction}
+      className="flex flex-col px-2 py-1 gap-2 mt-10 border border-accent-darker rounded-sm lg:w-2/3 xl:w-1/2 lg:mx-auto"
+    >
       <div>
         <select
           name="categoryId"

@@ -8,7 +8,7 @@ import { ConfigurationItemSkeleton } from '@/components/skeleton';
 
 const Configuration = async () => {
   return (
-    <div className="h-full">
+    <div className="h-full lg:w-1/2 xl:w-2/3 lg:mx-auto">
       <Suspense fallback={<ConfigurationItemSkeleton title="Categories" />}>
         <SubConfiguration
           title="Categories"

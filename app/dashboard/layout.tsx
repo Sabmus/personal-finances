@@ -37,7 +37,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex-shrink-0">footer</div>
       </div>
 
-      <div className="h-full">{children}</div>
+      <div className="h-full md:p-4">{children}</div>
     </div>
   );
 };

@@ -14,7 +14,7 @@ const SubConfiguration = async ({
   return (
     <div className="flex flex-col h-1/3 py-2 border-b border-b-accent-darker">
       <h5 className="text-center text-accent-darker">{title}</h5>
-      <div className="overflow-y-scroll">
+      <div className="overflow-y-auto">
         <div className="flex flex-col gap-2">
           <div className="overflow-x-hidden">
             {' '}

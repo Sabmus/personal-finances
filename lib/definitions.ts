@@ -157,6 +157,7 @@ export interface IDeleteConfigurationItemProps {
 export interface IDeleteTransactionProps {
   id: string;
   action: TDeleteFormAction;
+  buttonName?: string;
 }
 
 export interface ITransactionCardProps {

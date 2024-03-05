@@ -31,14 +31,15 @@ const Transaction = async () => {
           Add Transaction
         </Link>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 lg:hidden">
         {transactions &&
           transactions.map(transaction => (
             <TransactionCard key={transaction.id} transaction={transaction} deleteAction={deleteTransaction} />
           ))}
       </div>
-
-      {/* <PaymentTable transactions={transactions} /> */}
+      <div className="hidden lg:block">
+        <PaymentTable transactions={transactions} />
+      </div>
     </div>
   );
 };
