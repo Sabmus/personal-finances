@@ -2,9 +2,9 @@
 
 import { ChangeEvent, useState, useRef, useEffect, MouseEvent, forwardRef, HTMLProps } from 'react';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
-import { IInputObject } from '@/lib/definitions';
+import { IDimension } from '@/lib/definitions';
 
-type InputProps = HTMLProps<HTMLInputElement> & { dataArray: IInputObject[] };
+type InputProps = HTMLProps<HTMLInputElement> & { dataArray: IDimension[] };
 
 const Combobox = forwardRef<HTMLInputElement, InputProps>(({ dataArray, ...props }, ref) => {
   const { id, name, className, placeholder } = props;

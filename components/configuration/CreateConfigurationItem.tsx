@@ -37,9 +37,9 @@ const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemP
     <>
       {create ? (
         <div ref={divRef} className="configurationItem">
-          <form action={formAction} className="flex w-full items-center">
-            <input type="text" name="name" id="name" className="px-2 mr-2 w-full" autoFocus />
-            <SubmitButton name="Save" />
+          <form action={formAction} className="flex justify-between w-full items-center">
+            <input type="text" name="name" id="name" className="px-2 mr-2 w-2/3" autoFocus />
+            <SubmitButton btnName="Save" className="mr-4" />
           </form>
           <span>
             <X size={20} className=" text-red-400 hover:cursor-pointer hover:scale-110" onClick={handleBtnClick} />

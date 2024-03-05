@@ -20,10 +20,11 @@ export const getGroups = async () => {
       })
       .from(groups)
       .where(and(isNull(groups.deletedAt), eq(groups.owner, user?.id || '')));
-    return result;
+    return { data: result, error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting groups.');
+    // throw new Error('Error getting groups.');
+    return { data: undefined, error: 'Error getting groups.' };
   }
 };
 
@@ -41,10 +42,11 @@ export const getCategories = async () => {
       })
       .from(categories)
       .where(and(isNull(categories.deletedAt), eq(categories.userId, user?.id || '')));
-    return result;
+    return { data: result, error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting categories.');
+    // throw new Error('Error getting categories.');
+    return { data: undefined, error: 'Error getting categories.' };
   }
 };
 
@@ -62,10 +64,11 @@ export const getPaymentMethods = async () => {
       })
       .from(paymentMethods)
       .where(and(isNull(paymentMethods.deletedAt), eq(paymentMethods.userId, user?.id || '')));
-    return result;
+    return { data: result, error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting Payment Methods.');
+    // throw new Error('Error getting Payment Methods.');
+    return { data: undefined, error: 'Error getting Payment Methods.' };
   }
 };
 
@@ -96,10 +99,11 @@ export const getAllTransactions = async () => {
       .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
       .orderBy(desc(transactions.createdAt));
 
-    return result;
+    return { data: result, error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting all transactions.');
+    //throw new Error('Error getting all transactions.');
+    return { data: undefined, error: 'Error getting all transactions.' };
   }
 };
 
@@ -124,10 +128,11 @@ export const getTransaction = async (id: string) => {
       .leftJoin(paymentMethods, eq(paymentMethods.id, transactions.paymentMethodId))
       .where(and(isNull(transactions.deletedAt), eq(transactions.id, id)));
 
-    return result[0];
+    return { data: result[0], error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting transaction.');
+    // throw new Error('Error getting transaction.');
+    return { data: undefined, error: 'Error getting transaction.' };
   }
 };
 
@@ -172,10 +177,11 @@ export const getTotalAmount = async () => {
       })
       .from(transactions)
       .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')));
-    return result[0].totalAmount || 0;
+    return { data: result[0].totalAmount, error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting total amount.');
+    // throw new Error('Error getting total amount.');
+    return { data: undefined, error: 'Error getting total amount.' };
   }
 };
 
@@ -199,9 +205,10 @@ export const getTop3Categories = async () => {
       .from(amountByCategory)
       .orderBy(desc(amountByCategory.amount))
       .limit(3);
-    return result;
+    return { data: result, error: undefined };
   } catch (error) {
     console.log(error);
-    throw new Error('Error getting top 3 categories.');
+    // throw new Error('Error getting top 3 categories.');
+    return { data: undefined, error: 'Error getting top 3 categories.' };
   }
 };

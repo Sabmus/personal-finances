@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
       <div className="hidden md:flex md:flex-col md:items-center p-4 bg-slate-500">
         <Logo />
-        <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20 border-test">
+        <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20">
           <ul>
             {links &&
               links.map((link, idx) => (
@@ -34,7 +34,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               ))}
           </ul>
         </div>
-        <div className="flex-shrink-0">footer</div>
+        <div className="flex-shrink-0">
+          <span>
+            built with{' '}
+            <a href="https://nextjs.org/" target="_blank" rel="noopener">
+              NextJs
+            </a>
+          </span>
+        </div>
       </div>
 
       <div className="h-full md:p-4">{children}</div>

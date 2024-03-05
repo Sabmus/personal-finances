@@ -53,10 +53,12 @@ const DashboardMenu = () => {
           </ul>
         </div>
         <div className="flex-shrink-0 text-center">
-          built with{' '}
-          <a href="https://nextjs.org/" target="_blank" rel="noopener">
-            NextJs
-          </a>{' '}
+          <span>
+            built with{' '}
+            <a href="https://nextjs.org/" target="_blank" rel="noopener">
+              NextJs
+            </a>
+          </span>
         </div>
       </div>
     </div>

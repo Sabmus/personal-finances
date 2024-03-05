@@ -3,13 +3,7 @@
 import { useState, useEffect, ChangeEvent } from 'react';
 import { ITransactionFormProps } from '@/lib/definitions';
 
-const TransactionForm = ({
-  formAction,
-  state,
-  categories,
-  paymentMethods,
-  transaction = undefined,
-}: ITransactionFormProps) => {
+const TransactionForm = ({ formAction, state, categories, paymentMethods, transaction }: ITransactionFormProps) => {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +11,7 @@ const TransactionForm = ({
   };
 
   useEffect(() => {
-    if (transaction?.hasInstalment) {
+    if (transaction?.data?.hasInstalment) {
       setChecked(true);
     }
   }, [transaction]);
@@ -33,13 +27,14 @@ const TransactionForm = ({
           id="categoryId"
           aria-describedby="categoryId-error"
           className="w-full"
-          defaultValue={transaction?.categoryId ?? ''}
+          defaultValue={transaction?.data?.categoryId ?? ''}
         >
-          {categories.map((category, idx) => (
-            <option key={idx} value={category.id}>
-              {category.name}
-            </option>
-          ))}
+          {categories.data &&
+            categories.data.map((category, idx) => (
+              <option key={idx} value={category.id}>
+                {category.name}
+              </option>
+            ))}
         </select>
         {state.errors && state.errors.categoryId && (
           <div id="categoryId-error" className="text-red-500">
@@ -53,13 +48,14 @@ const TransactionForm = ({
           id="paymentMethodId"
           aria-describedby="paymentMethodId-error"
           className="w-full"
-          defaultValue={transaction?.paymentMethodId ?? ''}
+          defaultValue={transaction?.data?.paymentMethodId ?? ''}
         >
-          {paymentMethods.map((paymentMethod, idx) => (
-            <option key={idx} value={paymentMethod.id}>
-              {paymentMethod.name}
-            </option>
-          ))}
+          {paymentMethods.data &&
+            paymentMethods.data.map((paymentMethod, idx) => (
+              <option key={idx} value={paymentMethod.id}>
+                {paymentMethod.name}
+              </option>
+            ))}
         </select>
         {state.errors && state.errors?.paymentMethodId && (
           <div id="paymentMethodId-error" className="text-red-500">
@@ -75,7 +71,7 @@ const TransactionForm = ({
           placeholder="Amount"
           aria-describedby="amount-error"
           className="w-full"
-          defaultValue={transaction?.amount ?? ''}
+          defaultValue={transaction?.data?.amount ?? ''}
         />
         {state.errors && state.errors.amount && (
           <div id="amount-error" className="text-red-500">
@@ -105,7 +101,7 @@ const TransactionForm = ({
               placeholder="Instalment Quantity"
               className="w-full"
               aria-describedby="instalmentQuantity-error"
-              defaultValue={transaction?.instalmentQuantity ?? ''}
+              defaultValue={transaction?.data?.instalmentQuantity ?? ''}
             />
             {state.errors && state.errors.instalmentQuantity && (
               <div id="instalmentQuantity-error" className="text-red-500">
@@ -121,7 +117,7 @@ const TransactionForm = ({
               placeholder="Instalment Amount"
               className="w-full"
               aria-describedby="instalmentAmount-error"
-              defaultValue={transaction?.instalmentAmount ?? ''}
+              defaultValue={transaction?.data?.instalmentAmount ?? ''}
             />
             {state.errors && state.errors.instalmentAmount && (
               <div id="instalmentAmount-error" className="text-red-500">
@@ -139,7 +135,7 @@ const TransactionForm = ({
           placeholder="Notes"
           className="max-h-40 w-full"
           aria-describedby="notes-error"
-          defaultValue={transaction?.notes ?? ''}
+          defaultValue={transaction?.data?.notes ?? ''}
         ></textarea>
         {state.errors && state.errors.notes && (
           <div id="notes-error" className="text-red-500">

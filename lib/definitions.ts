@@ -10,11 +10,6 @@ export interface IDimension {
   name: string;
 }
 
-export interface IInputObject {
-  id: string;
-  name: string;
-}
-
 export type TAllTransactions = Omit<Transaction, 'userId' | 'updatedAt' | 'deletedAt'> & {
   category: string | null;
   paymentMethod: string | null;
@@ -35,9 +30,9 @@ export type TransactiontState = {
 
 export type TransactionFormProps = {
   type?: string;
-  categories: IInputObject[];
-  paymentMethods: IInputObject[];
-  transaction: TAllTransactions | undefined;
+  categories: { data: IDimension[] | undefined; error: undefined | string };
+  paymentMethods: { data: IDimension[] | undefined; error: undefined | string };
+  transaction: { data: TAllTransactions | undefined; error: undefined | string };
 };
 
 export interface ITransactionFormProps extends TransactionFormProps {
@@ -124,15 +119,17 @@ type TGroupsData = {
 export interface ISubConfigurationProps {
   title: string;
   btnTitle: string;
-  //data: TGroupsData[] | IInputObject[];
-  dataFunction: () => Promise<TGroupsData[] | IInputObject[]>;
+  dataFunction: () => Promise<{
+    data: IDimension[] | undefined;
+    error: undefined | string;
+  }>;
   createAction: TCreateFormAction;
   editAction: TEditFormAction;
   deleteAction: TDeleteFormAction;
 }
 
 export interface IConfigurationItemsProps {
-  item: IInputObject;
+  item: IDimension;
   editAction: TEditFormAction;
   deleteAction: TDeleteFormAction;
 }

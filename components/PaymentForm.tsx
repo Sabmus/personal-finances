@@ -5,10 +5,10 @@ import { createTransaction, editTransaction } from '@/lib/actions/transactionAct
 import { TransactionFormProps, TransactiontState } from '@/lib/definitions';
 import { TransactionForm } from '@/components/transaction';
 
-const PaymentForm = ({ type, categories, paymentMethods, transaction = undefined }: TransactionFormProps) => {
+const PaymentForm = ({ type, categories, paymentMethods, transaction }: TransactionFormProps) => {
   const initialFormState: TransactiontState = { errors: {}, message: '' };
 
-  const editTransactionWithId = editTransaction.bind(null, transaction?.id || '');
+  const editTransactionWithId = editTransaction.bind(null, transaction?.data?.id || '');
   const useFormStateFunc = type === 'create' ? createTransaction : editTransactionWithId;
 
   const [state, formAction] = useFormState(useFormStateFunc, initialFormState);

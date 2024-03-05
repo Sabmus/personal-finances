@@ -30,14 +30,19 @@ const Transaction = async () => {
           Add Transaction
         </Link>
       </div>
+      {transactions.error && (
+        <div className="text-2xl text-error">
+          <span>{transactions.error}. Please try again.</span>
+        </div>
+      )}
       <div className="flex flex-col gap-1 lg:hidden">
-        {transactions &&
-          transactions.map(transaction => (
+        {transactions.data &&
+          transactions.data.map(transaction => (
             <TransactionCard key={transaction.id} transaction={transaction} deleteAction={deleteTransaction} />
           ))}
       </div>
       <div className="hidden lg:block">
-        <TransactionTable transactions={transactions} />
+        <TransactionTable transactions={transactions.data ?? []} />
       </div>
     </div>
   );

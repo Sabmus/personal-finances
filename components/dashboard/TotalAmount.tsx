@@ -4,7 +4,15 @@ import { toCLP } from '@/utils';
 const TotalAmount = async () => {
   const totalAmount = await getTotalAmount();
 
-  return <>{totalAmount && <span>{toCLP(Number(totalAmount))}</span>}</>;
+  return (
+    <>
+      {totalAmount.data && !totalAmount.error ? (
+        <span>{toCLP(Number(totalAmount.data))}</span>
+      ) : (
+        <span className="text-lg text-error">{totalAmount.error}</span>
+      )}
+    </>
+  );
 };
 
 export default TotalAmount;
