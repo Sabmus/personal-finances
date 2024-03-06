@@ -1,5 +1,6 @@
 import { getTotalAmount } from '@/lib/data';
-import { toCLP } from '@/utils';
+import { AmountCard } from '@/components/dashboard';
+import { DollarSign } from 'lucide-react';
 
 const TotalAmount = async () => {
   const totalAmount = await getTotalAmount();
@@ -7,7 +8,7 @@ const TotalAmount = async () => {
   return (
     <>
       {totalAmount.data && !totalAmount.error ? (
-        <span>{toCLP(Number(totalAmount.data))}</span>
+        <AmountCard title="Total" icon={DollarSign} amount={Number(totalAmount.data)} info="some info" />
       ) : (
         <span className="text-lg text-error">{totalAmount.error}</span>
       )}
