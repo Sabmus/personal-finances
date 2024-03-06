@@ -1,18 +1,19 @@
 import { getTotalAmount } from '@/lib/data';
 import { AmountCard } from '@/components/dashboard';
-import { DollarSign } from 'lucide-react';
 
 const TotalAmount = async () => {
   const totalAmount = await getTotalAmount();
 
   return (
-    <>
+    <div className="h-full bg-surface rounded-sm px-2 md:px-4 py-2">
       {totalAmount.data && !totalAmount.error ? (
-        <AmountCard title="Total" icon={DollarSign} amount={Number(totalAmount.data)} info="some info" />
+        <AmountCard title="Total spent" amount={Number(totalAmount.data)} info="some info" />
       ) : (
-        <span className="text-lg text-error">{totalAmount.error}</span>
+        <div className="h-full flex justify-center items-center">
+          <span className="text-lg text-error">{totalAmount.error}</span>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

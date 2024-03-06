@@ -19,10 +19,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="flex flex-col h-svh md:grid md:grid-cols-[30%_70%] lg:grid-cols-[15%_85%]">
+    <div className="flex flex-col h-svh lg:grid lg:grid-cols-[15%_85%]">
       <DashboardNav />
 
-      <div className="hidden md:flex md:flex-col md:items-center p-4 bg-slate-500">
+      <div className="hidden lg:flex lg:flex-col lg:items-center p-4 bg-surface">
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20">
           <ul>
@@ -39,7 +39,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
 
-      <div className="h-svh md:p-4">{children}</div>
+      <div className="h-svh md:px-4">{children}</div>
     </div>
   );
 };

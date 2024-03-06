@@ -13,6 +13,10 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontSize: {
+        clamp: 'clamp(0.8rem, 1.5vw, 3rem)',
+        'header-clamp': 'clamp(2.5rem, 3.5vw, 3rem)',
+      },
       colors: {
         background: 'hsl(var(--color-background) / <alpha-value>)',
         foreground: 'hsl(var(--color-foreground) / <alpha-value>)',

@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <Toaster position="top-center" reverseOrder={false} />
-          <div className="h-svh w-11/12 sm:w-full mx-auto">{children}</div>
+          <div className="h-svh w-11/12 mx-auto md:w-full">{children}</div>
         </ThemeProvider>
       </body>
     </html>

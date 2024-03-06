@@ -5,19 +5,29 @@ const Top3Categories = async () => {
   const top3Categories = await getTop3Categories();
 
   return (
-    <ul className="flex flex-col h-full text-foreground/70 md:flex-row md:justify-evenly md:items-center">
-      {top3Categories.data && !top3Categories.error ? (
-        top3Categories.data.map(category => (
-          <li key={category.name} className="flex justify-between items-baseline text-center md:flex-col">
-            <h5 className="text-accent md:hidden">{category.name}</h5>
-            <h5 className="text-foreground/70">{toCLP(Number(category.amount))}</h5>
-            <h5 className="hidden text-accent md:block">{category.name}</h5>
-          </li>
-        ))
-      ) : (
-        <span className="text-xl text-error">{top3Categories.error}</span>
-      )}
-    </ul>
+    <div className="flex flex-col h-full px-2 md:px-4 py-2">
+      <div className="flex justify-between items-center text-xs mb-2">
+        <span className="text-foreground/50">Top 3 Categories</span>
+        <span className="text-foreground/50">icon</span>
+      </div>
+      <div className="h-full grid grid-cols-3 gap-2 items-center">
+        {top3Categories.data && !top3Categories.error ? (
+          top3Categories.data.map(category => (
+            <div key={category.name} className="h-full flex flex-col gap-1 md:justify-evenly text-center">
+              <div className="flex flex-col leading-none">
+                <span className="leading-none text-xs">{category.name}</span>
+                <span className="text-accent sm:text-2xl md:text-clamp">{toCLP(Number(category.amount))}</span>
+              </div>
+              <span className="leading-none text-xs text-foreground/50">5% of salary</span>
+            </div>
+          ))
+        ) : (
+          <div className="h-full flex justify-center items-center">
+            <span className="text-lg text-error">{top3Categories.error}</span>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

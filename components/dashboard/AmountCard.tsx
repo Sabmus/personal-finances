@@ -1,26 +1,24 @@
 import { toCLP } from '@/utils';
-import { LucideIcon } from 'lucide-react';
 
 interface IAmountCardProps {
   title: string;
-  icon: LucideIcon;
   amount: number;
   info: string;
 }
 
-const AmountCard = ({ title, icon, amount, info }: IAmountCardProps) => {
+const AmountCard = ({ title, amount, info }: IAmountCardProps) => {
   return (
-    <div className="flex flex-col justify-between h-full p-2">
+    <div className="flex flex-col justify-between h-full">
       <div className="flex justify-between">
-        <h4>{title}</h4>
-        <span>{icon}</span>
+        <h6 className="text-foreground/50">{title}</h6>
+        <span className="text-foreground/50">icon</span>
       </div>
-      <div className="flex">
-        <h1>{toCLP(amount)}</h1>
-        <span>CLP</span>
+      <div className="flex justify-center gap-1 items-baseline">
+        <h1 className="text-accent text-header-clamp">{toCLP(amount)}</h1>
+        <span className="text-xs">CLP</span>
       </div>
-      <div>
-        <span>{info}</span>
+      <div className="w-2/3 mx-auto text-xs text-center">
+        <span className="text-foreground/50">10% of salary</span>
       </div>
     </div>
   );
