@@ -25,21 +25,25 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden lg:flex lg:flex-col lg:items-center p-4 bg-surface">
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20">
-          <ul>
-            {links &&
-              links.map((link, idx) => (
-                <li key={idx} className="py-2">
-                  <Link href={link.href}>{link.name}</Link>
-                </li>
-              ))}
-          </ul>
+          <nav>
+            <ul>
+              {links &&
+                links.map((link, idx) => (
+                  <li key={idx} className="py-2 rounded-sm hover:bg-accent group">
+                    <Link href={link.href} className="font-medium group-hover:text-background">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </nav>
         </div>
         <div className="flex-shrink-0">
           <LogOutForm redirectTo="/" label="Log out" />
         </div>
       </div>
 
-      <div className="h-svh md:px-4">{children}</div>
+      <div className="h-full md:px-4 overflow-y-hidden">{children}</div>
     </div>
   );
 };

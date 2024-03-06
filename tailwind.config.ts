@@ -15,6 +15,7 @@ const config: Config = {
       },
       fontSize: {
         clamp: 'clamp(0.8rem, 1.5vw, 3rem)',
+        'table-clamp': 'clamp(0.8rem, 1.5vw, 1rem)',
         'header-clamp': 'clamp(2.5rem, 3.5vw, 3rem)',
       },
       colors: {

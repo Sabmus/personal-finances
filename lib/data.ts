@@ -1,7 +1,7 @@
 import { db } from '@/db';
 import { categories, paymentMethods, transactions, groups } from '@/db/models';
 import { isNull, eq, and, sum, desc } from 'drizzle-orm';
-import { TAllTransactions, IDimension } from '@/lib/definitions';
+import { TAllTransactions, IDimension, TLastTenTransactions } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createId } from '@paralleldrive/cuid2';
 import { getUser } from '@/lib/actions/utils';
@@ -104,6 +104,42 @@ export const getAllTransactions = async () => {
     console.log(error);
     //throw new Error('Error getting all transactions.');
     return { data: undefined, error: 'Error getting all transactions.' };
+  }
+};
+
+export const getLastTenTransactions = async () => {
+  // Add noStore() here prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
+  try {
+    const user = await getUser();
+    const result: TLastTenTransactions[] = await db
+      .select({
+        id: transactions.id,
+        category: categories.name,
+        //categoryId: transactions.categoryId,
+        paymentMethod: paymentMethods.name,
+        //paymentMethodId: transactions.paymentMethodId,
+        amount: transactions.amount,
+        //hasInstalment: transactions.hasInstalment,
+        //instalmentQuantity: transactions.instalmentQuantity,
+        //instalmentAmount: transactions.instalmentAmount,
+        //notes: transactions.notes,
+        createdAt: transactions.createdAt,
+      })
+      .from(transactions)
+      .leftJoin(categories, eq(categories.id, transactions.categoryId))
+      .leftJoin(paymentMethods, eq(paymentMethods.id, transactions.paymentMethodId))
+      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
+      .orderBy(desc(transactions.createdAt))
+      .limit(10);
+
+    return { data: result, error: undefined };
+  } catch (error) {
+    console.log(error);
+    //throw new Error('Error getting all transactions.');
+    return { data: undefined, error: 'Error getting last transactions.' };
   }
 };
 

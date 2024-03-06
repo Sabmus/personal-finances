@@ -1,5 +1,6 @@
 import { getTop3Categories } from '@/lib/data';
 import { toCLP } from '@/utils';
+import { Layers3 } from 'lucide-react';
 
 const Top3Categories = async () => {
   const top3Categories = await getTop3Categories();
@@ -8,7 +9,9 @@ const Top3Categories = async () => {
     <div className="flex flex-col h-full px-2 md:px-4 py-2">
       <div className="flex justify-between items-center text-xs mb-2">
         <span className="text-foreground/50">Top 3 Categories</span>
-        <span className="text-foreground/50">icon</span>
+        <span className="text-foreground/50">
+          <Layers3 size={18} />
+        </span>
       </div>
       <div className="h-full grid grid-cols-3 gap-2 items-center">
         {top3Categories.data && !top3Categories.error ? (

@@ -15,6 +15,14 @@ export type TAllTransactions = Omit<Transaction, 'userId' | 'updatedAt' | 'delet
   paymentMethod: string | null;
 };
 
+export type TLastTenTransactions = {
+  id: string;
+  category: string | null;
+  paymentMethod: string | null;
+  amount: number;
+  createdAt: Date;
+};
+
 export type TransactiontState = {
   errors?: {
     categoryId?: string[];

@@ -20,7 +20,7 @@ const TransactionTableList = ({ transaction, handleButtonClick }: ITransactionTa
       <td className="table-td">{toCLP(transaction.amount)}</td>
       <td className="table-td">{transaction.instalmentQuantity}</td>
       <td className="table-td">{toCLP(transaction.instalmentAmount ?? 0)}</td>
-      <td className="table-td">{transaction.createdAt.toDateString()}</td>
+      <td className="table-td">{transaction.createdAt.toLocaleDateString('es-CL')}</td>
       <td className="table-td">
         <div className="flex justify-between items-center">
           <span>

@@ -1,4 +1,5 @@
 import { toCLP } from '@/utils';
+import { CircleDollarSign } from 'lucide-react';
 
 interface IAmountCardProps {
   title: string;
@@ -9,9 +10,11 @@ interface IAmountCardProps {
 const AmountCard = ({ title, amount, info }: IAmountCardProps) => {
   return (
     <div className="flex flex-col justify-between h-full">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h6 className="text-foreground/50">{title}</h6>
-        <span className="text-foreground/50">icon</span>
+        <span className="text-foreground/50">
+          <CircleDollarSign size={22} />
+        </span>
       </div>
       <div className="text-center">
         <h1 className="text-accent text-header-clamp">{toCLP(amount)}</h1>

@@ -29,6 +29,27 @@
   --color-success: 224.89 88.95% 53.53%;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: hsl(221.25, 24.24%, 12.94%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(221.25, 24.24%, 25%);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(221.25, 24.24%, 30%);
+}
+
 @layer base {
   html {
     @apply scroll-smooth w-full;
