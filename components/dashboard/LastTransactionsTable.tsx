@@ -1,5 +1,6 @@
 import { getLastTenTransactions } from '@/lib/data';
 import { toCLP } from '@/utils';
+import { NoDataError } from '@/components/dashboard';
 
 const LastTransactionsTable = async () => {
   const transactions = await getLastTenTransactions();
@@ -38,9 +39,7 @@ const LastTransactionsTable = async () => {
               </tr>
             ))
           ) : (
-            <div>
-              <span>{transactions.error}</span>
-            </div>
+            <NoDataError error={transactions.error} />
           )}
         </tbody>
       </table>

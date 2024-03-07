@@ -183,3 +183,28 @@ export interface ITransactionCardDetailsProps {
   showDetails: boolean;
   transaction: TAllTransactions;
 }
+
+export type TAmountByDate = {
+  date: Date;
+  totalAmount: string | null;
+};
+
+export type TAmountByPaymentMethod = {
+  paymentMethod: string;
+  totalAmount: string | null;
+};
+
+type TLineChart = {
+  data: TAmountByDate[] | undefined;
+  error: undefined | string;
+};
+
+type TBarChart = {
+  data: TAmountByPaymentMethod[] | undefined;
+  error: undefined | string;
+};
+
+export interface IChartProps {
+  dataFunction: () => Promise<TLineChart | TBarChart>;
+  graphType: 'line' | 'bar';
+}

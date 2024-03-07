@@ -1,5 +1,5 @@
 import { getTotalAmount } from '@/lib/data';
-import { AmountCard } from '@/components/dashboard';
+import { AmountCard, NoDataError } from '@/components/dashboard';
 
 const TotalAmount = async () => {
   const totalAmount = await getTotalAmount();
@@ -9,9 +9,7 @@ const TotalAmount = async () => {
       {totalAmount.data && !totalAmount.error ? (
         <AmountCard title="Total spent" amount={Number(totalAmount.data)} info="some info" />
       ) : (
-        <div className="h-full flex justify-center items-center">
-          <span className="text-lg text-error">{totalAmount.error}</span>
-        </div>
+        <NoDataError error={totalAmount.error} />
       )}
     </div>
   );

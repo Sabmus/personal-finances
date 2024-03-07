@@ -4,5 +4,7 @@ export { default as DashboardMenu } from '@/components/dashboard/DashboardMenu';
 export { default as DashboardNav } from '@/components/dashboard/DashboardNav';
 export { default as AmountCard } from '@/components/dashboard/AmountCard';
 export { default as LastTransactionsTable } from '@/components/dashboard/LastTransactionsTable';
+export { default as Chart } from '@/components/dashboard/Chart';
 export { default as LineChart } from '@/components/dashboard/LineChart';
 export { default as BarChart } from '@/components/dashboard/BarChart';
+export { default as NoDataError } from '@/components/dashboard/NoDataError';

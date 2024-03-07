@@ -9,45 +9,101 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { TAmountByDate } from '@/lib/definitions';
+import { useEffect, useRef, useState } from 'react';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-export const options = {
-  responsive: true,
-  plugins: {
-    labels: {},
-    legend: {
-      position: 'top' as const,
+const LineChart = ({ graphData }: { graphData: TAmountByDate[] }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  let accentColor = useRef('');
+  let foregroundColor = useRef('');
+
+  useEffect(() => {
+    const style = getComputedStyle(document.body);
+    accentColor.current = style.getPropertyValue('--color-accent');
+    foregroundColor.current = style.getPropertyValue('--color-foreground');
+    setIsLoaded(true);
+  }, []);
+
+  const options = {
+    responsive: true,
+    interaction: {
+      mode: 'nearest' as const,
+      intersect: false,
     },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
+    scales: {
+      x: {
+        display: true,
+        ticks: {
+          color: `hsl(${foregroundColor.current} / 0.7)`,
+        },
+        title: {
+          display: true,
+          text: 'Date',
+          color: `hsl(${foregroundColor.current})`,
+          font: {
+            weight: 'bold' as const,
+          },
+        },
+      },
+      y: {
+        display: true,
+        ticks: {
+          color: `hsl(${foregroundColor.current} / 0.7)`,
+        },
+        title: {
+          display: true,
+          text: 'Amount',
+          color: `hsl(${foregroundColor.current})`,
+          font: {
+            weight: 'bold' as const,
+          },
+        },
+      },
     },
-  },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => 1),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 4,
+        right: 4,
+        top: 2,
+        bottom: 2,
+      },
     },
-  ],
-};
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: true,
+        text: 'Amount spent by date',
+        color: `hsl(${foregroundColor.current})`,
+      },
+    },
+  };
 
-const LineChart = () => {
-  return (
-    <div className="border-test h-full">
-      <Line options={options} data={data} />
-    </div>
-  );
+  const labels = graphData?.map(d => d.date.toLocaleDateString('es-CL'));
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Amount',
+        data: graphData?.map(d => d.totalAmount),
+        borderColor: `hsl(${accentColor.current})`,
+        borderWidth: 1,
+        backgroundColor: `hsl(${accentColor.current} / 0.5)`,
+        fill: true,
+        tension: 0.25,
+      },
+    ],
+  };
+
+  return <div className="h-full">{isLoaded && <Line data={data} options={options} />}</div>;
 };
 
 export default LineChart;

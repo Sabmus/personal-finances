@@ -248,3 +248,46 @@ export const getTop3Categories = async () => {
     return { data: undefined, error: 'Error getting top 3 categories.' };
   }
 };
+
+export const getTransactionByDay = async () => {
+  noStore();
+
+  try {
+    const user = await getUser();
+    const result = await db
+      .select({
+        date: transactions.createdAt,
+        totalAmount: sum(transactions.amount).as('totalAmount'),
+      })
+      .from(transactions)
+      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
+      .groupBy(transactions.createdAt);
+
+    return { data: result, error: undefined };
+  } catch (error) {
+    console.log(error);
+    return { data: undefined, error: 'Error getting transaction by day.' };
+  }
+};
+
+export const getAmountByPaymentMethod = async () => {
+  noStore();
+
+  try {
+    const user = await getUser();
+    const result = await db
+      .select({
+        paymentMethod: paymentMethods.name,
+        totalAmount: sum(transactions.amount).as('totalAmount'),
+      })
+      .from(transactions)
+      .innerJoin(paymentMethods, eq(paymentMethods.id, transactions.paymentMethodId))
+      .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
+      .groupBy(transactions.paymentMethodId);
+
+    return { data: result, error: undefined };
+  } catch (error) {
+    console.log(error);
+    return { data: undefined, error: 'Error getting amount by payment method.' };
+  }
+};

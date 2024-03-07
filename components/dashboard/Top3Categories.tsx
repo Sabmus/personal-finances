@@ -1,6 +1,7 @@
 import { getTop3Categories } from '@/lib/data';
 import { toCLP } from '@/utils';
 import { Layers3 } from 'lucide-react';
+import { NoDataError } from '@/components/dashboard';
 
 const Top3Categories = async () => {
   const top3Categories = await getTop3Categories();
@@ -25,9 +26,7 @@ const Top3Categories = async () => {
             </div>
           ))
         ) : (
-          <div className="h-full flex justify-center items-center">
-            <span className="text-lg text-error">{top3Categories.error}</span>
-          </div>
+          <NoDataError error={top3Categories.error} />
         )}
       </div>
     </div>
