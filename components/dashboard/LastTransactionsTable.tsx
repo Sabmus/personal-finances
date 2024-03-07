@@ -7,16 +7,16 @@ const LastTransactionsTable = async () => {
 
   return (
     <div className="h-full px-1 md:px-4 overflow-y-auto">
-      <table className="text-foreground/50 w-full bg-surface text-table-clamp">
+      <table className="table-auto text-foreground-secondary w-full bg-surface text-table-clamp">
         <thead className="sticky top-0 bg-surface">
-          <tr className="text-left">
-            <th scope="col" className="py-2">
+          <tr className="text-left text-foreground/70">
+            <th scope="col" className="py-2 md:w-52">
               Date
             </th>
-            <th scope="col" className="py-2">
+            <th scope="col" className="py-2 md:w-64">
               Category
             </th>
-            <th scope="col" className="py-2 hidden md:inline-block">
+            <th scope="col" className="py-2 hidden md:inline-block md:w-40">
               Payment Method
             </th>
             <th scope="col" className="py-2 md:hidden">

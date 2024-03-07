@@ -9,8 +9,8 @@ const Top3Categories = async () => {
   return (
     <div className="flex flex-col h-full px-2 md:px-4 py-2">
       <div className="flex justify-between items-center text-xs mb-2">
-        <span className="text-foreground/50">Top 3 Categories</span>
-        <span className="text-foreground/50">
+        <span className="text-foreground-secondary">Top 3 Categories</span>
+        <span className="text-foreground-secondary">
           <Layers3 size={18} />
         </span>
       </div>
@@ -22,7 +22,7 @@ const Top3Categories = async () => {
                 <span className="leading-none text-xs">{category.name}</span>
                 <span className="text-accent sm:text-2xl md:text-clamp">{toCLP(Number(category.amount))}</span>
               </div>
-              <span className="leading-none text-xs text-foreground/50">5% of salary</span>
+              <span className="leading-none text-xs text-foreground-secondary">5% of salary</span>
             </div>
           ))
         ) : (

@@ -36,7 +36,7 @@ const TransacionModal = ({
         <h1>{toCLP(amount)}</h1>
       </div>
       <div>
-        <p className="text-foreground/60">
+        <p className="text-foreground-secondary">
           expended in <span className="text-accent">{category}</span> with:{' '}
           <span className="text-accent">{paymentMethod}</span>
         </p>
@@ -57,7 +57,7 @@ const TransacionModal = ({
       {notes && (
         <div className="px-24 py-2 w-full">
           <h6>Notes</h6>
-          <p className="text-foreground/70">{notes}</p>
+          <p className="text-foreground-secondary">{notes}</p>
         </div>
       )}
 

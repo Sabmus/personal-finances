@@ -21,6 +21,7 @@ const config: Config = {
       colors: {
         background: 'hsl(var(--color-background) / <alpha-value>)',
         foreground: 'hsl(var(--color-foreground) / <alpha-value>)',
+        'foreground-secondary': 'hsl(var(--color-foreground) / 0.5)',
         accent: 'hsl(var(--color-accent) / <alpha-value>)',
         'accent-hover': 'hsl(var(--color-accent-hover))',
         'accent-darker': 'hsl(var(--color-accent-darker))',

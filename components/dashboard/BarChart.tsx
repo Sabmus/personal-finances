@@ -25,7 +25,7 @@ const BarChart = ({ graphData }: { graphData: TAmountByPaymentMethod[] }) => {
       x: {
         display: true,
         ticks: {
-          color: `hsl(${foregroundColor.current} / 0.7)`,
+          color: `hsl(${foregroundColor.current} / 0.5)`,
         },
         title: {
           display: true,
@@ -39,7 +39,7 @@ const BarChart = ({ graphData }: { graphData: TAmountByPaymentMethod[] }) => {
       y: {
         display: true,
         ticks: {
-          color: `hsl(${foregroundColor.current} / 0.7)`,
+          color: `hsl(${foregroundColor.current} / 0.5)`,
         },
         title: {
           display: true,

@@ -11,8 +11,8 @@ const AmountCard = ({ title, amount, info }: IAmountCardProps) => {
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="flex justify-between items-center">
-        <h6 className="text-foreground/50">{title}</h6>
-        <span className="text-foreground/50">
+        <h6 className="text-foreground-secondary">{title}</h6>
+        <span className="text-foreground-secondary">
           <CircleDollarSign size={22} />
         </span>
       </div>
@@ -20,7 +20,7 @@ const AmountCard = ({ title, amount, info }: IAmountCardProps) => {
         <h1 className="text-accent text-header-clamp">{toCLP(amount)}</h1>
       </div>
       <div className="w-2/3 mx-auto text-xs text-center">
-        <span className="text-foreground/50">10% of salary</span>
+        <span className="text-foreground-secondary">10% of salary</span>
       </div>
     </div>
   );

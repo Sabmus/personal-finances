@@ -40,7 +40,7 @@ const LineChart = ({ graphData }: { graphData: TAmountByDate[] }) => {
       x: {
         display: true,
         ticks: {
-          color: `hsl(${foregroundColor.current} / 0.7)`,
+          color: `hsl(${foregroundColor.current} / 0.5)`,
         },
         title: {
           display: true,
@@ -54,7 +54,7 @@ const LineChart = ({ graphData }: { graphData: TAmountByDate[] }) => {
       y: {
         display: true,
         ticks: {
-          color: `hsl(${foregroundColor.current} / 0.7)`,
+          color: `hsl(${foregroundColor.current} / 0.5)`,
         },
         title: {
           display: true,
