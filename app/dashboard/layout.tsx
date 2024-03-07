@@ -43,7 +43,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
 
-      <div className="h-full md:px-4 overflow-y-hidden">{children}</div>
+      <div className="h-full md:px-4 overflow-y-hidden py-3">{children}</div>
     </div>
   );
 };

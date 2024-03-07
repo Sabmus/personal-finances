@@ -1,6 +1,11 @@
 import { Suspense } from 'react';
 import { TotalAmount, Top3Categories, LastTransactionsTable, Chart } from '@/components/dashboard';
-import { TotalAmountSkeleton, Top3CategoriesSkeleton, LastTransactionsTableSkeleton } from '@/components/skeleton';
+import {
+  TotalAmountSkeleton,
+  Top3CategoriesSkeleton,
+  LastTransactionsTableSkeleton,
+  ChartSkeleton,
+} from '@/components/skeleton';
 import { Hero } from '@/components';
 import { getTransactionByDay, getAmountByPaymentMethod } from '@/lib/data';
 
@@ -24,7 +29,7 @@ const Dashboard = () => {
           </Suspense>
         </div>
         <div className="md:col-span-8 md:row-span-4 bg-surface">
-          <Suspense fallback={<span>Loading...</span>}>
+          <Suspense fallback={<ChartSkeleton />}>
             <Chart dataFunction={getTransactionByDay} graphType="line" />
           </Suspense>
         </div>
@@ -39,7 +44,7 @@ const Dashboard = () => {
           </Suspense>
         </div>
         <div className="md:col-span-4 md:row-span-6 bg-surface">
-          <Suspense fallback={<span>Loading...</span>}>
+          <Suspense fallback={<ChartSkeleton />}>
             <Chart dataFunction={getAmountByPaymentMethod} graphType="bar" />
           </Suspense>
         </div>

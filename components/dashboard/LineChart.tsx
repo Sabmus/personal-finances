@@ -14,6 +14,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { TAmountByDate } from '@/lib/definitions';
 import { useEffect, useRef, useState } from 'react';
+import { ChartSkeleton } from '@/components/skeleton';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
@@ -103,7 +104,7 @@ const LineChart = ({ graphData }: { graphData: TAmountByDate[] }) => {
     ],
   };
 
-  return <div className="h-full">{isLoaded && <Line data={data} options={options} />}</div>;
+  return <div className="h-full">{isLoaded ? <Line data={data} options={options} /> : <ChartSkeleton />}</div>;
 };
 
 export default LineChart;
