@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { TotalAmount, Top3Categories, LastTransactionsTable, Chart } from '@/components/dashboard';
-import { TotalAmountSkeleton } from '@/components/skeleton';
+import { TotalAmountSkeleton, Top3CategoriesSkeleton } from '@/components/skeleton';
 import { Hero } from '@/components';
 import { getTransactionByDay, getAmountByPaymentMethod } from '@/lib/data';
 
@@ -19,8 +19,8 @@ const Dashboard = () => {
         </div>
 
         <div className="flex flex-col md:col-span-4 md:row-span-2">
-          <Suspense fallback={<span>Loading...</span>}>
-            <TotalAmountSkeleton />
+          <Suspense fallback={<TotalAmountSkeleton />}>
+            <TotalAmount />
           </Suspense>
         </div>
         <div className="md:col-span-8 md:row-span-4 bg-surface">
@@ -29,7 +29,7 @@ const Dashboard = () => {
           </Suspense>
         </div>
         <div className="flex flex-col md:col-span-4 md:row-span-2 bg-surface">
-          <Suspense fallback={<span>Loading...</span>}>
+          <Suspense fallback={<Top3CategoriesSkeleton />}>
             <Top3Categories />
           </Suspense>
         </div>

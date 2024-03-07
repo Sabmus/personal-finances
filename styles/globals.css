@@ -13,6 +13,7 @@
   --color-error: 1.72 83.65% 59.22%;
   --color-error-hover: 1.72 83.65% 59.22%;
   --color-success: 216.9 100% 41.76%;
+  --color-skeleton: 355.56 100% 94.71%;
 }
 
 .dark {
@@ -27,6 +28,7 @@
   --color-error: 1.72 83.65% 59.22%;
   --color-error-hover: 1.72 63.65% 49.22%;
   --color-success: 224.89 88.95% 53.53%;
+  --color-skeleton: 355.56 100% 94.71%;
 }
 
 /* width */
@@ -166,6 +168,10 @@
   }
   .table-td {
     @apply px-4 py-1;
+  }
+
+  .skeleton {
+    @apply relative isolate overflow-hidden shadow-xl shadow-black/5 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-skeleton before:to-transparent before:-translate-x-full before:animate-shimmer before:border-t before:border-skeleton;
   }
 }
 

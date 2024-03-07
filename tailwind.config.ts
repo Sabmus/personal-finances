@@ -30,6 +30,7 @@ const config: Config = {
         error: 'hsl(var(--color-error))',
         'error-hover': 'hsl(var(--color-error-hover))',
         success: 'hsl(var(--color-success))',
+        skeleton: 'hsl(var(--color-skeleton) / 0.1)',
       },
       keyframes: {
         'fade-in-down': {
@@ -52,10 +53,16 @@ const config: Config = {
             transform: 'translateY(0)',
           },
         },
+        shimmer: {
+          '100%': {
+            transform: 'translateX(100%)',
+          },
+        },
       },
       animation: {
         'fade-in-down': 'fade-in-down 0.3s ease-out',
         'fade-in-up': 'fade-in-up 0.3s ease-out',
+        shimmer: 'shimmer 1s infinite linear',
       },
     },
   },

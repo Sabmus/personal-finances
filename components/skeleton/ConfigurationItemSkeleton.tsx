@@ -6,9 +6,12 @@ const ConfigurationItemSkeleton = ({ title }: { title: string }) => {
           <h5>{title}</h5>
         </div>
         <div className="grid grid-cols-3 gap-x-4 gap-y-1">
-          <div className="bg-gray-800 h-10 w-full px-2 py-1 rounded-sm border border-surface animate-pulse"></div>
-          <div className="bg-gray-800 h-10 w-full px-2 py-1 rounded-sm border border-surface animate-pulse"></div>
-          <div className="bg-gray-800 h-10 w-full px-2 py-1 rounded-sm border border-surface animate-pulse"></div>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div
+              key={index}
+              className="bg-skeleton h-10 w-full px-2 py-1 rounded-sm border border-surface skeleton"
+            ></div>
+          ))}
         </div>
       </div>
     </div>
