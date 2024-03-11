@@ -36,10 +36,15 @@ export type TransactiontState = {
   message?: string;
 };
 
+export interface IConfigurationResultsProps {
+  data: IDimension[] | undefined;
+  error: undefined | string;
+}
+
 export type TransactionFormProps = {
   type?: string;
-  categories: { data: IDimension[] | undefined; error: undefined | string };
-  paymentMethods: { data: IDimension[] | undefined; error: undefined | string };
+  categories: IConfigurationResultsProps;
+  paymentMethods: IConfigurationResultsProps;
   transaction: { data: TAllTransactions | undefined; error: undefined | string };
 };
 
@@ -78,7 +83,10 @@ export interface ITransactionTableListProps {
 export type TCreateFormAction = (
   prevState: CategoryState,
   formData: FormData
-) => Promise<{ errors: { name?: string[] | undefined }; message: string } | { message: string; errors: undefined }>;
+) => Promise<
+  | { errors: { name?: string[] | undefined }; message: string }
+  | { message: string; errors: undefined }
+>;
 
 export type TCreateFormProps = {
   action: TCreateFormAction;
@@ -93,7 +101,10 @@ export type TEditFormAction = (
   id: string,
   prevState: CategoryState,
   formData: FormData
-) => Promise<{ errors: { name?: string[] | undefined }; message: string } | { message: string; errors: undefined }>;
+) => Promise<
+  | { errors: { name?: string[] | undefined }; message: string }
+  | { message: string; errors: undefined }
+>;
 
 export type TTableData<T> = {
   colName: string;
@@ -127,7 +138,8 @@ type TGroupsData = {
 export interface ISubConfigurationProps {
   title: string;
   btnTitle: string;
-  dataFunction: () => Promise<{
+  resource?: IConfigurationResultsProps;
+  dataFunction?: () => Promise<{
     data: IDimension[] | undefined;
     error: undefined | string;
   }>;
@@ -207,4 +219,11 @@ type TBarChart = {
 export interface IChartProps {
   dataFunction: () => Promise<TLineChart | TBarChart>;
   graphType: 'line' | 'bar';
+}
+
+export interface IMainConfigurationProps {
+  configurationList: string[];
+  categories: IConfigurationResultsProps;
+  paymentMethods: IConfigurationResultsProps;
+  groups: IConfigurationResultsProps;
 }

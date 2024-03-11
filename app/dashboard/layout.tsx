@@ -1,4 +1,4 @@
-import { Logo, LogOutForm } from '@/components';
+import { Hero, Logo, LogOutForm } from '@/components';
 import { DashboardNav } from '@/components/dashboard';
 import Link from 'next/link';
 
@@ -43,7 +43,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
 
-      <div className="h-full md:px-4 overflow-y-hidden py-3">{children}</div>
+      <div className="flex flex-col h-full md:px-4 overflow-y-hidden py-3">
+        <div className="flex justify-between items-center">
+          <span>otra barra</span>
+          <Hero />
+        </div>
+        {children}
+      </div>
     </div>
   );
 };

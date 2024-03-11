@@ -1,15 +1,24 @@
 import { getGroups, getCategories, getPaymentMethods } from '@/lib/data';
-import { SubConfiguration } from '@/components/configuration';
-import { createCategory, editCategory, deleteCategory } from '@/lib/actions/categoryActions';
-import { createPaymentMethod, editPaymentMethod, deletePaymentMethod } from '@/lib/actions/paymentMethodsActions';
-import { createGroup, editGroup, deleteGroup } from '@/lib/actions/groupActions';
-import { Suspense } from 'react';
-import { ConfigurationItemSkeleton } from '@/components/skeleton';
+import { MainConfiguration } from '@/components/configuration';
+import { configurationList } from '@/utils';
 
 const Configuration = async () => {
+  const [categories, paymentMethods, groups] = await Promise.all([
+    getCategories(),
+    getPaymentMethods(),
+    getGroups(),
+  ]);
+
   return (
-    <div className="h-full lg:w-1/2 xl:w-2/3 lg:mx-auto">
-      <Suspense fallback={<ConfigurationItemSkeleton title="Categories" />}>
+    <div className="h-full">
+      <MainConfiguration
+        configurationList={configurationList}
+        categories={categories}
+        paymentMethods={paymentMethods}
+        groups={groups}
+      />
+
+      {/* <Suspense fallback={<ConfigurationItemSkeleton title="Categories" />}>
         <SubConfiguration
           title="Categories"
           btnTitle="Add Category"
@@ -41,7 +50,7 @@ const Configuration = async () => {
           editAction={editGroup}
           deleteAction={deleteGroup}
         />
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 };

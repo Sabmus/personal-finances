@@ -22,3 +22,5 @@ export function toUSD(value: number) {
     currency: 'USD',
   }).format(value);
 }
+
+export const configurationList = ['Categories', 'Payment Methods', 'Groups'];
