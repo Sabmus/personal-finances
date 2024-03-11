@@ -1,6 +1,11 @@
 'use client';
 
-import { CategoryState, PaymentMethodState, ICreateConfigurationItemProps } from '@/lib/definitions';
+import {
+  CategoryState,
+  PaymentMethodState,
+  GroupState,
+  ICreateConfigurationItemProps,
+} from '@/lib/definitions';
 import { useFormState } from 'react-dom';
 import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
@@ -9,7 +14,7 @@ import toast from 'react-hot-toast';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemProps) => {
-  const initialState: CategoryState | PaymentMethodState = { errors: {}, message: '' };
+  const initialState: CategoryState | PaymentMethodState | GroupState = { errors: {}, message: '' };
   const [state, formAction] = useFormState(action, initialState);
   const divRef = useRef(null);
 
@@ -36,13 +41,17 @@ const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemP
   return (
     <>
       {create ? (
-        <div ref={divRef} className="configurationItem">
+        <div ref={divRef} className="flex justify-between items-center px-2 select-none">
           <form action={formAction} className="flex justify-between w-full items-center">
             <input type="text" name="name" id="name" className="px-2 mr-2 w-2/3" autoFocus />
             <SubmitButton btnName="Save" className="mr-4" />
           </form>
           <span>
-            <X size={20} className=" text-red-400 hover:cursor-pointer hover:scale-110" onClick={handleBtnClick} />
+            <X
+              size={20}
+              className=" text-red-400 hover:cursor-pointer hover:scale-110"
+              onClick={handleBtnClick}
+            />
           </span>
         </div>
       ) : (
