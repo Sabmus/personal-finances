@@ -24,7 +24,7 @@ const MainConfiguration = ({
   };
 
   return (
-    <div className="h-full grid grid-cols-2 grid-rows-1 gap-2">
+    <div className="grid grid-cols-2 grid-rows-1 gap-2 h-full">
       <div className="px-2 py-4 bg-surface">
         <h3 className="mb-10">Configuration</h3>
         <ConfigurationNav
@@ -34,7 +34,7 @@ const MainConfiguration = ({
         />
       </div>
       <div className="px-2 py-4 bg-surface">
-        <div className={`h-full ${activeConfiguration === 0 ? 'block' : 'hidden'}`}>
+        <div className={`h-full ${activeConfiguration !== 0 ? 'hidden' : ''}`}>
           <SubConfiguration
             title="Categories"
             btnTitle="Add Category"
@@ -45,7 +45,7 @@ const MainConfiguration = ({
             deleteAction={deleteCategory}
           />
         </div>
-        <div className={`h-full ${activeConfiguration === 1 ? 'block' : 'hidden'}`}>
+        <div className={`h-full ${activeConfiguration !== 1 ? 'hidden' : ''}`}>
           <SubConfiguration
             title="Payment Methods"
             btnTitle="Add Paymen Method"
@@ -56,7 +56,7 @@ const MainConfiguration = ({
             deleteAction={deletePaymentMethod}
           />
         </div>
-        <div className={`h-full ${activeConfiguration === 2 ? 'block' : 'hidden'}`}>
+        <div className={`h-full ${activeConfiguration !== 2 ? 'hidden' : ''}`}>
           <SubConfiguration
             title="Groups"
             btnTitle="Add new group"

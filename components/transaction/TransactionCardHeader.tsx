@@ -26,7 +26,7 @@ const TransactionCardHeader = ({
   useOnClickOutside(spanRef, () => setShowSettings(false));
 
   return (
-    <div ref={spanRef} className="flex justify-between items-center bg-purple-900">
+    <div ref={spanRef} className="flex justify-between items-center bg-surface">
       <div
         className="flex justify-between items-center flex-grow px-2 py-1 overflow-x-hidden"
         onClick={handleShowDetails}

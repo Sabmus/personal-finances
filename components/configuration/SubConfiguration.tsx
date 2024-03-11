@@ -15,26 +15,28 @@ const SubConfiguration = ({
   //const resource = await dataFunction();
 
   return (
-    <div className="flex flex-col h-1/3 py-2 border-b border-b-accent-darker">
-      <h5 className="text-center text-accent-darker">{title}</h5>
-      {resource && resource.error && <div className="text-center text-error">{resource.error}</div>}
-      <div className="overflow-y-auto">
-        <div className="flex flex-col gap-2">
-          <div className="overflow-x-hidden">
-            {/* grid grid-cols-1 gap-x-4 gap-y-1 */}
-            {resource &&
-              resource.data &&
-              resource.data.map(item => (
-                <ConfigurationItem
-                  key={item.id}
-                  item={item}
-                  editAction={editAction}
-                  deleteAction={deleteAction}
-                />
-              ))}
-            <CreateConfigurationItem action={createAction} btnTitle={btnTitle} />
-          </div>
-        </div>
+    <div className="flex flex-col gap-2 h-full">
+      <div className="flex justify-between items-center">
+        <input type="text" name="search" id={title} placeholder="search..." />
+        <CreateConfigurationItem action={createAction} btnTitle={btnTitle} />
+      </div>
+
+      {resource && resource.error && !resource.data && (
+        <div className="text-center text-error">{resource.error}</div>
+      )}
+
+      <div className="h-full overflow-y-auto overflow-x-hidden">
+        {resource &&
+          resource.data &&
+          !resource.error &&
+          resource.data.map(item => (
+            <ConfigurationItem
+              key={item.id}
+              item={item}
+              editAction={editAction}
+              deleteAction={deleteAction}
+            />
+          ))}
       </div>
     </div>
   );

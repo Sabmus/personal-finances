@@ -43,7 +43,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
 
-      <div className="flex flex-col h-full md:px-4 overflow-y-hidden py-3">
+      <div className="flex flex-col h-svh max-h-svh md:px-4 py-2">
         <div className="flex justify-between items-center">
           <span>otra barra</span>
           <Hero />

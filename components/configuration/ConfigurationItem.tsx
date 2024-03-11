@@ -27,9 +27,17 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
   };
 
   return (
-    <div ref={divRef} className="configurationItem">
+    <div
+      ref={divRef}
+      className="h-14 flex justify-between items-center px-2 select-none rounded-md hover:bg-background border-r-4 border-r-transparent hover:border-r-accent"
+    >
       {showEdit ? (
-        <UpdateConfigurationItem id={id} inputValue={name} action={editAction} handleShowOptions={handleShowOptions} />
+        <UpdateConfigurationItem
+          id={id}
+          inputValue={name}
+          action={editAction}
+          handleShowOptions={handleShowOptions}
+        />
       ) : (
         <h6>{name}</h6>
       )}
@@ -46,12 +54,12 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
         </div>
         {showEdit ? (
           <button onClick={handleEdit}>
-            <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer bg-background" />
+            <X size={24} className="text-red-400 hover:scale-110 hover:cursor-pointer bg-surface" />
           </button>
         ) : (
           <Settings
             size={20}
-            className={`bg-background hover:cursor-pointer duration-200 ease-in ${
+            className={`bg-surface hover:cursor-pointer duration-200 ease-in ${
               showOptions ? 'rotate-90 scale-110' : 'rotate-0 scale-100'
             }`}
             onClick={handleShowOptions}
