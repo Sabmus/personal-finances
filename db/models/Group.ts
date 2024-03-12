@@ -12,5 +12,5 @@ export const groups = sqliteTable('group', {
   ...timestampMs,
 });
 
-export type Group = typeof group.$inferSelect;
-export type NewGroup = typeof group.$inferInsert;
+export type Group = typeof groups.$inferSelect;
+export type NewGroup = typeof groups.$inferInsert;
