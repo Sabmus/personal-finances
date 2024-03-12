@@ -10,6 +10,7 @@ import {
   deletePaymentMethod,
 } from '@/lib/actions/paymentMethodsActions';
 import { createGroup, editGroup, deleteGroup } from '@/lib/actions/groupActions';
+import { editUserData } from '@/lib/actions/userDataActions';
 
 const MainConfiguration = ({
   configurationList,

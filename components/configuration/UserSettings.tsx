@@ -1,31 +1,54 @@
 'use client';
-import { UserSettingsForm } from '@/components/configuration';
-import { IUserSettingsProps } from '@/lib/definitions';
-import { toCLP } from '@/utils';
 
-const UserSettings = ({ userData }: { userData: IUserSettingsProps }) => {
+import { useRef, useState } from 'react';
+import { UserSettingsForm } from '@/components/configuration';
+import { IUerSettingsProps } from '@/lib/definitions';
+import { toCLP } from '@/utils';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
+
+const UserSettings = ({ userData }: IUerSettingsProps) => {
+  const [editMode, setEditMode] = useState(false);
+
+  const handleEditMode = () => {
+    setEditMode(prev => !prev);
+  };
+
+  const divRef = useRef(null);
+  useOnClickOutside(divRef, () => setEditMode(false));
+
   return (
-    <div className="h-full border-test">
-      <div className="border-test">
-        {userData.data ? (
-          <>
-            <div className="flex">
-              <h6>Salary: </h6>
-              <span>{toCLP(userData.data.salary || 0)}</span>
-            </div>
-            <div>
-              <h6>Company: </h6>
-              <span>{userData.data.company}</span>
-            </div>
-            <div>
-              <h6>Position: </h6>
-              <span>{userData.data.position}</span>
-            </div>
-          </>
-        ) : (
-          <UserSettingsForm type="create" />
-        )}
+    <div ref={divRef} className="flex flex-col gap-2 h-full">
+      <div className="text-right">
+        <button className="btn" onClick={handleEditMode}>
+          Edit Settings
+        </button>
       </div>
+      {editMode ? (
+        <div className="h-full">
+          <UserSettingsForm type="edit" userData={userData.data} handleEditMode={handleEditMode} />
+        </div>
+      ) : (
+        <div className="h-full">
+          <div className="h-14 px-4 py-2 flex items-center gap-2 rounded-md hover:bg-background hover:border-r-4 hover:border-r-accent">
+            <span className="text-accent w-20">Salary:</span>
+            <span className={`${userData?.data?.salary || 'text-foreground-secondary'}`}>
+              {toCLP(userData?.data?.salary || 0)}
+            </span>
+          </div>
+          <div className="h-14 px-4 py-2 flex items-center gap-2 rounded-md hover:bg-background hover:border-r-4 hover:border-r-accent">
+            <span className="text-accent w-20">Company:</span>
+            <span className={`${userData?.data?.company || 'text-foreground-secondary'}`}>
+              {userData?.data?.company || 'Not set'}
+            </span>
+          </div>
+          <div className="h-14 px-4 py-2 flex items-center gap-2 rounded-md hover:bg-background hover:border-r-4 hover:border-r-accent">
+            <span className="text-accent w-20">Position:</span>
+            <span className={`${userData?.data?.position || 'text-foreground-secondary'}`}>
+              {userData?.data?.position || 'Not set'}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

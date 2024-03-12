@@ -12,15 +12,9 @@ const SubmitButton = ({ btnName, className }: ISubmitButtonProps) => {
   const status = useFormStatus();
 
   return (
-    <>
-      {status.pending ? (
-        <Loader2 size={20} className={`animate-spin ${className}`} />
-      ) : (
-        <button disabled={status.pending} className={`link ${className}`}>
-          {btnName}
-        </button>
-      )}
-    </>
+    <button disabled={status.pending} className={`btn mx-auto ${className}`}>
+      {status.pending ? <Loader2 size={20} className="animate-spin mx-auto" /> : btnName}
+    </button>
   );
 };
 

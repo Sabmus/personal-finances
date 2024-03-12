@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { categories, paymentMethods, transactions, groups, userData } from '@/db/models';
-import { isNull, eq, and, sum, desc } from 'drizzle-orm';
+import { isNull, eq, and, sum, desc, sql } from 'drizzle-orm';
 import { TAllTransactions, IDimension, TLastTenTransactions, IUserData } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createId } from '@paralleldrive/cuid2';
@@ -15,6 +15,7 @@ export const getUserData = async () => {
     const user = await getUser();
     const userDataSettings: IUserData[] = await db
       .select({
+        id: userData.id,
         salary: userData.salary,
         company: userData.company,
         position: userData.position,
@@ -251,11 +252,16 @@ export const getTotalAmount = async () => {
     const user = await getUser();
     const result = await db
       .select({
-        totalAmount: sum(transactions.amount),
+        totalAmount: sum(transactions.amount).as('totalAmount'),
+        percentageOfSalary:
+          sql<number>`round(sum(${transactions.amount}) / ${userData.salary}, 3) * 100`.as(
+            'percentageOfSalary'
+          ),
       })
       .from(transactions)
+      .leftJoin(userData, eq(transactions.userId, userData.userId))
       .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')));
-    return { data: result[0].totalAmount, error: undefined };
+    return { data: result[0], error: undefined };
   } catch (error) {
     console.log(error);
     // throw new Error('Error getting total amount.');
@@ -271,9 +277,14 @@ export const getTop3Categories = async () => {
         .select({
           name: categories.name,
           amount: sum(transactions.amount).as('amount'),
+          percentageOfSalary:
+            sql<number>`round(sum(${transactions.amount}) / ${userData.salary}, 3) * 100`.as(
+              'percentageOfSalary'
+            ),
         })
         .from(transactions)
         .leftJoin(categories, eq(categories.id, transactions.categoryId))
+        .leftJoin(userData, eq(transactions.userId, userData.userId))
         .where(and(isNull(transactions.deletedAt), eq(transactions.userId, user?.id || '')))
         .groupBy(transactions.categoryId)
     );

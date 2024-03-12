@@ -11,6 +11,7 @@ export interface IDimension {
 }
 
 export interface IUserData {
+  id: string;
   salary: number | null;
   company: string | null;
   position: string | null;
@@ -125,6 +126,22 @@ export type TEditFormAction = (
   | { errors: { name?: string[] | undefined }; message: string }
   | { message: string; errors: undefined }
 >;
+
+export type TEditUserDataAction = (
+  id: string,
+  prevState: UserDataState,
+  formData: FormData
+) => Promise<
+  | {
+      errors: { salary?: string[]; company?: string[]; position?: string[] | undefined };
+      message: string;
+    }
+  | { message: string; errors: undefined }
+>;
+
+export interface IUerSettingsProps {
+  userData: IUserSettingsProps;
+}
 
 export type TTableData<T> = {
   colName: string;

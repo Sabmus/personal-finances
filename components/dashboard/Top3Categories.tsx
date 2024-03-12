@@ -17,12 +17,19 @@ const Top3Categories = async () => {
       <div className="h-full grid grid-cols-3 gap-2 items-center">
         {top3Categories.data && !top3Categories.error ? (
           top3Categories.data.map(category => (
-            <div key={category.name} className="h-full flex flex-col gap-1 md:justify-evenly text-center">
+            <div
+              key={category.name}
+              className="h-full flex flex-col gap-1 md:justify-evenly text-center"
+            >
               <div className="flex flex-col leading-none">
                 <span className="leading-none text-xs">{category.name}</span>
-                <span className="text-accent sm:text-2xl md:text-clamp">{toCLP(Number(category.amount))}</span>
+                <span className="text-accent sm:text-2xl md:text-clamp">
+                  {toCLP(Number(category.amount))}
+                </span>
               </div>
-              <span className="leading-none text-xs text-foreground-secondary">5% of salary</span>
+              <span className="leading-none text-xs text-foreground-secondary">
+                {category.percentageOfSalary}% of salary
+              </span>
             </div>
           ))
         ) : (

@@ -4,7 +4,7 @@ import { CircleDollarSign } from 'lucide-react';
 interface IAmountCardProps {
   title: string;
   amount: number;
-  info: string;
+  info: number;
 }
 
 const AmountCard = ({ title, amount, info }: IAmountCardProps) => {
@@ -20,7 +20,7 @@ const AmountCard = ({ title, amount, info }: IAmountCardProps) => {
         <h1 className="text-accent text-header-clamp">{toCLP(amount)}</h1>
       </div>
       <div className="w-2/3 mx-auto text-xs text-center">
-        <span className="text-foreground-secondary">10% of salary</span>
+        <span className="text-foreground-secondary">{info}% of salary</span>
       </div>
     </div>
   );
