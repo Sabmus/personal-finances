@@ -32,7 +32,11 @@ const DashboardMenu = () => {
 
   return (
     <div ref={divRef} className="relative flex items-center">
-      <div className={`absolute z-30 transition-all duration-200 ${isOpenMenu ? 'left-16 delay-75' : 'left-0'}`}>
+      <div
+        className={`absolute z-30 transition-all duration-200 ${
+          isOpenMenu ? 'left-16 delay-75' : 'left-0'
+        }`}
+      >
         <Menu onClick={handleMenuClick} />
       </div>
       <div

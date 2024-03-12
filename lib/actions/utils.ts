@@ -5,7 +5,7 @@ import { eq, and, isNull } from 'drizzle-orm';
 
 export const getUser = async () => {
   const session = await auth();
-  return session?.user;
+  return session?.user || null;
 };
 
 export const checkCategoryExists = async (user: User, name: string) => {
@@ -14,7 +14,13 @@ export const checkCategoryExists = async (user: User, name: string) => {
       id: categories.id,
     })
     .from(categories)
-    .where(and(eq(categories.name, name), eq(categories.userId, user?.id || ''), isNull(categories.deletedAt)))
+    .where(
+      and(
+        eq(categories.name, name),
+        eq(categories.userId, user?.id || ''),
+        isNull(categories.deletedAt)
+      )
+    )
     .limit(1);
 
   return category.length > 0;
@@ -27,7 +33,11 @@ export const checkPaymentMethodExists = async (user: User, name: string) => {
     })
     .from(paymentMethods)
     .where(
-      and(eq(paymentMethods.name, name), eq(paymentMethods.userId, user?.id || ''), isNull(paymentMethods.deletedAt))
+      and(
+        eq(paymentMethods.name, name),
+        eq(paymentMethods.userId, user?.id || ''),
+        isNull(paymentMethods.deletedAt)
+      )
     )
     .limit(1);
 
