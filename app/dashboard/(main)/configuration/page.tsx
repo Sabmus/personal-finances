@@ -1,12 +1,13 @@
-import { getGroups, getCategories, getPaymentMethods } from '@/lib/data';
+import { getGroups, getCategories, getPaymentMethods, getUserData } from '@/lib/data';
 import { MainConfiguration } from '@/components/configuration';
 import { configurationList } from '@/utils';
 
 const Configuration = async () => {
-  const [categories, paymentMethods, groups] = await Promise.all([
+  const [categories, paymentMethods, groups, userData] = await Promise.all([
     getCategories(),
     getPaymentMethods(),
     getGroups(),
+    getUserData(),
   ]);
 
   return (
@@ -16,6 +17,7 @@ const Configuration = async () => {
         categories={categories}
         paymentMethods={paymentMethods}
         groups={groups}
+        userData={userData}
       />
     </div>
   );

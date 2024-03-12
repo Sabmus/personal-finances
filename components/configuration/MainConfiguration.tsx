@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ConfigurationNav, SubConfiguration } from '@/components/configuration';
+import { ConfigurationNav, SubConfiguration, UserSettings } from '@/components/configuration';
 import { IMainConfigurationProps } from '@/lib/definitions';
 import { createCategory, editCategory, deleteCategory } from '@/lib/actions/categoryActions';
 import {
@@ -16,6 +16,7 @@ const MainConfiguration = ({
   categories,
   paymentMethods,
   groups,
+  userData,
 }: IMainConfigurationProps) => {
   const [activeConfiguration, setActiveConfiguration] = useState(0);
 
@@ -66,6 +67,9 @@ const MainConfiguration = ({
             editAction={editGroup}
             deleteAction={deleteGroup}
           />
+        </div>
+        <div className={`h-full ${activeConfiguration !== 3 ? 'hidden' : ''}`}>
+          <UserSettings userData={userData} />
         </div>
       </div>
     </div>
