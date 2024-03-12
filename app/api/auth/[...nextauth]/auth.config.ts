@@ -1,13 +1,5 @@
-import { createInitialCategory, createInitialPaymentMethod } from '@/lib/data';
+import { createInitialCategory, createInitialPaymentMethod, initialUserData } from '@/lib/data';
 import { NewUser } from '@/db/models/User';
-
-interface INewUser {
-  id: string;
-  name: string;
-  email: string;
-  emailVerified: boolean;
-  image: string;
-}
 
 export const authConfig = {
   /*pages: {
@@ -42,15 +34,4 @@ export const authConfig = {
       return true;
     },
   },
-  /*events: {
-    async createUser({ user }: { user: NewUser }) {
-      console.log('\n\n⚠⚠ creating initial category ⚠⚠\n\n');
-      await createInitialCategory(user.id);
-      console.log('\n✨✨ initial category created succesfully ✨✨\n');
-      console.log('\n⚠⚠ creating initial payment method ⚠⚠\n');
-      await createInitialPaymentMethod(user.id);
-      console.log('\n\n✨✨ initial payment method created succesfully ✨✨\n\n');
-      return;
-    },
-  },*/
 };
