@@ -94,3 +94,20 @@ export const GroupSchema = z.object({
     .transform(value => (value === '' ? null : value))
     .nullable(),
 });
+
+export const UserDataSchema = z.object({
+  salary: z.union([
+    z.null(),
+    z.coerce.number().positive({
+      message: 'Salary is required.',
+    }),
+  ]),
+  company: z
+    .string()
+    .max(32, { message: 'Company name must be less than 36 characters.' })
+    .transform(value => (value === '' ? null : value)),
+  position: z
+    .string()
+    .max(32, { message: 'Position name must be less than 36 characters.' })
+    .transform(value => (value === '' ? null : value)),
+});

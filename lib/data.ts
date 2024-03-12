@@ -1,10 +1,32 @@
 import { db } from '@/db';
-import { categories, paymentMethods, transactions, groups } from '@/db/models';
+import { categories, paymentMethods, transactions, groups, userData } from '@/db/models';
 import { isNull, eq, and, sum, desc } from 'drizzle-orm';
-import { TAllTransactions, IDimension, TLastTenTransactions } from '@/lib/definitions';
+import { TAllTransactions, IDimension, TLastTenTransactions, IUserData } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { createId } from '@paralleldrive/cuid2';
 import { getUser } from '@/lib/actions/utils';
+
+export const getUserData = async () => {
+  // Add noStore() here prevent the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  noStore();
+
+  try {
+    const user = await getUser();
+    const userDataSettings: IUserData[] = await db
+      .select({
+        salary: userData.salary,
+        company: userData.company,
+        position: userData.position,
+      })
+      .from(userData)
+      .where(eq(userData.userId, user?.id || ''));
+    return { data: userDataSettings[0], error: undefined };
+  } catch (error) {
+    console.log(error);
+    return { data: undefined, error: 'Error getting user data.' };
+  }
+};
 
 export const getGroups = async () => {
   // Add noStore() here prevent the response from being cached.
@@ -202,6 +224,26 @@ export const createInitialPaymentMethod = async (userId: string) => {
     throw new Error('Error creating initial payment method.');
   }
   return;
+};
+
+export const initialUserData = async (userId: string) => {
+  console.log('running initial user data... ');
+  try {
+    await db.insert(userData).values({
+      id: createId(),
+      userId,
+      salary: 0,
+      company: '',
+      position: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    console.log('initial user data created... ');
+  } catch (error) {
+    console.log('Error creating initial user data.', error);
+    // throw new Error('Error creating initial user data.');
+  }
 };
 
 export const getTotalAmount = async () => {

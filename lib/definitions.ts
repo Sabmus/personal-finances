@@ -10,6 +10,12 @@ export interface IDimension {
   name: string;
 }
 
+export interface IUserData {
+  salary: number | null;
+  company: string | null;
+  position: string | null;
+}
+
 export type TAllTransactions = Omit<Transaction, 'userId' | 'updatedAt' | 'deletedAt'> & {
   category: string | null;
   paymentMethod: string | null;
@@ -41,6 +47,11 @@ export interface IConfigurationResultsProps {
   error: undefined | string;
 }
 
+export interface IUserSettingsProps {
+  data: IUserData | undefined;
+  error: undefined | string;
+}
+
 export type TransactionFormProps = {
   type?: string;
   categories: IConfigurationResultsProps;
@@ -56,6 +67,15 @@ export interface ITransactionFormProps extends TransactionFormProps {
 export type CategoryState = {
   errors?: {
     name?: string[];
+  };
+  message?: string;
+};
+
+export type UserDataState = {
+  errors?: {
+    salary?: string[];
+    company?: string[];
+    position?: string[];
   };
   message?: string;
 };
@@ -226,4 +246,5 @@ export interface IMainConfigurationProps {
   categories: IConfigurationResultsProps;
   paymentMethods: IConfigurationResultsProps;
   groups: IConfigurationResultsProps;
+  userData: IUserSettingsProps;
 }

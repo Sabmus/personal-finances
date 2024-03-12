@@ -8,6 +8,13 @@
       "when": 1708617875817,
       "tag": "0000_fluffy_supreme_intelligence",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1710254614915,
+      "tag": "0001_early_glorian",
+      "breakpoints": true
     }
   ]
 }
