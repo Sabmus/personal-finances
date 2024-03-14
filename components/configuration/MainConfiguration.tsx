@@ -50,7 +50,7 @@ const MainConfiguration = ({
         <div className={`h-full ${activeConfiguration !== 1 ? 'hidden' : ''}`}>
           <SubConfiguration
             title="Payment Methods"
-            btnTitle="Add Paymen Method"
+            btnTitle="Add Payment Method"
             resource={paymentMethods}
             //dataFunction={getPaymentMethods}
             createAction={createPaymentMethod}

@@ -56,7 +56,7 @@ const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemP
         </div>
       ) : (
         <div className="flex items-center">
-          <button className="btn w-full" onClick={handleBtnClick}>
+          <button className="btn-outline w-full" onClick={handleBtnClick}>
             {btnTitle}
           </button>
         </div>

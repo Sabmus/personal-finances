@@ -19,8 +19,13 @@ const UserSettings = ({ userData }: IUerSettingsProps) => {
   return (
     <div ref={divRef} className="flex flex-col gap-2 h-full">
       <div className="text-right">
-        <button className="btn" onClick={handleEditMode}>
-          Edit Settings
+        <button
+          className={`btn-outline ${
+            editMode && 'bg-error text-foreground hover:bg-error-hover hover:text-foreground'
+          }`}
+          onClick={handleEditMode}
+        >
+          {!editMode ? 'Edit Settings' : 'Cancel'}
         </button>
       </div>
       {editMode ? (
