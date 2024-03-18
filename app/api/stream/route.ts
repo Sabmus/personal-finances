@@ -29,9 +29,12 @@ export async function GET() {
       });
       // Listen for new posts from Redis
       redisSubscriber.on('message', (channel, message) => {
+        console.log('🚀 ~ redisSubscriber.on ~ channel:', channel);
+        console.log('🚀 ~ redisSubscriber.on ~ message:', message);
         // Send data with the response in the SSE format
         // Only send data when the channel message is reeived is same as the message is published to
-        if (channel === setKey) controller.enqueue(encoder.encode(`data: ${message}\n\n`));
+        // if (channel === setKey) controller.enqueue(encoder.encode(`data: ${message}\n\n`));
+        controller.enqueue(encoder.encode(`data: ${message}\n\n`));
       });
       redisSubscriber.on('end', () => {
         controller.close();

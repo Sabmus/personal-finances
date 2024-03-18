@@ -7,11 +7,11 @@ import { InviteGroupMemberState } from '@/lib/definitions';
 import { useFormState } from 'react-dom';
 import toast from 'react-hot-toast';
 
-const MemberInviteForm = ({ ownerEmail }: { ownerEmail: string }) => {
+const MemberInviteForm = ({ ownerEmail, groupId }: { ownerEmail: string; groupId: string }) => {
   const [formOpen, setFormOpen] = useState(false);
   const initialState: InviteGroupMemberState = { errors: {}, message: '' };
 
-  const sendMemberInviteWithUserEmail = sendMemberInvite.bind(null, ownerEmail);
+  const sendMemberInviteWithUserEmail = sendMemberInvite.bind(null, ownerEmail, groupId);
   const [state, formAction] = useFormState(sendMemberInviteWithUserEmail, initialState);
 
   useEffect(() => {
@@ -29,7 +29,14 @@ const MemberInviteForm = ({ ownerEmail }: { ownerEmail: string }) => {
     <div>
       {formOpen ? (
         <form className="flex gap-2" action={formAction}>
-          <input type="text" placeholder="Email" className="px-2" autoFocus />
+          <input
+            type="text"
+            placeholder="Email"
+            id="email"
+            name="email"
+            className="px-2"
+            autoFocus
+          />
           <SubmitButton btnName="Send" />
           <button onClick={() => setFormOpen(false)}>Cancel</button>
         </form>

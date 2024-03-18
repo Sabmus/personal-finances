@@ -49,7 +49,7 @@ const NotificationBell = () => {
   }, []);
 
   return (
-    <div className="relative bg-surface px-1 py-1 rounded-md">
+    <div className="relative bg-surface px-1 py-1 rounded-md hover:cursor-pointer">
       <span
         className={`${
           notifications.length ? 'absolute' : 'hidden'

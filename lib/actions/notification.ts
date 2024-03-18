@@ -8,6 +8,7 @@ import { InviteGroupMemberState } from '@/lib/definitions';
 // And publishing messages to the Upstash Redis database with the current timestamp
 export const sendMemberInvite = async (
   ownerEmail: string,
+  groupId: string,
   prevState: InviteGroupMemberState,
   formData: FormData
 ) => {
@@ -27,19 +28,11 @@ export const sendMemberInvite = async (
   //   'use server';
   const redis = Redis.fromEnv();
 
-  const invitationObj = {
-    from: ownerEmail,
-    to: email,
-  };
-
-  // Publish the email to the "posts" channel in Upstash Redis
-  await redis.publish(
-    'memberInvited',
-    JSON.stringify({
-      invitationObj,
-      date: new Date().toString(),
-    })
-  );
+  // create a set with the owner's email as the key and the email as the value
+  await redis.sadd(email, {
+    sender: ownerEmail,
+    group: groupId,
+  });
 
   return { message: 'Invitation Sent!', errors: undefined };
 };
