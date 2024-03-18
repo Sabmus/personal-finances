@@ -5,8 +5,14 @@ import { IConfigurationItemsProps } from '@/lib/definitions';
 import { Settings, X } from 'lucide-react';
 import { UpdateConfigurationItem, DeleteConfigurationItem } from '@/components/configuration';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
+import Link from 'next/link';
 
-const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationItemsProps) => {
+const ConfigurationItem = ({
+  isGroup,
+  item,
+  editAction,
+  deleteAction,
+}: IConfigurationItemsProps) => {
   const { id, name } = item;
   const [showOptions, setShowOptions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -39,7 +45,7 @@ const ConfigurationItem = ({ item, editAction, deleteAction }: IConfigurationIte
           handleShowOptions={handleShowOptions}
         />
       ) : (
-        <h6>{name}</h6>
+        <h6>{!isGroup ? name : <Link href={`groups/${item.id}`}>{name}</Link>}</h6>
       )}
       <div className="relative flex items-center gap-1">
         <div

@@ -1,5 +1,13 @@
 import { db } from '@/db';
-import { categories, paymentMethods, transactions, groups, userData } from '@/db/models';
+import {
+  categories,
+  paymentMethods,
+  transactions,
+  groups,
+  userData,
+  userGroups,
+  users,
+} from '@/db/models';
 import { isNull, eq, and, sum, desc, sql } from 'drizzle-orm';
 import { TAllTransactions, IDimension, TLastTenTransactions, IUserData } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -342,5 +350,26 @@ export const getAmountByPaymentMethod = async () => {
   } catch (error) {
     console.log(error);
     return { data: undefined, error: 'Error getting amount by payment method.' };
+  }
+};
+
+export const getGroupData = async (id: string) => {
+  try {
+    const user = await getUser();
+    const results = await db
+      .select({
+        groupName: groups.name,
+        members: users.name,
+        split: userGroups.split,
+      })
+      .from(groups)
+      .leftJoin(userGroups, eq(groups.id, userGroups.groupId))
+      .leftJoin(users, eq(userGroups.userId, users.id))
+      .where(and(eq(groups.id, id), eq(groups.owner, user?.id || '')));
+    return { data: results, error: undefined };
+  } catch (error) {
+    console.log(error);
+    // throw new Error('Error getting top 3 categories.');
+    return { data: undefined, error: 'Error getting group data.' };
   }
 };

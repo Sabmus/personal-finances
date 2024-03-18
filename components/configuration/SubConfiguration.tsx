@@ -1,5 +1,3 @@
-'use client';
-
 import { ISubConfigurationProps } from '@/lib/definitions';
 import { ConfigurationItem, CreateConfigurationItem } from '@/components/configuration';
 
@@ -32,6 +30,7 @@ const SubConfiguration = ({
           resource.data.map(item => (
             <ConfigurationItem
               key={item.id}
+              isGroup={title === 'Groups'}
               item={item}
               editAction={editAction}
               deleteAction={deleteAction}

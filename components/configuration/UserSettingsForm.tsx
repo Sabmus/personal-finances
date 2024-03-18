@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { UserDataState, IUserData } from '@/lib/definitions';
 import { createUserData, editUserData } from '@/lib/actions/userDataActions';

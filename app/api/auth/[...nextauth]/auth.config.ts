@@ -1,6 +1,3 @@
-import { createInitialCategory, createInitialPaymentMethod, initialUserData } from '@/lib/data';
-import { NewUser } from '@/db/models/User';
-
 export const authConfig = {
   /*pages: {
     signIn: '/login',

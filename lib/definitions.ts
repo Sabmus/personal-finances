@@ -186,6 +186,7 @@ export interface ISubConfigurationProps {
 }
 
 export interface IConfigurationItemsProps {
+  isGroup: boolean;
   item: IDimension;
   editAction: TEditFormAction;
   deleteAction: TDeleteFormAction;

@@ -2,10 +2,11 @@ import NextAuth from 'next-auth';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { db } from '@/db';
 import GithubProvider from 'next-auth/providers/github';
+import GoogleProvider from '@auth/core/providers/google';
 import { authConfig } from '@/app/api/auth/[...nextauth]/auth.config';
 
 import { createInitialCategory, createInitialPaymentMethod, initialUserData } from '@/lib/data';
-import { User, NewUser } from '@/db/models/User';
+import { NewUser } from '@/db/models/User';
 
 export const {
   handlers: { GET, POST },
@@ -22,6 +23,17 @@ export const {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      /* profile(profile) {
+        return {
+          // Return all the profile information you need.
+          // The only truly required field is `id`
+          // to be able identify the account when added to a database
+        }
+      }, */
     }),
   ],
   events: {
