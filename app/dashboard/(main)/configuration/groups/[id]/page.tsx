@@ -1,22 +1,20 @@
 import { getGroupData } from '@/lib/data';
+import { MemberInviteForm } from '@/components/configuration';
 
 const GroupPage = async ({ params }: { params: { id: string } }) => {
   const groupData = await getGroupData(params.id);
 
   return (
     <div className="h-full flex flex-col gap-2">
-      <div className="flex justify-between items-center">
-        <h3>nombre del grupo</h3>
-        <button className="btn-outline">Add friends</button>
-      </div>
-      <div>
+      <h3>{groupData?.data?.results && groupData.data.results[0]?.groupName}</h3>
+      <div className="flex justify-between items-center h-10">
         <h4>Members</h4>
-        <ul>
-          <li>Member 1</li>
-          <li>Member 2</li>
-          <li>Member 3</li>
-        </ul>
+        <MemberInviteForm ownerEmail={groupData?.data?.ownerEmail!} />
       </div>
+      <ul>
+        {groupData?.data?.results &&
+          groupData.data.results.map((item, index) => <li key={index}>{item.members}</li>)}
+      </ul>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Hero, Logo, LogOutForm } from '@/components';
-import { DashboardNav } from '@/components/dashboard';
+import { DashboardNav, NotificationBell } from '@/components/dashboard';
 import Link from 'next/link';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -46,7 +46,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-col h-svh max-h-svh md:px-4 py-2 overflow-y-auto">
         <div className="flex justify-between items-center">
           <span>otra barra</span>
-          <Hero />
+          <div className="flex gap-4 justify-around items-center">
+            <NotificationBell />
+            <Hero />
+          </div>
         </div>
         {children}
       </div>
@@ -55,23 +58,3 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default DashboardLayout;
-
-{
-  /* <div className="grid grid-cols-[20%_80%] h-svh">
-      <div className="flex flex-col items-center p-4 bg-slate-500">
-        <Logo />
-        <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20 border-test">
-          <ul>
-            {links &&
-              links.map((link, idx) => (
-                <li key={idx} className="py-2">
-                  <Link href={link.href}>{link.name}</Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-        <div className="flex-shrink-0">footer</div>
-      </div>
-      <div className="p-4">{children}</div>
-    </div> */
-}

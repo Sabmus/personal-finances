@@ -1,27 +1,17 @@
-'use client';
-
 import { CircleUserRound } from 'lucide-react';
-import { useState } from 'react';
 
-const HeroPhoto = ({ img, children }: { img: string; children: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOnClick = () => {
-    setIsOpen(prev => !prev);
-  };
-
+const HeroPhoto = ({ img }: { img: string }) => {
   return (
     <div className="relative py-2">
       <div className="w-10 h-10 rounded-full text-center">
         {img ? (
-          <img src={img} className="rounded-full hover:cursor-pointer" onClick={handleOnClick} />
+          <img src={img} className="rounded-full" />
         ) : (
           <div className="bg-background w-10 h-10 rounded-full">
-            <CircleUserRound size={40} className="hover:cursor-pointer" onClick={handleOnClick} />
+            <CircleUserRound size={40} />
           </div>
         )}
       </div>
-      {isOpen && <div className="absolute h-fit w-24 top-1/2 -translate-y-1/2 right-8 flex-center">{children}</div>}
     </div>
   );
 };

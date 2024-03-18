@@ -6,3 +6,4 @@ export { default as CreateConfigurationItem } from '@/components/configuration/C
 export { default as ConfigurationNav } from '@/components/configuration/ConfigurationNav';
 export { default as UserSettings } from '@/components/configuration/UserSettings';
 export { default as UserSettingsForm } from '@/components/configuration/UserSettingsForm';
+export { default as MemberInviteForm } from '@/components/configuration/MemberInviteForm';

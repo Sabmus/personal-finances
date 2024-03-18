@@ -359,14 +359,14 @@ export const getGroupData = async (id: string) => {
     const results = await db
       .select({
         groupName: groups.name,
-        members: users.name,
+        members: users.email,
         split: userGroups.split,
       })
       .from(groups)
       .leftJoin(userGroups, eq(groups.id, userGroups.groupId))
       .leftJoin(users, eq(userGroups.userId, users.id))
       .where(and(eq(groups.id, id), eq(groups.owner, user?.id || '')));
-    return { data: results, error: undefined };
+    return { data: { ownerEmail: user?.email, results }, error: undefined };
   } catch (error) {
     console.log(error);
     // throw new Error('Error getting top 3 categories.');

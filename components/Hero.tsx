@@ -1,14 +1,10 @@
 import { auth } from '@/lib/auth';
-import { HeroPhoto, LogOutForm } from '@/components';
+import { HeroPhoto } from '@/components';
 
 const Hero = async () => {
   const session = await auth();
 
-  return (
-    <HeroPhoto img={session?.user?.image ?? ''}>
-      <LogOutForm redirectTo="/" />
-    </HeroPhoto>
-  );
+  return <HeroPhoto img={session?.user?.image ?? ''} />;
 };
 
 export default Hero;

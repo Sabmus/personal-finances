@@ -72,6 +72,13 @@ export type CategoryState = {
   message?: string;
 };
 
+export type InviteGroupMemberState = {
+  errors?: {
+    email?: string[];
+  };
+  message?: string;
+};
+
 export type UserDataState = {
   errors?: {
     salary?: string[];

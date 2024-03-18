@@ -5,7 +5,7 @@ import { eq, and, isNull } from 'drizzle-orm';
 
 export const getUser = async () => {
   const session = await auth();
-  return session?.user || null;
+  return session?.user;
 };
 
 export const checkCategoryExists = async (user: User, name: string) => {

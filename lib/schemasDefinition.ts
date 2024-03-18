@@ -111,3 +111,7 @@ export const UserDataSchema = z.object({
     .max(32, { message: 'Position name must be less than 36 characters.' })
     .transform(value => (value === '' ? null : value)),
 });
+
+export const InviteGroupMemberSchema = z.object({
+  email: z.string().email({ message: 'Invalid email.' }).min(1, { message: 'Email is required.' }),
+});
