@@ -16,6 +16,7 @@ const MemberInviteForm = ({ ownerEmail, groupId }: { ownerEmail: string; groupId
 
   useEffect(() => {
     if (state.errors === undefined) {
+      setFormOpen(false);
       toast.success(state.message || 'Updated Successfully');
     }
     if (state.errors?.email) {

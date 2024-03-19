@@ -7,12 +7,21 @@ import toast from 'react-hot-toast';
 const NotificationBell = () => {
   const notifications = [];
 
+  const connectToStream = () => {
+    return new EventSource('/api/stream');
+  };
+
   useEffect(() => {
-    const eventSource = new EventSource('/api/stream');
+    const eventSource = connectToStream();
 
     eventSource.addEventListener('message', event => {
       const tmp = JSON.parse(event.data);
       console.log('🚀 ~ eventSource.addEventListener ~ tmp:', tmp);
+    });
+
+    eventSource.addEventListener('error', event => {
+      console.log('eventSource error: \n', event);
+      eventSource.close();
     });
 
     return () => {

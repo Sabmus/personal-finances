@@ -1,37 +1,28 @@
-// Can be 'nodejs', but Vercel recommends using 'edge'
 export const runtime = 'nodejs';
-
-// Prevents this route's response from being cached
 export const dynamic = 'force-dynamic';
-
-// Use ioredis to subscribe
+export const revalidate = 0;
 import Redis from 'ioredis';
 
-// Define the key to listen and publish messages to
 const setKey = 'notifications';
 
 if (!process.env.UPSTASH_REDIS_URL) {
   throw new Error('api/stream/route.js: UPSTASH_REDIS_URL not found in .env.local');
 }
 
-// Create a redis subscriber
 const redisSubscriber = new Redis(process.env.UPSTASH_REDIS_URL || '');
+
+redisSubscriber.subscribe(setKey, err => {
+  if (err) console.log('subscribe error: \n\n\n', err);
+});
 
 export async function GET() {
   const encoder = new TextEncoder();
-  // Create a stream
+
   const customReadable = new ReadableStream({
     start(controller) {
-      redisSubscriber.subscribe(setKey, err => {
-        if (err) console.log(err);
-      });
-
       redisSubscriber.on('message', (channel, message) => {
-        if (channel === setKey) controller.enqueue(encoder.encode(`data: ${message}\n\n`));
-      });
-
-      redisSubscriber.on('end', () => {
-        controller.close();
+        controller.enqueue(encoder.encode(message));
+        // controller.close();
       });
     },
   });

@@ -4,15 +4,12 @@ import { Redis } from '@upstash/redis';
 import { InviteGroupMemberSchema } from '@/lib/schemasDefinition';
 import { InviteGroupMemberState } from '@/lib/definitions';
 
-// The function that takes care of obtaining the country code from Vercel headers
-// And publishing messages to the Upstash Redis database with the current timestamp
 export const sendMemberInvite = async (
   ownerEmail: string,
   groupId: string,
   prevState: InviteGroupMemberState,
   formData: FormData
 ) => {
-  'use server';
   const redis = Redis.fromEnv();
 
   const validatedFields = InviteGroupMemberSchema.safeParse({
