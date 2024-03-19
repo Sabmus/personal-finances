@@ -12,6 +12,9 @@ export const sendMemberInvite = async (
   prevState: InviteGroupMemberState,
   formData: FormData
 ) => {
+  'use server';
+  const redis = Redis.fromEnv();
+
   const validatedFields = InviteGroupMemberSchema.safeParse({
     email: formData.get('email'),
   });
@@ -25,14 +28,15 @@ export const sendMemberInvite = async (
 
   const { email } = validatedFields.data;
 
-  //   'use server';
-  const redis = Redis.fromEnv();
-
   // create a set with the owner's email as the key and the email as the value
-  await redis.sadd(email, {
-    sender: ownerEmail,
-    group: groupId,
-  });
+  await redis.publish(
+    'notifications',
+    JSON.stringify({
+      from: ownerEmail,
+      to: email,
+      groupId,
+    })
+  );
 
   return { message: 'Invitation Sent!', errors: undefined };
 };
