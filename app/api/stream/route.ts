@@ -1,4 +1,4 @@
-export const runtime = 'nodejs';
+/* export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 import Redis from 'ioredis';
@@ -38,3 +38,4 @@ export async function GET() {
     },
   });
 }
+ */

@@ -24,6 +24,6 @@ export const login = async (prevState: any, formData: FormData) => {
   }
 };
 
-export const logOut = async ({ path = '/' }: { path: string }) => {
+export const logOutAction = async ({ path = '/' }: { path: string }) => {
   await signOut({ redirectTo: path });
 };

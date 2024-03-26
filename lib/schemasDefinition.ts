@@ -115,3 +115,8 @@ export const UserDataSchema = z.object({
 export const InviteGroupMemberSchema = z.object({
   email: z.string().email({ message: 'Invalid email.' }).min(1, { message: 'Email is required.' }),
 });
+
+export const AcceptDeclineGroupMemberSchema = z.object({
+  from: z.string().min(1, { message: 'from user is required.' }),
+  groupId: z.string().min(1, { message: 'group is required.' }),
+});

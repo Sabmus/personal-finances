@@ -7,11 +7,11 @@ import { InviteGroupMemberState } from '@/lib/definitions';
 import { useFormState } from 'react-dom';
 import toast from 'react-hot-toast';
 
-const MemberInviteForm = ({ ownerEmail, groupId }: { ownerEmail: string; groupId: string }) => {
+const MemberInviteForm = ({ groupId }: { groupId: string }) => {
   const [formOpen, setFormOpen] = useState(false);
   const initialState: InviteGroupMemberState = { errors: {}, message: '' };
 
-  const sendMemberInviteWithUserEmail = sendMemberInvite.bind(null, ownerEmail, groupId);
+  const sendMemberInviteWithUserEmail = sendMemberInvite.bind(null, groupId);
   const [state, formAction] = useFormState(sendMemberInviteWithUserEmail, initialState);
 
   useEffect(() => {

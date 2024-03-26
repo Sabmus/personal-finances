@@ -79,6 +79,14 @@ export type InviteGroupMemberState = {
   message?: string;
 };
 
+export type AcceptDeclineGroupMemberState = {
+  errors?: {
+    from?: string[];
+    groupId?: string[];
+  };
+  message?: string;
+};
+
 export type UserDataState = {
   errors?: {
     salary?: string[];
@@ -272,4 +280,16 @@ export interface IMainConfigurationProps {
   paymentMethods: IConfigurationResultsProps;
   groups: IConfigurationResultsProps;
   userData: IUserSettingsProps;
+}
+
+export interface INotificationBellProps {
+  notifications: {
+    data:
+      | {
+          from: string | null;
+          group: string | null;
+        }[]
+      | undefined;
+    error: undefined | string;
+  };
 }

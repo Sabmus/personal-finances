@@ -7,9 +7,9 @@ export const userData = sqliteTable('userData', {
   userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
-  salary: integer('salary').default(0),
-  company: text('company').default(''),
-  position: text('position').default(''),
+  salary: integer('salary'),
+  company: text('company'),
+  position: text('position'),
   ...timestampMs,
 });
 

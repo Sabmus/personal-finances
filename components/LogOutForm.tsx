@@ -1,7 +1,10 @@
 import { signOut } from '@/lib/auth';
+// import { logOutAction } from '@/lib/actions/authActions';
 import { LogOut } from 'lucide-react';
 
 const LogOutForm = ({ redirectTo = '/', label }: { redirectTo?: string; label?: string }) => {
+  // const logOutBinded = logOutAction.bind(null, { path: redirectTo });
+
   return (
     <form
       action={async () => {

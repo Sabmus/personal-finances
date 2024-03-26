@@ -1,5 +1,5 @@
 import { Hero, Logo, LogOutForm } from '@/components';
-import { DashboardNav, NotificationBell } from '@/components/dashboard';
+import { DashboardNav, Notification } from '@/components/dashboard';
 import Link from 'next/link';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -47,7 +47,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex justify-between items-center">
           <span>otra barra</span>
           <div className="flex gap-4 justify-around items-center">
-            <NotificationBell />
+            <Notification />
             <Hero />
           </div>
         </div>

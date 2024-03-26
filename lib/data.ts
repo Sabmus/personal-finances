@@ -7,6 +7,7 @@ import {
   userData,
   userGroups,
   users,
+  notifications,
 } from '@/db/models';
 import { isNull, eq, and, sum, desc, sql } from 'drizzle-orm';
 import { TAllTransactions, IDimension, TLastTenTransactions, IUserData } from '@/lib/definitions';
@@ -371,5 +372,26 @@ export const getGroupData = async (id: string) => {
     console.log(error);
     // throw new Error('Error getting top 3 categories.');
     return { data: undefined, error: 'Error getting group data.' };
+  }
+};
+
+export const getGroupsInvitations = async () => {
+  try {
+    const user = await getUser();
+    const results = await db
+      .select({
+        from: users.name,
+        group: groups.name,
+      })
+      .from(notifications)
+      .leftJoin(groups, eq(notifications.groupId, groups.id))
+      .leftJoin(users, eq(notifications.from, users.id))
+      .where(and(eq(notifications.to, user?.id || ''), eq(notifications.status, 'pending')));
+
+    return { data: results, error: undefined };
+  } catch (error) {
+    console.log(error);
+    // throw new Error('Error getting top 3 categories.');
+    return { data: undefined, error: 'Error getting groups invitations' };
   }
 };

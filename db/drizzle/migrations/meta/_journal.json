@@ -15,6 +15,41 @@
       "when": 1710254614915,
       "tag": "0001_early_glorian",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1711469899087,
+      "tag": "0002_overconfident_mystique",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1711470865461,
+      "tag": "0003_yellow_zaran",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1711470907626,
+      "tag": "0004_wise_veda",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1711485754482,
+      "tag": "0005_famous_bulldozer",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1711485837945,
+      "tag": "0006_hard_white_queen",
+      "breakpoints": true
     }
   ]
 }

@@ -6,3 +6,4 @@ export * from '@/db/models/Group';
 export * from '@/db/models/UserGroup';
 export * from '@/db/models/TransactionGroup';
 export * from '@/db/models/UserData';
+export * from '@/db/models/Notification';

@@ -8,4 +8,6 @@ export { default as Chart } from '@/components/dashboard/Chart';
 export { default as LineChart } from '@/components/dashboard/LineChart';
 export { default as BarChart } from '@/components/dashboard/BarChart';
 export { default as NoDataError } from '@/components/dashboard/NoDataError';
+export { default as Notification } from '@/components/dashboard/Notification';
 export { default as NotificationBell } from '@/components/dashboard/NotificationBell';
+export { default as NotificationForm } from '@/components/dashboard/NotificationForm';

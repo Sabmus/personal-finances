@@ -9,7 +9,7 @@ const GroupPage = async ({ params }: { params: { id: string } }) => {
       <h3>{groupData?.data?.results && groupData.data.results[0]?.groupName}</h3>
       <div className="flex justify-between items-center h-10">
         <h4>Members</h4>
-        <MemberInviteForm ownerEmail={groupData?.data?.ownerEmail!} groupId={params.id} />
+        <MemberInviteForm groupId={params.id} />
       </div>
       <ul>
         {groupData?.data?.results &&
