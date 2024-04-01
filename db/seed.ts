@@ -22,11 +22,14 @@ const client = createClient({
   authToken: process.env.DB_TOKEN,
 });
 
+const userId = '';
+
 const createCategoriesSeed = () => {
   const categoryList = ['Food', 'Transport', 'Entertainment', 'Shopping', 'Bills', 'Others'];
   return categoryList.map(category => {
     return {
       id: createId(),
+      userId,
       name: category,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -39,6 +42,7 @@ const createPaymentMethodSeed = () => {
   return paymentMethodList.map(paymentMethod => {
     return {
       id: createId(),
+      userId,
       name: paymentMethod,
       createdAt: new Date(),
       updatedAt: new Date(),
