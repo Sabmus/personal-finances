@@ -5,8 +5,8 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from '@auth/core/providers/google';
 import { authConfig } from '@/app/api/auth/[...nextauth]/auth.config';
 
-import { createInitialCategory, createInitialPaymentMethod, initialUserData } from '@/lib/data';
-import { NewUser } from '@/db/models/User';
+// import { createInitialCategory, createInitialPaymentMethod, initialUserData } from '@/lib/data';
+// import { NewUser } from '@/db/models/User';
 
 export const {
   handlers: { GET, POST },
