@@ -36,15 +36,15 @@ export const {
       }, */
     }),
   ],
-  events: {
+  /*   events: {
     async createUser({ user }: { user: NewUser }) {
-      /*      console.log('\n\n⚠⚠ creating initial category ⚠⚠\n\n');
-      await createInitialCategory(user.id);
-      console.log('\n✨✨ initial category created succesfully ✨✨\n');
-      console.log('\n⚠⚠ creating initial payment method ⚠⚠\n');
-      await createInitialPaymentMethod(user.id);
-      console.log('\n\n✨✨ initial payment method created succesfully ✨✨\n\n'); */
+      // console.log('\n\n⚠⚠ creating initial category ⚠⚠\n\n');
+      // await createInitialCategory(user.id);
+      // console.log('\n✨✨ initial category created succesfully ✨✨\n');
+      // console.log('\n⚠⚠ creating initial payment method ⚠⚠\n');
+      // await createInitialPaymentMethod(user.id);
+      // console.log('\n\n✨✨ initial payment method created succesfully ✨✨\n\n');
       await initialUserData(user.id);
     },
-  },
+  }, */
 });
