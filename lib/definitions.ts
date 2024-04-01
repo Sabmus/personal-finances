@@ -156,6 +156,7 @@ export type TEditUserDataAction = (
 
 export interface IUerSettingsProps {
   userData: IUserSettingsProps;
+  userId?: string;
 }
 
 export type TTableData<T> = {

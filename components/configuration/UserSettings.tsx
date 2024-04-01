@@ -6,7 +6,7 @@ import { IUerSettingsProps } from '@/lib/definitions';
 import { toCLP } from '@/utils';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 
-const UserSettings = ({ userData }: IUerSettingsProps) => {
+const UserSettings = ({ userData, userId }: IUerSettingsProps) => {
   const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
@@ -30,7 +30,12 @@ const UserSettings = ({ userData }: IUerSettingsProps) => {
       </div>
       {editMode ? (
         <div className="h-full">
-          <UserSettingsForm type="edit" userData={userData.data} handleEditMode={handleEditMode} />
+          <UserSettingsForm
+            type="edit"
+            userData={userData.data}
+            userId={userId}
+            handleEditMode={handleEditMode}
+          />
         </div>
       ) : (
         <div className="h-full">

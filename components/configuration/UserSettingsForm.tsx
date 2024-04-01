@@ -10,12 +10,13 @@ import { SubmitButton } from '@/components/ui';
 interface IUserSettingsFormProps {
   type: string;
   userData?: IUserData;
+  userId?: string;
   handleEditMode: () => void;
 }
 
-const UserSettingsForm = ({ type, userData, handleEditMode }: IUserSettingsFormProps) => {
+const UserSettingsForm = ({ type, userData, userId, handleEditMode }: IUserSettingsFormProps) => {
   const initialFormState: UserDataState = { errors: {}, message: '' };
-  const editUserDataWithId = editUserData.bind(null, userData?.id || '');
+  const editUserDataWithId = editUserData.bind(null, userId || '');
 
   const useFormStateFunc = type === 'create' ? createUserData : editUserDataWithId;
   const [state, formAction] = useFormState(useFormStateFunc, initialFormState);
