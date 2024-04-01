@@ -9,7 +9,7 @@ const GroupsPage = async () => {
     <div className="h-full">
       <SubConfiguration
         title="Groups"
-        btnTitle="Add new group"
+        btnTitle="Add"
         resource={groups}
         //dataFunction={getGroups}
         createAction={createGroup}

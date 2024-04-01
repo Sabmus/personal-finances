@@ -55,8 +55,9 @@ const CreateConfigurationItem = ({ action, btnTitle }: ICreateConfigurationItemP
           </span>
         </div>
       ) : (
-        <div className="flex items-center">
-          <button className="btn-outline w-full" onClick={handleBtnClick}>
+        <div className="flex justify-between gap-2 items-center">
+          <input type="text" name="search" id="search" placeholder="search..." />
+          <button className="btn-outline text-nowrap" onClick={handleBtnClick}>
             {btnTitle}
           </button>
         </div>

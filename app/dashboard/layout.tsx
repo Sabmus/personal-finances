@@ -1,9 +1,10 @@
 import { Hero, Logo, LogOutForm } from '@/components';
-import { DashboardNav, Notification } from '@/components/dashboard';
+import { DashboardMenu, Notification } from '@/components/dashboard';
 import Link from 'next/link';
+import { Ilinks } from '@/lib/definitions';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const links = [
+  const links: Ilinks[] = [
     {
       name: 'Dashboard',
       href: '/dashboard',
@@ -20,8 +21,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex flex-col h-svh lg:grid lg:grid-cols-[15%_85%]">
-      <DashboardNav />
-
       <div className="hidden lg:flex lg:flex-col lg:items-center p-4 bg-surface">
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20">
@@ -44,9 +43,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       <div className="flex flex-col h-svh max-h-svh md:px-4 py-2 overflow-y-auto">
-        <div className="flex justify-between items-center">
-          <span>otra barra</span>
+        <div className="flex justify-between lg:justify-end items-center">
+          <div className="lg:hidden">
+            <DashboardMenu links={links} />
+          </div>
+
           <div className="flex gap-4 justify-around items-center">
+            <div className="lg:hidden">
+              <LogOutForm redirectTo="/" />
+            </div>
             <Notification />
             <Hero />
           </div>

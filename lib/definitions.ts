@@ -293,3 +293,8 @@ export interface INotificationBellProps {
     error: undefined | string;
   };
 }
+
+export interface Ilinks {
+  name: string;
+  href: string;
+}

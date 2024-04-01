@@ -5,7 +5,6 @@ const Configuration = async () => {
       <p className="text-foreground-secondary">
         Here you can add new categories, payment methods, groups and modify your profile data.
       </p>
-      <p className="text-foreground-secondary">Click on a item from the left to begin.</p>
     </div>
   );
 };

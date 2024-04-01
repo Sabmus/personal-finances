@@ -4,23 +4,9 @@ import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
+import { Ilinks } from '@/lib/definitions';
 
-const links = [
-  {
-    name: 'Dashboard',
-    href: '/dashboard',
-  },
-  {
-    name: 'Transactions',
-    href: '/dashboard/transactions',
-  },
-  {
-    name: 'Configuration',
-    href: '/dashboard/configuration',
-  },
-];
-
-const DashboardMenu = () => {
+const DashboardMenu = ({ links }: { links: Ilinks[] }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const divRef = useRef(null);
 
@@ -40,12 +26,12 @@ const DashboardMenu = () => {
         <Menu onClick={handleMenuClick} />
       </div>
       <div
-        className={`absolute w-[200px] z-20 flex flex-col top-0 h-svh transition-all duration-200 ease-in ${
+        className={`absolute w-[200px] z-20 flex -top-16 flex-col transition-all duration-200 ease-in ${
           isOpenMenu ? '-left-7' : '-left-64'
         } bg-background/95`}
       >
-        <div className="flex-grow flex-shrink-0 basis-auto w-full text-center">
-          <ul className="h-full flex flex-col justify-center">
+        <div className="flex-grow flex-shrink-0 basis-auto h-svh text-center">
+          <ul className="flex flex-col justify-center h-full">
             {links &&
               links.map((link, idx) => (
                 <li key={idx} className="py-2">

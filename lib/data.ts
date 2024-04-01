@@ -263,7 +263,7 @@ export const getTotalAmount = async () => {
       .select({
         totalAmount: sum(transactions.amount).as('totalAmount'),
         percentageOfSalary:
-          sql<number>`round(sum(${transactions.amount}) / ${userData.salary}, 3) * 100`.as(
+          sql<number>`round((sum(${transactions.amount}) / ${userData.salary} * 100), 1)`.as(
             'percentageOfSalary'
           ),
       })
@@ -287,7 +287,7 @@ export const getTop3Categories = async () => {
           name: categories.name,
           amount: sum(transactions.amount).as('amount'),
           percentageOfSalary:
-            sql<number>`round(sum(${transactions.amount}) / ${userData.salary}, 3) * 100`.as(
+            sql<number>`round((sum(${transactions.amount}) / ${userData.salary}) * 100, 1)`.as(
               'percentageOfSalary'
             ),
         })

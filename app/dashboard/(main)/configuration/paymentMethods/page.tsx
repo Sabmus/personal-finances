@@ -13,7 +13,7 @@ const PaymentMethodsPage = async () => {
     <div className="h-full">
       <SubConfiguration
         title="Payment Methods"
-        btnTitle="Add Payment Method"
+        btnTitle="Add"
         resource={paymentMethods}
         //dataFunction={getPaymentMethods}
         createAction={createPaymentMethod}

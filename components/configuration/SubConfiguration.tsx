@@ -14,10 +14,7 @@ const SubConfiguration = ({
 
   return (
     <div className="flex flex-col gap-2 h-full">
-      <div className="flex justify-between items-center">
-        <input type="text" name="search" id={title} placeholder="search..." />
-        <CreateConfigurationItem action={createAction} btnTitle={btnTitle} />
-      </div>
+      <CreateConfigurationItem action={createAction} btnTitle={btnTitle} />
 
       {resource && resource.error && !resource.data && (
         <div className="text-center text-error">{resource.error}</div>

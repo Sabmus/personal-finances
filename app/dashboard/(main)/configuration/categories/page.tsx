@@ -9,7 +9,7 @@ const CategoriesPage = async () => {
     <div className="h-full">
       <SubConfiguration
         title="Categories"
-        btnTitle="Add Category"
+        btnTitle="Add"
         resource={categories}
         //dataFunction={getCategories}
         createAction={createCategory}
