@@ -49,6 +49,7 @@ export const createUserData = async (prevState: UserDataState, formData: FormDat
 };
 
 export const editUserData = async (id: string, prevState: UserDataState, formData: FormData) => {
+  // @ts-ignore
   const user: User = await getUser();
 
   const validatedFields = UserDataSchema.safeParse({
