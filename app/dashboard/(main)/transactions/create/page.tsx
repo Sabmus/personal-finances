@@ -7,7 +7,7 @@ const CreatePayment = async () => {
 
   return (
     <div className="h-full">
-      <PaymentForm type="create" categories={categories} paymentMethods={paymentMethods} transaction={undefined} />
+      <PaymentForm type="create" categories={categories} paymentMethods={paymentMethods} />
     </div>
   );
 };

@@ -57,7 +57,7 @@ export type TransactionFormProps = {
   type?: string;
   categories: IConfigurationResultsProps;
   paymentMethods: IConfigurationResultsProps;
-  transaction: { data: TAllTransactions | undefined; error: undefined | string };
+  transaction?: { data: TAllTransactions | undefined; error: undefined | string };
 };
 
 export interface ITransactionFormProps extends TransactionFormProps {
