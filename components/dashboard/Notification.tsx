@@ -1,7 +1,7 @@
 import { getGroupsInvitations } from '@/lib/data';
 import { NotificationBell } from '@/components/dashboard';
 
-export const revalidate = 5000;
+// export const revalidate = 5000;
 
 const Notification = async () => {
   const notifications = await getGroupsInvitations();

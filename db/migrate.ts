@@ -26,7 +26,10 @@ async function runMigration() {
     console.log('migrating...');
     const db = drizzle(client);
 
-    await migrate(db, { migrationsFolder: './db/drizzle/migrations', migrationsTable: 'migrations' });
+    await migrate(db, {
+      migrationsFolder: './db/drizzle/migrations',
+      migrationsTable: 'migrations',
+    });
     // Don't forget to close the connection, otherwise the script will hang
     console.log('closing connection...');
     client.close();

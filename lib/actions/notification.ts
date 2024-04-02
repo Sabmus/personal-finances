@@ -58,7 +58,12 @@ export const sendMemberInvite = async (
   return { message: 'Invitation Sent!', errors: undefined };
 };
 
-export const acceptGroupInvite = async (from: string, groupId: string, prevState: any) => {
+export const acceptGroupInvite = async (
+  from: string,
+  groupId: string,
+  prevState: any,
+  formData: FormData
+) => {
   // @ts-ignore
   const user: User = await getUser();
 
@@ -91,7 +96,12 @@ export const acceptGroupInvite = async (from: string, groupId: string, prevState
   return { message: 'Group invitation accepted!.', errors: undefined };
 };
 
-export const declineGroupInvite = async (from: string, groupId: string, prevState: any) => {
+export const declineGroupInvite = async (
+  from: string,
+  groupId: string,
+  prevState: any,
+  formData: FormData
+) => {
   // @ts-ignore
   const user: User = await getUser();
 

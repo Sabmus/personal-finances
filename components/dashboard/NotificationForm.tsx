@@ -6,11 +6,11 @@ import { acceptGroupInvite, declineGroupInvite } from '@/lib/actions/notificatio
 import { AcceptDeclineGroupMemberState } from '@/lib/definitions';
 import toast from 'react-hot-toast';
 
-const NotificationForm = ({ from, groupId }: { from: string | null; groupId: string | null }) => {
+const NotificationForm = ({ from, group }: { from: string | null; group: string | null }) => {
   const initialState: AcceptDeclineGroupMemberState = { errors: {}, message: '' };
 
-  const acceptGroupInviteBinded = acceptGroupInvite.bind(null, from!, groupId!);
-  const declineGroupInviteBinded = declineGroupInvite.bind(null, from!, groupId!);
+  const acceptGroupInviteBinded = acceptGroupInvite.bind(null, from!, group!);
+  const declineGroupInviteBinded = declineGroupInvite.bind(null, from!, group!);
 
   const [acceptState, acceptAction] = useFormState(acceptGroupInviteBinded, initialState);
   const [declineState, declineAction] = useFormState(declineGroupInviteBinded, initialState);
@@ -36,14 +36,20 @@ const NotificationForm = ({ from, groupId }: { from: string | null; groupId: str
   }, [acceptState, declineState]);
 
   return (
-    <>
-      <form action={acceptAction}>
-        <button className="btn">Accept</button>
-      </form>
-      <form action={declineAction}>
-        <button className="btn">Decline</button>
-      </form>
-    </>
+    <div className="flex gap-8 items-center">
+      <div className="flex flex-col text-nowrap">
+        <span className="text-lg">{group}</span>
+        <span className="text-sm text-foreground-secondary">{from}</span>
+      </div>
+      <div className="flex gap-2">
+        <form action="" id={`${group}accept`}>
+          <button className="btn">Accept</button>
+        </form>
+        <form action="" id={`${group}decline`}>
+          <button className="btn">Decline</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

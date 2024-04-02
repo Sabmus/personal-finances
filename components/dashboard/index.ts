@@ -10,3 +10,4 @@ export { default as NoDataError } from '@/components/dashboard/NoDataError';
 export { default as Notification } from '@/components/dashboard/Notification';
 export { default as NotificationBell } from '@/components/dashboard/NotificationBell';
 export { default as NotificationForm } from '@/components/dashboard/NotificationForm';
+export { default as TestClientComponent } from '@/components/dashboard/TestClientComponent';

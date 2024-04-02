@@ -284,7 +284,7 @@ export interface IMainConfigurationProps {
 }
 
 export interface INotificationBellProps {
-  notifications: {
+  notifications?: {
     data:
       | {
           from: string | null;

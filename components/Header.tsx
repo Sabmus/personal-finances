@@ -35,7 +35,7 @@ const Header = async () => {
           )}
         </ul>
         {session ? (
-          <LogOutForm redirectTo={undefined} />
+          <LogOutForm redirectTo="/" />
         ) : (
           <Link href="/api/auth/signin?callbackUrl=/" className="btn-outline">
             Log in
