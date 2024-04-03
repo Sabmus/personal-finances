@@ -31,7 +31,7 @@ const UserSettings = ({ userData, userId }: IUerSettingsProps) => {
       {editMode ? (
         <div className="h-full">
           <UserSettingsForm
-            type="edit"
+            type={userData.data ? 'edit' : 'create'}
             userData={userData.data}
             userId={userId}
             handleEditMode={handleEditMode}
