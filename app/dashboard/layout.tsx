@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="flex flex-col h-svh lg:grid lg:grid-cols-[15%_85%]">
+    <div className="flex flex-col h-screen lg:grid lg:grid-cols-[15%_85%]">
       <div className="hidden lg:flex lg:flex-col lg:items-center p-4 bg-surface">
         <Logo />
         <div className="flex-grow flex-shrink-0 basis-auto w-full text-center mt-20">
@@ -28,11 +28,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <ul>
               {links &&
                 links.map((link, idx) => (
-                  <li key={idx} className="py-2 rounded-sm hover:bg-accent group">
-                    <Link href={link.href} className="font-medium group-hover:text-background">
+                  <Link key={idx} href={link.href} className="font-medium group">
+                    <li className="py-2 rounded-sm hover:bg-accent group-hover:text-background">
                       {link.name}
-                    </Link>
-                  </li>
+                    </li>
+                  </Link>
                 ))}
             </ul>
           </nav>
@@ -42,7 +42,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
 
-      <div className="flex flex-col h-svh max-h-svh md:px-4 py-2 overflow-y-auto">
+      <div className="flex flex-col h-screen max-h-screen md:px-4 py-2 overflow-y-auto">
         <div className="flex justify-between lg:justify-end items-center">
           <div className="lg:hidden">
             <DashboardMenu links={links} />

@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <Toaster position="top-center" reverseOrder={false} />
-          <div className="h-svh w-11/12 mx-auto md:w-full">{children}</div>
+          <div className="h-screen w-11/12 mx-auto md:w-full">{children}</div>
         </ThemeProvider>
       </body>
     </html>

@@ -30,7 +30,7 @@ const DashboardMenu = ({ links }: { links: Ilinks[] }) => {
           isOpenMenu ? '-left-7' : '-left-64'
         } bg-background/95`}
       >
-        <div className="flex-grow flex-shrink-0 basis-auto h-svh text-center">
+        <div className="flex-grow flex-shrink-0 basis-auto h-screen text-center">
           <ul className="flex flex-col justify-center h-full">
             {links &&
               links.map((link, idx) => (
